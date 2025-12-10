@@ -1,0 +1,1567 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyscf.pbc.grad package &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyscf_api_docs/pyscf.pbc.grad';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf.adc.html">pyscf.adc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.agf2.html">pyscf.agf2 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ao2mo.html">pyscf.ao2mo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.cc.html">pyscf.cc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ci.html">pyscf.ci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.data.html">pyscf.data package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.df.html">pyscf.df package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.grad.html">pyscf.df.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.hessian.html">pyscf.df.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.dft.html">pyscf.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.dft.xc.html">pyscf.dft.xc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.eph.html">pyscf.eph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.fci.html">pyscf.fci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.geomopt.html">pyscf.geomopt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.grad.html">pyscf.grad package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.gto.html">pyscf.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.gto.basis.html">pyscf.gto.basis package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.gto.basis.dyall-basis.html">pyscf.gto.basis.dyall-basis package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.gw.html">pyscf.gw package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.hessian.html">pyscf.hessian package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lib.html">pyscf.lib package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lo.html">pyscf.lo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcpdft.html">pyscf.mcpdft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcscf.html">pyscf.mcscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mp.html">pyscf.mp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mrpt.html">pyscf.mrpt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.nac.html">pyscf.nac package</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyscf.pbc.html">pyscf.pbc package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.adc.html">pyscf.pbc.adc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ao2mo.html">pyscf.pbc.ao2mo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.cc.html">pyscf.pbc.cc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ci.html">pyscf.pbc.ci package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.df.html">pyscf.pbc.df package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.dft.html">pyscf.pbc.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.dft.multigrid.html">pyscf.pbc.dft.multigrid package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.eph.html">pyscf.pbc.eph package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.geomopt.html">pyscf.pbc.geomopt package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyscf.pbc.grad package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.gto.html">pyscf.pbc.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.basis.html">pyscf.pbc.gto.basis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.pseudo.html">pyscf.pbc.gto.pseudo package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.gw.html">pyscf.pbc.gw package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.lib.html">pyscf.pbc.lib package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mp.html">pyscf.pbc.mp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpicc.html">pyscf.pbc.mpicc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpitools.html">pyscf.pbc.mpitools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.scf.html">pyscf.pbc.scf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.symm.html">pyscf.pbc.symm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tddft.html">pyscf.pbc.tddft package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tdscf.html">pyscf.pbc.tdscf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tools.html">pyscf.pbc.tools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.x2c.html">pyscf.pbc.x2c package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.qmmm.html">pyscf.qmmm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.qmmm.pbc.html">pyscf.qmmm.pbc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.scf.html">pyscf.scf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.sgx.html">pyscf.sgx package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.solvent.html">pyscf.solvent package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.grad.html">pyscf.solvent.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.hessian.html">pyscf.solvent.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.soscf.html">pyscf.soscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.symm.html">pyscf.symm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tddft.html">pyscf.tddft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tdscf.html">pyscf.tdscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tools.html">pyscf.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.x2c.html">pyscf.x2c package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.pbc.grad package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyscf-pbc-grad-package">
+<h1>pyscf.pbc.grad package<a class="headerlink" href="#pyscf-pbc-grad-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.pbc.grad.krhf">
+<span id="pyscf-pbc-grad-krhf-module"></span><h2>pyscf.pbc.grad.krhf module<a class="headerlink" href="#module-pyscf.pbc.grad.krhf" title="Link to this heading">#</a></h2>
+<p>Non-relativistic analytical nuclear gradients for restricted Hartree Fock with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.krhf.GradientsBase" title="pyscf.pbc.grad.krhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Non-relativistic restricted Hartree-Fock gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.as_scanner">
+<span class="sig-name descname"><span class="pre">as_scanner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.as_scanner" title="Link to this definition">#</a></dt>
+<dd><p>Generating a nuclear gradients scanner/solver (for geometry optimizer).</p>
+<p>The returned solver is a function. This function requires one argument
+“cell” as input and returns energy and first order nuclear derivatives.</p>
+<p>The solver will automatically use the results of last calculation as the
+initial guess of the new calculation.  All parameters assigned in the
+nuc-grad object and SCF object (DIIS, conv_tol, max_memory etc) are
+automatically applied in the solver.</p>
+<p>Note scanner has side effects.  It may change many underlying objects
+(_scf, with_df, with_x2c, …) during calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.extra_force">
+<span class="sig-name descname"><span class="pre">extra_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.extra_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.extra_force" title="Link to this definition">#</a></dt>
+<dd><p>Hook for extra contributions in analytical gradients.</p>
+<p>Contributions like the response of auxiliary basis in density fitting
+method, the grid response in DFT numerical integration can be put in
+this function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.grad_elec">
+<span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.grad_elec" title="Link to this definition">#</a></dt>
+<dd><p>Electronic part of KRHF/KRKS gradients
+Args:</p>
+<blockquote>
+<div><p>mf_grad : pbc.grad.krhf.Gradients or pbc.grad.krks.Gradients object</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Kernel function is the main driver of a method.  Every method should
+define the kernel function as the entry of the calculation.  Note the
+return value of kernel function is not strictly defined.  It can be
+anything related to the method (such as the energy, the wave-function,
+the DFT mesh grids etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.Gradients.make_rdm1e">
+<span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.Gradients.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">GradientsBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.grad.html#pyscf.grad.rhf.GradientsBase" title="pyscf.grad.rhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Basic nuclear gradient functions for non-relativistic methods</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.get_hcore">
+<span class="sig-name descname"><span class="pre">get_hcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.get_hcore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.get_hcore" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.get_j">
+<span class="sig-name descname"><span class="pre">get_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.get_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.get_j" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.get_jk">
+<span class="sig-name descname"><span class="pre">get_jk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.get_jk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.get_jk" title="Link to this definition">#</a></dt>
+<dd><p>J = ((-nabla i) j| kl) D_lk
+K = ((-nabla i) j| kl) D_jk</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.get_k">
+<span class="sig-name descname"><span class="pre">get_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.get_k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.get_k" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.get_ovlp">
+<span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.get_ovlp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.grad_nuc">
+<span class="sig-name descname"><span class="pre">grad_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.grad_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.grad_nuc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.hcore_generator">
+<span class="sig-name descname"><span class="pre">hcore_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.hcore_generator" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.kpts">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">kpts</span></span><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.kpts" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.optimizer" title="Link to this definition">#</a></dt>
+<dd><p>Geometry optimization solver</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>solver (string) : geometry optimization solver, can be “geomeTRIC”
+(default) or “berny”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.GradientsBase.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#GradientsBase.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.GradientsBase.reset" title="Link to this definition">#</a></dt>
+<dd><p>Clean up intermediates</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.SCF_GradScanner">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">SCF_GradScanner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#SCF_GradScanner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.SCF_GradScanner" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.lib.html#pyscf.lib.misc.GradScanner" title="pyscf.lib.misc.GradScanner"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradScanner</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.as_scanner">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">as_scanner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#as_scanner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.as_scanner" title="Link to this definition">#</a></dt>
+<dd><p>Generating a nuclear gradients scanner/solver (for geometry optimizer).</p>
+<p>The returned solver is a function. This function requires one argument
+“cell” as input and returns energy and first order nuclear derivatives.</p>
+<p>The solver will automatically use the results of last calculation as the
+initial guess of the new calculation.  All parameters assigned in the
+nuc-grad object and SCF object (DIIS, conv_tol, max_memory etc) are
+automatically applied in the solver.</p>
+<p>Note scanner has side effects.  It may change many underlying objects
+(_scf, with_df, with_x2c, …) during calculation.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_hcore">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_hcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_hcore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_hcore" title="Link to this definition">#</a></dt>
+<dd><p>Part of the nuclear gradients of core Hamiltonian</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_j">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_j</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_j"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_j" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_jk">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_jk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_jk"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_jk" title="Link to this definition">#</a></dt>
+<dd><p>J = ((-nabla i) j| kl) D_lk
+K = ((-nabla i) j| kl) D_jk</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_k">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_k" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_ovlp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_ovlp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.get_veff" title="Link to this definition">#</a></dt>
+<dd><p>NR Hartree-Fock Coulomb repulsion</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.grad_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#grad_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.grad_elec" title="Link to this definition">#</a></dt>
+<dd><p>Electronic part of KRHF/KRKS gradients
+Args:</p>
+<blockquote>
+<div><p>mf_grad : pbc.grad.krhf.Gradients or pbc.grad.krks.Gradients object</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.grad_nuc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">grad_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#grad_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.grad_nuc" title="Link to this definition">#</a></dt>
+<dd><p>Derivatives of nuclear repulsion energy wrt nuclear coordinates</p>
+<dl class="simple">
+<dt>Notes:</dt><dd><p>An optimized version of this function is available in
+<cite>pbc.gto.ewald_methods.ewald_nuc_grad</cite></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.hcore_generator">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">hcore_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#hcore_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.hcore_generator" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krhf.make_rdm1e">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krhf.</span></span><span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krhf.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd><p>Energy weighted density matrix</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.krks">
+<span id="pyscf-pbc-grad-krks-module"></span><h2>pyscf.pbc.grad.krks module<a class="headerlink" href="#module-pyscf.pbc.grad.krks" title="Link to this heading">#</a></h2>
+<p>Non-relativistic analytical nuclear gradients for restricted Kohn Sham with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.krhf.Gradients" title="pyscf.pbc.grad.krhf.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.Gradients.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#Gradients.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.Gradients.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.Gradients.get_stress">
+<span class="sig-name descname"><span class="pre">get_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#Gradients.get_stress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.Gradients.get_stress" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.krks.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.Gradients.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#Gradients.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.Gradients.reset" title="Link to this definition">#</a></dt>
+<dd><p>Clean up intermediates</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ni</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xc_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relativity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hermi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks.get_vxc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.krks_stress">
+<span id="pyscf-pbc-grad-krks-stress-module"></span><h2>pyscf.pbc.grad.krks_stress module<a class="headerlink" href="#module-pyscf.pbc.grad.krks_stress" title="Link to this heading">#</a></h2>
+<p>The energy derivatives for the strain tensor e_ij is</p>
+<blockquote>
+<div><blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The strain tesnor e_ij describes the transformation for real space coordinates
+in the crystal</p>
+<blockquote>
+<div><p>sum_j [deta_ij + e_ij] R_j  [for j = x, y, z]</p>
+</div></blockquote>
+<p>The strain tensor is generally not a symmetric tensor. Symmetrization</p>
+<blockquote>
+<div><p>[e1   e6/2 e5/2]
+[e6/2 e2   e4/2]
+[e5/2 e4/2 e3  ]</p>
+</div></blockquote>
+<p>is applied to form 6 independent component.</p>
+<blockquote>
+<div><p>e1 = e_11
+e2 = e_22
+e3 = e_33
+e6 = e_12 + e_21
+e5 = e_13 + e_31
+e4 = e_32 + e_23</p>
+</div></blockquote>
+<p>The 6 component strain is then used to define the symmetric stress tensor.</p>
+<blockquote>
+<div><blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_i = — ——  for i = 1 .. 6</dt><dd><p>V  d e_i</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The symmetric stress tensor represented in the 6 Voigt notation can be
+transformed from the asymmetric stress tensor sigma_ij</p>
+<blockquote>
+<div><p>sigma1 = sigma_11
+sigma2 = sigma_22
+sigma3 = sigma_33
+sigma6 = (sigma_12 + sigma_21)/2
+sigma5 = (sigma_13 + sigma_31)/2
+sigma4 = (sigma_23 + sigma_32)/2</p>
+</div></blockquote>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks_stress.get_kin">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks_stress.</span></span><span class="sig-name descname"><span class="pre">get_kin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks_stress.html#get_kin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks_stress.get_kin" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for kinetic matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks_stress.get_ovlp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks_stress.</span></span><span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks_stress.html#get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks_stress.get_ovlp" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for overlap matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks_stress.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks_stress.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm_kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_nuc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks_stress.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks_stress.get_vxc" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for Coulomb and XC at gamma point</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>with_j : Whether to include the electron-electron Coulomb interactions
+with_nuc : Whether to include the electron-nuclear Coulomb interactions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krks_stress.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krks_stress.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krks_stress.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krks_stress.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Compute the energy derivatives for strain tensor (e_ij)</p>
+<blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+<p>sigma is a asymmetric 3x3 matrix. The symmetric stress tensor in the 6 Voigt
+notation can be transformed from the asymmetric stress tensor</p>
+<p>sigma1 = sigma_11
+sigma2 = sigma_22
+sigma3 = sigma_33
+sigma6 = (sigma_12 + sigma_21)/2
+sigma5 = (sigma_13 + sigma_31)/2
+sigma4 = (sigma_23 + sigma_32)/2</p>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.krkspu">
+<span id="pyscf-pbc-grad-krkspu-module"></span><h2>pyscf.pbc.grad.krkspu module<a class="headerlink" href="#module-pyscf.pbc.grad.krkspu" title="Link to this heading">#</a></h2>
+<p>Analytical derivatives for DFT+U with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krkspu.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krkspu.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krkspu.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krkspu.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.krks.Gradients" title="pyscf.pbc.grad.krks.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krkspu.Gradients.extra_force">
+<span class="sig-name descname"><span class="pre">extra_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krkspu.html#Gradients.extra_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krkspu.Gradients.extra_force" title="Link to this definition">#</a></dt>
+<dd><p>Hook for extra contributions in analytical gradients.</p>
+<p>Contributions like the response of auxiliary basis in density fitting
+method, the grid response in DFT numerical integration can be put in
+this function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krkspu.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krkspu.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krkspu.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.krkspu.generate_first_order_local_orbitals">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.krkspu.</span></span><span class="sig-name descname"><span class="pre">generate_first_order_local_orbitals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minao_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'MINAO'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krkspu.html#generate_first_order_local_orbitals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.krkspu.generate_first_order_local_orbitals" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.kuhf">
+<span id="pyscf-pbc-grad-kuhf-module"></span><h2>pyscf.pbc.grad.kuhf module<a class="headerlink" href="#module-pyscf.pbc.grad.kuhf" title="Link to this heading">#</a></h2>
+<p>Non-relativistic analytical nuclear gradients for unrestricted Hartree Fock with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuhf.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.krhf.GradientsBase" title="pyscf.pbc.grad.krhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Non-relativistic restricted Hartree-Fock gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.as_scanner">
+<span class="sig-name descname"><span class="pre">as_scanner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.as_scanner" title="Link to this definition">#</a></dt>
+<dd><p>Generating a nuclear gradients scanner/solver (for geometry optimizer).</p>
+<p>The returned solver is a function. This function requires one argument
+“cell” as input and returns energy and first order nuclear derivatives.</p>
+<p>The solver will automatically use the results of last calculation as the
+initial guess of the new calculation.  All parameters assigned in the
+nuc-grad object and SCF object (DIIS, conv_tol, max_memory etc) are
+automatically applied in the solver.</p>
+<p>Note scanner has side effects.  It may change many underlying objects
+(_scf, with_df, with_x2c, …) during calculation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.extra_force">
+<span class="sig-name descname"><span class="pre">extra_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.extra_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.extra_force" title="Link to this definition">#</a></dt>
+<dd><p>Hook for extra contributions in analytical gradients.</p>
+<p>Contributions like the response of auxiliary basis in density fitting
+method, the grid response in DFT numerical integration can be put in
+this function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.grad_elec">
+<span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/krhf.html#Gradients.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Kernel function is the main driver of a method.  Every method should
+define the kernel function as the entry of the calculation.  Note the
+return value of kernel function is not strictly defined.  It can be
+anything related to the method (such as the energy, the wave-function,
+the DFT mesh grids etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.Gradients.make_rdm1e">
+<span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#Gradients.make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.Gradients.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuhf.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.get_veff" title="Link to this definition">#</a></dt>
+<dd><p>NR Hartree-Fock Coulomb repulsion</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.grad_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuhf.</span></span><span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#grad_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuhf.make_rdm1e">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuhf.</span></span><span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuhf.html#make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuhf.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd><p>Energy weighted density matrix</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.kuks">
+<span id="pyscf-pbc-grad-kuks-module"></span><h2>pyscf.pbc.grad.kuks module<a class="headerlink" href="#module-pyscf.pbc.grad.kuks" title="Link to this heading">#</a></h2>
+<p>Non-relativistic analytical nuclear gradients for unrestricted Kohn Sham with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuks.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.kuhf.Gradients" title="pyscf.pbc.grad.kuhf.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<p>Non-relativistic restricted Hartree-Fock gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks.Gradients.get_stress">
+<span class="sig-name descname"><span class="pre">get_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks.html#Gradients.get_stress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks.Gradients.get_stress" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.kuks.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuks.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuks.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ni</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xc_code</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts_band</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">relativity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hermi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks.get_vxc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.kuks_stress">
+<span id="pyscf-pbc-grad-kuks-stress-module"></span><h2>pyscf.pbc.grad.kuks_stress module<a class="headerlink" href="#module-pyscf.pbc.grad.kuks_stress" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks_stress.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuks_stress.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm_kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_nuc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks_stress.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks_stress.get_vxc" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for Coulomb and XC at gamma point</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>with_j : Whether to include the electron-electron Coulomb interactions
+with_nuc : Whether to include the electron-nuclear Coulomb interactions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kuks_stress.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kuks_stress.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kuks_stress.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kuks_stress.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Compute the energy derivatives for strain tensor (e_ij)</p>
+<blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+<p>sigma is a asymmetric 3x3 matrix. The symmetric stress tensor in the 6 Voigt
+notation can be transformed from the asymmetric stress tensor</p>
+<p>sigma1 = sigma_11
+sigma2 = sigma_22
+sigma3 = sigma_33
+sigma6 = (sigma_12 + sigma_21)/2
+sigma5 = (sigma_13 + sigma_31)/2
+sigma4 = (sigma_23 + sigma_32)/2</p>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.kukspu">
+<span id="pyscf-pbc-grad-kukspu-module"></span><h2>pyscf.pbc.grad.kukspu module<a class="headerlink" href="#module-pyscf.pbc.grad.kukspu" title="Link to this heading">#</a></h2>
+<p>Analytical derivatives for DFT+U with kpoints sampling</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kukspu.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.kukspu.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kukspu.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kukspu.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.kuks.Gradients" title="pyscf.pbc.grad.kuks.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kukspu.Gradients.extra_force">
+<span class="sig-name descname"><span class="pre">extra_force</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atom_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">envs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kukspu.html#Gradients.extra_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kukspu.Gradients.extra_force" title="Link to this definition">#</a></dt>
+<dd><p>Hook for extra contributions in analytical gradients.</p>
+<p>Contributions like the response of auxiliary basis in density fitting
+method, the grid response in DFT numerical integration can be put in
+this function.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.kukspu.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/kukspu.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.kukspu.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.rhf">
+<span id="pyscf-pbc-grad-rhf-module"></span><h2>pyscf.pbc.grad.rhf module<a class="headerlink" href="#module-pyscf.pbc.grad.rhf" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.rhf.GradientsBase" title="pyscf.pbc.grad.rhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Non-relativistic Gamma-point restricted Hartree-Fock gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.Gradients.grad_elec">
+<span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.rhf.Gradients.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.Gradients.make_rdm1e">
+<span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/grad/rhf.html#Gradients.make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.Gradients.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.GradientsBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">GradientsBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#GradientsBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.GradientsBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.grad.html#pyscf.grad.rhf.GradientsBase" title="pyscf.grad.rhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Base class for Gamma-point nuclear gradient</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.GradientsBase.get_ovlp">
+<span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#GradientsBase.get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.GradientsBase.get_ovlp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.GradientsBase.grad_nuc">
+<span class="sig-name descname"><span class="pre">grad_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#GradientsBase.grad_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.GradientsBase.grad_nuc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.GradientsBase.optimizer">
+<span class="sig-name descname"><span class="pre">optimizer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#GradientsBase.optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.GradientsBase.optimizer" title="Link to this definition">#</a></dt>
+<dd><p>Geometry optimization solver</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>solver (string) : geometry optimization solver, can be “geomeTRIC”
+(default) or “berny”.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.get_ovlp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.get_ovlp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.grad_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#grad_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rhf.grad_nuc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rhf.</span></span><span class="sig-name descname"><span class="pre">grad_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ew_eta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ew_cut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rhf.html#grad_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rhf.grad_nuc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.rks">
+<span id="pyscf-pbc-grad-rks-module"></span><h2>pyscf.pbc.grad.rks module<a class="headerlink" href="#module-pyscf.pbc.grad.rks" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.rhf.Gradients" title="pyscf.pbc.grad.rhf.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<p>Non-relativistic Gamma-point restricted Kohn-Sham DFT gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks.Gradients.get_stress">
+<span class="sig-name descname"><span class="pre">get_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks.html#Gradients.get_stress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks.Gradients.get_stress" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks.Gradients.grids">
+<span class="sig-name descname"><span class="pre">grids</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyscf.pbc.grad.rks.Gradients.grids" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.rks_stress">
+<span id="pyscf-pbc-grad-rks-stress-module"></span><h2>pyscf.pbc.grad.rks_stress module<a class="headerlink" href="#module-pyscf.pbc.grad.rks_stress" title="Link to this heading">#</a></h2>
+<p>The energy derivatives for the strain tensor e_ij is</p>
+<blockquote>
+<div><blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>The strain tesnor e_ij describes the transformation for real space coordinates
+in the crystal</p>
+<blockquote>
+<div><p>sum_j [deta_ij + e_ij] R_j  [for j = x, y, z]</p>
+</div></blockquote>
+<p>Due to numerical errors, the strain tensor may slightly break the symmetry
+within the stress tensor. The 6 independent components of the stress tensor</p>
+<blockquote>
+<div><p>[e1   e6/2 e5/2]
+[e6/2 e2   e4/2]
+[e5/2 e4/2 e3  ]</p>
+</div></blockquote>
+<p>is constructed by symmetrizing the strain tensor as follows:</p>
+<blockquote>
+<div><p>e1 = e_11
+e2 = e_22
+e3 = e_33
+e6 = e_12 + e_21
+e5 = e_13 + e_31
+e4 = e_32 + e_23</p>
+</div></blockquote>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.ewald">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">ewald</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#ewald"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.ewald" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.get_kin">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">get_kin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#get_kin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.get_kin" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for kinetic matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.get_ovlp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cell</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.get_ovlp" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for overlap matrix</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_nuc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.get_vxc" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for Coulomb and XC at gamma point</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>with_j : Whether to include the electron-electron Coulomb interactions
+with_nuc : Whether to include the electron-nuclear Coulomb interactions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Compute the energy derivatives for strain tensor (e_ij)</p>
+<blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+<p>sigma is a asymmetric 3x3 matrix. The symmetric stress tensor in the 6 Voigt
+notation can be transformed from the asymmetric stress tensor</p>
+<p>sigma1 = sigma_11
+sigma2 = sigma_22
+sigma3 = sigma_33
+sigma6 = (sigma_12 + sigma_21)/2
+sigma5 = (sigma_13 + sigma_31)/2
+sigma4 = (sigma_23 + sigma_32)/2</p>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.rks_stress.strain_tensor_dispalcement">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.rks_stress.</span></span><span class="sig-name descname"><span class="pre">strain_tensor_dispalcement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/rks_stress.html#strain_tensor_dispalcement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.rks_stress.strain_tensor_dispalcement" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.uhf">
+<span id="pyscf-pbc-grad-uhf-module"></span><h2>pyscf.pbc.grad.uhf module<a class="headerlink" href="#module-pyscf.pbc.grad.uhf" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uhf.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uhf.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uhf.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.rhf.GradientsBase" title="pyscf.pbc.grad.rhf.GradientsBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">GradientsBase</span></code></a></p>
+<p>Non-relativistic Gamma-point restricted Hartree-Fock gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.Gradients.get_veff">
+<span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uhf.html#Gradients.get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uhf.Gradients.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.Gradients.grad_elec">
+<span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.grad.uhf.Gradients.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.Gradients.make_rdm1e">
+<span class="sig-name descname"><span class="pre">make_rdm1e</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/grad/uhf.html#Gradients.make_rdm1e"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uhf.Gradients.make_rdm1e" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.get_veff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uhf.</span></span><span class="sig-name descname"><span class="pre">get_veff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uhf.html#get_veff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uhf.get_veff" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uhf.grad_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uhf.</span></span><span class="sig-name descname"><span class="pre">grad_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kpt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">array([0.,</span> <span class="pre">0.,</span> <span class="pre">0.])</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uhf.html#grad_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uhf.grad_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.uks">
+<span id="pyscf-pbc-grad-uks-module"></span><h2>pyscf.pbc.grad.uks module<a class="headerlink" href="#module-pyscf.pbc.grad.uks" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uks.Gradients">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uks.</span></span><span class="sig-name descname"><span class="pre">Gradients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uks.html#Gradients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uks.Gradients" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.grad.uhf.Gradients" title="pyscf.pbc.grad.uhf.Gradients"><code class="xref py py-class docutils literal notranslate"><span class="pre">Gradients</span></code></a></p>
+<p>Non-relativistic Gamma-point unrestricted Kohn-Sham DFT gradients</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uks.Gradients.get_stress">
+<span class="sig-name descname"><span class="pre">get_stress</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uks.html#Gradients.get_stress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uks.Gradients.get_stress" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uks.Gradients.grids">
+<span class="sig-name descname"><span class="pre">grids</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyscf.pbc.grad.uks.Gradients.grids" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad.uks_stress">
+<span id="pyscf-pbc-grad-uks-stress-module"></span><h2>pyscf.pbc.grad.uks_stress module<a class="headerlink" href="#module-pyscf.pbc.grad.uks_stress" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uks_stress.get_vxc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uks_stress.</span></span><span class="sig-name descname"><span class="pre">get_vxc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ks_grad</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cell</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_j</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_nuc</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uks_stress.html#get_vxc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uks_stress.get_vxc" title="Link to this definition">#</a></dt>
+<dd><p>Strain derivatives for Coulomb and XC at gamma point</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>with_j : Whether to include the electron-electron Coulomb interactions
+with_nuc : Whether to include the electron-nuclear Coulomb interactions</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.grad.uks_stress.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.grad.uks_stress.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf_grad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/grad/uks_stress.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.grad.uks_stress.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Compute the energy derivatives for strain tensor (e_ij)</p>
+<blockquote>
+<div><p>1  d E</p>
+</div></blockquote>
+<dl class="simple">
+<dt>sigma_ij = — ——</dt><dd><p>V  d e_ij</p>
+</dd>
+</dl>
+<p>sigma is a asymmetric 3x3 matrix. The symmetric stress tensor in the 6 Voigt
+notation can be transformed from the asymmetric stress tensor</p>
+<p>sigma1 = sigma_11
+sigma2 = sigma_22
+sigma3 = sigma_33
+sigma6 = (sigma_12 + sigma_21)/2
+sigma5 = (sigma_13 + sigma_31)/2
+sigma4 = (sigma_23 + sigma_32)/2</p>
+<p>See K. Doll, Mol Phys (2010), 108, 223</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.grad">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscf.pbc.grad" title="Link to this heading">#</a></h2>
+<p>Analytical nuclear gradients for PBC</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.krhf">pyscf.pbc.grad.krhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.as_scanner"><code class="docutils literal notranslate"><span class="pre">Gradients.as_scanner()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.extra_force"><code class="docutils literal notranslate"><span class="pre">Gradients.extra_force()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.grad_elec"><code class="docutils literal notranslate"><span class="pre">Gradients.grad_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.kernel"><code class="docutils literal notranslate"><span class="pre">Gradients.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.Gradients.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">Gradients.make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase"><code class="docutils literal notranslate"><span class="pre">GradientsBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.get_hcore"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_hcore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.get_j"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_j()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.get_jk"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_jk()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.get_k"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_k()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.get_ovlp"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_ovlp()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.grad_nuc"><code class="docutils literal notranslate"><span class="pre">GradientsBase.grad_nuc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.hcore_generator"><code class="docutils literal notranslate"><span class="pre">GradientsBase.hcore_generator()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.kpts"><code class="docutils literal notranslate"><span class="pre">GradientsBase.kpts</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.optimizer"><code class="docutils literal notranslate"><span class="pre">GradientsBase.optimizer()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.GradientsBase.reset"><code class="docutils literal notranslate"><span class="pre">GradientsBase.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.SCF_GradScanner"><code class="docutils literal notranslate"><span class="pre">SCF_GradScanner</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.as_scanner"><code class="docutils literal notranslate"><span class="pre">as_scanner()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_hcore"><code class="docutils literal notranslate"><span class="pre">get_hcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_j"><code class="docutils literal notranslate"><span class="pre">get_j()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_jk"><code class="docutils literal notranslate"><span class="pre">get_jk()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_k"><code class="docutils literal notranslate"><span class="pre">get_k()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_ovlp"><code class="docutils literal notranslate"><span class="pre">get_ovlp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.grad_elec"><code class="docutils literal notranslate"><span class="pre">grad_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.grad_nuc"><code class="docutils literal notranslate"><span class="pre">grad_nuc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.hcore_generator"><code class="docutils literal notranslate"><span class="pre">hcore_generator()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krhf.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.krks">pyscf.pbc.grad.krks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.Gradients.dump_flags"><code class="docutils literal notranslate"><span class="pre">Gradients.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.Gradients.get_stress"><code class="docutils literal notranslate"><span class="pre">Gradients.get_stress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.Gradients.reset"><code class="docutils literal notranslate"><span class="pre">Gradients.reset()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.krks_stress">pyscf.pbc.grad.krks_stress module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks_stress.get_kin"><code class="docutils literal notranslate"><span class="pre">get_kin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks_stress.get_ovlp"><code class="docutils literal notranslate"><span class="pre">get_ovlp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks_stress.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krks_stress.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.krkspu">pyscf.pbc.grad.krkspu module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krkspu.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krkspu.Gradients.extra_force"><code class="docutils literal notranslate"><span class="pre">Gradients.extra_force()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krkspu.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.krkspu.generate_first_order_local_orbitals"><code class="docutils literal notranslate"><span class="pre">generate_first_order_local_orbitals()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.kuhf">pyscf.pbc.grad.kuhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.as_scanner"><code class="docutils literal notranslate"><span class="pre">Gradients.as_scanner()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.extra_force"><code class="docutils literal notranslate"><span class="pre">Gradients.extra_force()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.grad_elec"><code class="docutils literal notranslate"><span class="pre">Gradients.grad_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.kernel"><code class="docutils literal notranslate"><span class="pre">Gradients.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.Gradients.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">Gradients.make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.grad_elec"><code class="docutils literal notranslate"><span class="pre">grad_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuhf.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.kuks">pyscf.pbc.grad.kuks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks.Gradients.get_stress"><code class="docutils literal notranslate"><span class="pre">Gradients.get_stress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.kuks_stress">pyscf.pbc.grad.kuks_stress module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks_stress.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kuks_stress.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.kukspu">pyscf.pbc.grad.kukspu module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kukspu.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kukspu.Gradients.extra_force"><code class="docutils literal notranslate"><span class="pre">Gradients.extra_force()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.kukspu.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.rhf">pyscf.pbc.grad.rhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.Gradients.grad_elec"><code class="docutils literal notranslate"><span class="pre">Gradients.grad_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.Gradients.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">Gradients.make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.GradientsBase"><code class="docutils literal notranslate"><span class="pre">GradientsBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.GradientsBase.get_ovlp"><code class="docutils literal notranslate"><span class="pre">GradientsBase.get_ovlp()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.GradientsBase.grad_nuc"><code class="docutils literal notranslate"><span class="pre">GradientsBase.grad_nuc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.GradientsBase.optimizer"><code class="docutils literal notranslate"><span class="pre">GradientsBase.optimizer()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.get_ovlp"><code class="docutils literal notranslate"><span class="pre">get_ovlp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.grad_elec"><code class="docutils literal notranslate"><span class="pre">grad_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rhf.grad_nuc"><code class="docutils literal notranslate"><span class="pre">grad_nuc()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.rks">pyscf.pbc.grad.rks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks.Gradients.get_stress"><code class="docutils literal notranslate"><span class="pre">Gradients.get_stress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks.Gradients.grids"><code class="docutils literal notranslate"><span class="pre">Gradients.grids</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.rks_stress">pyscf.pbc.grad.rks_stress module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.ewald"><code class="docutils literal notranslate"><span class="pre">ewald()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.get_kin"><code class="docutils literal notranslate"><span class="pre">get_kin()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.get_ovlp"><code class="docutils literal notranslate"><span class="pre">get_ovlp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.rks_stress.strain_tensor_dispalcement"><code class="docutils literal notranslate"><span class="pre">strain_tensor_dispalcement()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.uhf">pyscf.pbc.grad.uhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.Gradients.get_veff"><code class="docutils literal notranslate"><span class="pre">Gradients.get_veff()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.Gradients.grad_elec"><code class="docutils literal notranslate"><span class="pre">Gradients.grad_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.Gradients.make_rdm1e"><code class="docutils literal notranslate"><span class="pre">Gradients.make_rdm1e()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.get_veff"><code class="docutils literal notranslate"><span class="pre">get_veff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uhf.grad_elec"><code class="docutils literal notranslate"><span class="pre">grad_elec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.uks">pyscf.pbc.grad.uks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uks.Gradients"><code class="docutils literal notranslate"><span class="pre">Gradients</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uks.Gradients.get_stress"><code class="docutils literal notranslate"><span class="pre">Gradients.get_stress()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uks.Gradients.grids"><code class="docutils literal notranslate"><span class="pre">Gradients.grids</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad.uks_stress">pyscf.pbc.grad.uks_stress module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uks_stress.get_vxc"><code class="docutils literal notranslate"><span class="pre">get_vxc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.grad.uks_stress.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.grad">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/pyscf_api_docs/pyscf.pbc.grad.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

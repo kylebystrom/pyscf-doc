@@ -1,0 +1,1414 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyscf.pbc.mp package &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyscf_api_docs/pyscf.pbc.mp';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf.adc.html">pyscf.adc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.agf2.html">pyscf.agf2 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ao2mo.html">pyscf.ao2mo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.cc.html">pyscf.cc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ci.html">pyscf.ci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.data.html">pyscf.data package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.df.html">pyscf.df package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.grad.html">pyscf.df.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.hessian.html">pyscf.df.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.dft.html">pyscf.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.dft.xc.html">pyscf.dft.xc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.eph.html">pyscf.eph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.fci.html">pyscf.fci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.geomopt.html">pyscf.geomopt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.grad.html">pyscf.grad package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.gto.html">pyscf.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.gto.basis.html">pyscf.gto.basis package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.gto.basis.dyall-basis.html">pyscf.gto.basis.dyall-basis package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.gw.html">pyscf.gw package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.hessian.html">pyscf.hessian package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lib.html">pyscf.lib package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lo.html">pyscf.lo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcpdft.html">pyscf.mcpdft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcscf.html">pyscf.mcscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mp.html">pyscf.mp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mrpt.html">pyscf.mrpt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.nac.html">pyscf.nac package</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyscf.pbc.html">pyscf.pbc package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.adc.html">pyscf.pbc.adc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ao2mo.html">pyscf.pbc.ao2mo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.cc.html">pyscf.pbc.cc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ci.html">pyscf.pbc.ci package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.df.html">pyscf.pbc.df package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.dft.html">pyscf.pbc.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.dft.multigrid.html">pyscf.pbc.dft.multigrid package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.eph.html">pyscf.pbc.eph package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.geomopt.html">pyscf.pbc.geomopt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.grad.html">pyscf.pbc.grad package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.gto.html">pyscf.pbc.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.basis.html">pyscf.pbc.gto.basis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.pseudo.html">pyscf.pbc.gto.pseudo package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.gw.html">pyscf.pbc.gw package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.lib.html">pyscf.pbc.lib package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyscf.pbc.mp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpicc.html">pyscf.pbc.mpicc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpitools.html">pyscf.pbc.mpitools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.scf.html">pyscf.pbc.scf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.symm.html">pyscf.pbc.symm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tddft.html">pyscf.pbc.tddft package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tdscf.html">pyscf.pbc.tdscf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tools.html">pyscf.pbc.tools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.x2c.html">pyscf.pbc.x2c package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.qmmm.html">pyscf.qmmm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.qmmm.pbc.html">pyscf.qmmm.pbc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.scf.html">pyscf.scf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.sgx.html">pyscf.sgx package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.solvent.html">pyscf.solvent package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.grad.html">pyscf.solvent.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.hessian.html">pyscf.solvent.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.soscf.html">pyscf.soscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.symm.html">pyscf.symm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tddft.html">pyscf.tddft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tdscf.html">pyscf.tdscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tools.html">pyscf.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.x2c.html">pyscf.x2c package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.pbc.mp package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyscf-pbc-mp-package">
+<h1>pyscf.pbc.mp package<a class="headerlink" href="#pyscf-pbc-mp-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.pbc.mp.kmp2">
+<span id="pyscf-pbc-mp-kmp2-module"></span><h2>pyscf.pbc.mp.kmp2 module<a class="headerlink" href="#module-pyscf.pbc.mp.kmp2" title="Link to this heading">#</a></h2>
+<p>kpoint-adapted and spin-adapted MP2
+t2[i,j,a,b] = &lt;ij|ab&gt; / D_ij^ab</p>
+<p>t2 and eris are never stored in full, only a partial
+eri of size (nkpts,nocc,nocc,nvir,nvir)</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">KMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#KMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.mp.html#pyscf.mp.mp2.RMP2" title="pyscf.mp.mp2.RMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">RMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#KMP2.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.get_nmo">
+<span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.get_nocc">
+<span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#KMP2.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>with_t2<span class="classifier">bool</span></dt><dd><p>Whether to generate and hold t2 amplitudes in memory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.make_rdm1">
+<span class="sig-name descname"><span class="pre">make_rdm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.make_rdm1" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced one-particle density matrix in the MO basis representation.
+The occupied-virtual orbital response is not included.</p>
+<p>dm1[p,q] = &lt;q_alpha^dagger p_alpha&gt; + &lt;q_beta^dagger p_beta&gt;</p>
+<p>The convention of 1-pdm is based on McWeeney’s book, Eq (5.4.20).
+The contraction between 1-particle Hamiltonian and rdm1 is
+E = einsum(‘pq,qp’, h1, rdm1)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (KMP2): a KMP2 kernel object;
+t2 (ndarray): a t2 MP2 tensor;
+kind (str): either ‘compact’ or ‘padded’ - defines behavior for k-dependent MO basis sizes;</p>
+</dd>
+<dt>Returns:</dt><dd><p>A k-dependent single-particle density matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.make_rdm2">
+<span class="sig-name descname"><span class="pre">make_rdm2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.make_rdm2" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced two-particle density matrix in MO basis</p>
+<div class="math notranslate nohighlight">
+\[dm2[p,q,r,s] = \sum_{\sigma,\tau} &lt;p_\sigma^\dagger r_\tau^\dagger s_\tau q_\sigma&gt;\]</div>
+<p>Note the contraction between ERIs (in Chemist’s notation) and rdm2 is
+E = einsum(‘pqrs,pqrs’, eri, rdm2)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KMP2.to_gpu">
+<span class="sig-name descname"><span class="pre">to_gpu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KMP2.to_gpu" title="Link to this definition">#</a></dt>
+<dd><p>Convert a method to its corresponding GPU variant, and recursively
+converts all attributes of a method to cupy objects or gpu4pyscf objects.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.KRMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">KRMP2</span></span><a class="headerlink" href="#pyscf.pbc.mp.kmp2.KRMP2" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.mp.kmp2.KMP2" title="pyscf.pbc.mp.kmp2.KMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMP2</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.get_frozen_mask">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#get_frozen_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.get_nmo">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#get_nmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.get_nocc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#get_nocc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Computes k-point RMP2 energy.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (KMP2): an instance of KMP2
+mo_energy (list): a list of numpy.ndarray. Each array contains MO energies of</p>
+<blockquote>
+<div><p>shape (Nmo,) for one kpt</p>
+</div></blockquote>
+<dl class="simple">
+<dt>mo_coeff (list): a list of numpy.ndarray. Each array contains MO coefficients</dt><dd><p>of shape (Nao, Nmo) for one kpt</p>
+</dd>
+</dl>
+<p>verbose (int, optional): level of verbosity. Defaults to logger.NOTE (=3).
+with_t2 (bool, optional): whether to compute t2 amplitudes. Defaults to WITH_T2 (=True).</p>
+</dd>
+<dt>Returns:</dt><dd><p>KMP2 energy and t2 amplitudes (=None if with_t2 is False)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.make_rdm1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">make_rdm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#make_rdm1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.make_rdm1" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced one-particle density matrix in the MO basis representation.
+The occupied-virtual orbital response is not included.</p>
+<p>dm1[p,q] = &lt;q_alpha^dagger p_alpha&gt; + &lt;q_beta^dagger p_beta&gt;</p>
+<p>The convention of 1-pdm is based on McWeeney’s book, Eq (5.4.20).
+The contraction between 1-particle Hamiltonian and rdm1 is
+E = einsum(‘pq,qp’, h1, rdm1)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (KMP2): a KMP2 kernel object;
+t2 (ndarray): a t2 MP2 tensor;
+kind (str): either ‘compact’ or ‘padded’ - defines behavior for k-dependent MO basis sizes;</p>
+</dd>
+<dt>Returns:</dt><dd><p>A k-dependent single-particle density matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.make_rdm2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">make_rdm2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#make_rdm2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.make_rdm2" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced two-particle density matrix in MO basis</p>
+<div class="math notranslate nohighlight">
+\[dm2[p,q,r,s] = \sum_{\sigma,\tau} &lt;p_\sigma^\dagger r_\tau^\dagger s_\tau q_\sigma&gt;\]</div>
+<p>Note the contraction between ERIs (in Chemist’s notation) and rdm2 is
+E = einsum(‘pqrs,pqrs’, eri, rdm2)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.padded_mo_coeff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">padded_mo_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#padded_mo_coeff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.padded_mo_coeff" title="Link to this definition">#</a></dt>
+<dd><p>Pads coefficients of active MOs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+mo_coeff (ndarray): original non-padded molecular coefficients;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Padded molecular coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.padded_mo_energy">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">padded_mo_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#padded_mo_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.padded_mo_energy" title="Link to this definition">#</a></dt>
+<dd><p>Pads energies of active MOs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+mo_energy (ndarray): original non-padded molecular energies;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Padded molecular energies.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2.padding_k_idx">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2.</span></span><span class="sig-name descname"><span class="pre">padding_k_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'split'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2.html#padding_k_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2.padding_k_idx" title="Link to this definition">#</a></dt>
+<dd><p>A convention used for padding vectors, matrices and tensors in case when occupation numbers depend on the
+k-point index.</p>
+<p>This implementation stores k-dependent Fock and other matrix in dense arrays with additional dimensions
+corresponding to k-point indexes. In case when the occupation numbers depend on the k-point index (i.e. a metal) or
+when some k-points have more Bloch basis functions than others the corresponding data structure has to be padded
+with entries that are not used (fictitious occupied and virtual degrees of freedom). Current convention stores these
+states at the Fermi level as shown in the following example.</p>
+<p>In the above example, <cite>get_nmo(mp, per_kpoint=True) == (6, 6, 5)</cite>, <cite>get_nocc(mp, per_kpoint) == (2, 3, 2)</cite>. The
+resulting dense <cite>get_nmo(mp) == 7</cite> and <cite>get_nocc(mp) == 3</cite> correspond to padded dimensions. This function will
+return the following indexes corresponding to the filled entries of the above table:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">padding_k_idx</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;split&quot;</span><span class="p">)</span>
+<span class="go">([(0, 1), (0, 1, 2), (0, 1)], [(0, 1, 2, 3), (1, 2, 3), (1, 2, 3)])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">padding_k_idx</span><span class="p">(</span><span class="n">mp</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;joint&quot;</span><span class="p">)</span>
+<span class="go">[(0, 1, 3, 4, 5, 6), (0, 1, 2, 4, 5, 6), (0, 1, 4, 5, 6)]</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+kind (str): either “split” (occupied and virtual spaces are split) or “joint” (occupied and virtual spaces are
+the joint;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Two lists corresponding to the occupied and virtual spaces for kind=”split”. Each list contains integer arrays
+with indexes pointing to actual non-zero entries in the padded vector/matrix/tensor. If kind=”joint”, a single
+list of arrays is returned corresponding to the entire MO space.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.mp.kmp2_ksymm">
+<span id="pyscf-pbc-mp-kmp2-ksymm-module"></span><h2>pyscf.pbc.mp.kmp2_ksymm module<a class="headerlink" href="#module-pyscf.pbc.mp.kmp2_ksymm" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">KMP2</span></span><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KMP2" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2" title="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KsymAdaptedKMP2</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KRMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">KRMP2</span></span><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KRMP2" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2" title="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KsymAdaptedKMP2</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">KsymAdaptedKMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#KsymAdaptedKMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.mp.kmp2.KMP2" title="pyscf.pbc.mp.kmp2.KMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#KsymAdaptedKMP2.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>with_t2<span class="classifier">bool</span></dt><dd><p>Whether to generate and hold t2 amplitudes in memory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm1">
+<span class="sig-name descname"><span class="pre">make_rdm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm1" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced one-particle density matrix in the MO basis representation.
+The occupied-virtual orbital response is not included.</p>
+<p>dm1[p,q] = &lt;q_alpha^dagger p_alpha&gt; + &lt;q_beta^dagger p_beta&gt;</p>
+<p>The convention of 1-pdm is based on McWeeney’s book, Eq (5.4.20).
+The contraction between 1-particle Hamiltonian and rdm1 is
+E = einsum(‘pq,qp’, h1, rdm1)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (KMP2): a KMP2 kernel object;
+t2 (ndarray): a t2 MP2 tensor;
+kind (str): either ‘compact’ or ‘padded’ - defines behavior for k-dependent MO basis sizes;</p>
+</dd>
+<dt>Returns:</dt><dd><p>A k-dependent single-particle density matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm2">
+<span class="sig-name descname"><span class="pre">make_rdm2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#KsymAdaptedKMP2.make_rdm2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm2" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced two-particle density matrix in MO basis</p>
+<div class="math notranslate nohighlight">
+\[dm2[p,q,r,s] = \sum_{\sigma,\tau} &lt;p_\sigma^\dagger r_\tau^\dagger s_\tau q_\sigma&gt;\]</div>
+<p>Note the contraction between ERIs (in Chemist’s notation) and rdm2 is
+E = einsum(‘pqrs,pqrs’, eri, rdm2)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.kernel" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.kernel_with_t2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">kernel_with_t2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#kernel_with_t2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.kernel_with_t2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.make_rdm1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">make_rdm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'compact'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#make_rdm1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.make_rdm1" title="Link to this definition">#</a></dt>
+<dd><p>Spin-traced one-particle density matrix in the MO basis representation.
+The occupied-virtual orbital response is not included.</p>
+<p>dm1[p,q] = &lt;q_alpha^dagger p_alpha&gt; + &lt;q_beta^dagger p_beta&gt;</p>
+<p>The convention of 1-pdm is based on McWeeney’s book, Eq (5.4.20).
+The contraction between 1-particle Hamiltonian and rdm1 is
+E = einsum(‘pq,qp’, h1, rdm1)</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (KMP2): a KMP2 kernel object;
+t2 (ndarray): a t2 MP2 tensor;
+kind (str): either ‘compact’ or ‘padded’ - defines behavior for k-dependent MO basis sizes;</p>
+</dd>
+<dt>Returns:</dt><dd><p>A k-dependent single-particle density matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_ksymm.make_t2_for_rdm1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_ksymm.</span></span><span class="sig-name descname"><span class="pre">make_t2_for_rdm1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_ksymm.html#make_t2_for_rdm1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_ksymm.make_t2_for_rdm1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.mp.kmp2_stagger">
+<span id="pyscf-pbc-mp-kmp2-stagger-module"></span><h2>pyscf.pbc.mp.kmp2_stagger module<a class="headerlink" href="#module-pyscf.pbc.mp.kmp2_stagger" title="Link to this heading">#</a></h2>
+<p>k-point spin-restricted periodic MP2 calculation using the staggered mesh method
+Author: Xin Xing (<a class="reference external" href="mailto:xxing&#37;&#52;&#48;berkeley&#46;edu">xxing<span>&#64;</span>berkeley<span>&#46;</span>edu</a>)
+Reference: Staggered Mesh Method for Correlation Energy Calculations of Solids: Second-Order</p>
+<blockquote>
+<div><p>Møller–Plesset Perturbation Theory, J. Chem. Theory Comput. 2021, 17, 8, 4733-4745</p>
+</div></blockquote>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_stagger.KMP2_stagger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_stagger.</span></span><span class="sig-name descname"><span class="pre">KMP2_stagger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flag_submesh</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_stagger.html#KMP2_stagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.mp.kmp2.KMP2" title="pyscf.pbc.mp.kmp2.KMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_stagger.html#KMP2_stagger.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_stagger.html#KMP2_stagger.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>with_t2<span class="classifier">bool</span></dt><dd><p>Whether to generate and hold t2 amplitudes in memory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kmp2_stagger.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kmp2_stagger.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kmp2_stagger.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kmp2_stagger.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Computes k-point RMP2 energy using the staggered mesh method</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (KMP2_stagger): an instance of KMP2_stagger
+mo_energy (list): a list of numpy.ndarray. Each array contains MO energies of</p>
+<blockquote>
+<div><p>shape (Nmo,) for one kpt</p>
+</div></blockquote>
+<dl class="simple">
+<dt>mo_coeff (list): a list of numpy.ndarray. Each array contains MO coefficients</dt><dd><p>of shape (Nao, Nmo) for one kpt</p>
+</dd>
+</dl>
+<p>verbose (int, optional): level of verbosity. Defaults to logger.NOTE (=3).</p>
+</dd>
+<dt>Returns:</dt><dd><p>KMP2 energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.mp.kump2">
+<span id="pyscf-pbc-mp-kump2-module"></span><h2>pyscf.pbc.mp.kump2 module<a class="headerlink" href="#module-pyscf.pbc.mp.kump2" title="Link to this heading">#</a></h2>
+<p>kpoint-adapted unrestricted MP2
+t2[i,j,a,b] = &lt;ij|ab&gt; / D_ij^ab</p>
+<p>t2 and eris are never stored in full, only a partial
+eri of size (nkpts,nocc,nocc,nvir,nvir)</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.KUMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">KUMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#KUMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.KUMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.mp.kmp2.KMP2" title="pyscf.pbc.mp.kmp2.KMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">KMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.KUMP2.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kump2.KUMP2.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.KUMP2.get_nmo">
+<span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kump2.KUMP2.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.KUMP2.get_nocc">
+<span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.kump2.KUMP2.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><p>For specifying frozen orbitals inside mp, the following options are accepted:</p>
+<blockquote>
+<div><p>+=========================+========================================+===============================+
+| Argument (Example)      | Argument Meaning                       | Example Meaning               |
++=========================+========================================+===============================+
+| int (1)                 | Freeze the same number of orbitals     | Freeze one (lowest) orbital   |
+|                         | regardless of spin and/or kpt          | for all kpts and spin cases   |
++————————-+—————————————-+——————————-+
+| 2-tuple of list of int  | inner list: List of orbitals indices   | Freeze the orbitals [0,4] for |
+| ([0, 4], [0, 5, 6])     |   to freeze at all kpts                | spin0, and orbitals [0,5,6]   |
+|                         | outer list: Spin index                 | for spin1 at all kpts         |
++————————-+—————————————-+——————————-+
+| list(2) of list of list | inner list: list of orbital indices to | Freeze orbital 0 for spin0 at |
+| ([[0,],[]],             |   freeze at each kpt for given spin    | kpt0, and freeze orbital 0,1  |
+|  [[0,1],[4]])           | outer list: spin index                 | for spin1 at kpt0 and orbital |
+|                         |                                        | 4 at kpt1                     |
++————————-+—————————————-+——————————-+</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.KUMP2.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#KUMP2.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.KUMP2.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Args:</dt><dd><dl class="simple">
+<dt>with_t2<span class="classifier">bool</span></dt><dd><p>Whether to generate and hold t2 amplitudes in memory.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.get_frozen_mask">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#get_frozen_mask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.get_nmo">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#get_nmo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.get_nocc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#get_nocc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><p>For specifying frozen orbitals inside mp, the following options are accepted:</p>
+<blockquote>
+<div><p>+=========================+========================================+===============================+
+| Argument (Example)      | Argument Meaning                       | Example Meaning               |
++=========================+========================================+===============================+
+| int (1)                 | Freeze the same number of orbitals     | Freeze one (lowest) orbital   |
+|                         | regardless of spin and/or kpt          | for all kpts and spin cases   |
++————————-+—————————————-+——————————-+
+| 2-tuple of list of int  | inner list: List of orbitals indices   | Freeze the orbitals [0,4] for |
+| ([0, 4], [0, 5, 6])     |   to freeze at all kpts                | spin0, and orbitals [0,5,6]   |
+|                         | outer list: Spin index                 | for spin1 at all kpts         |
++————————-+—————————————-+——————————-+
+| list(2) of list of list | inner list: list of orbital indices to | Freeze orbital 0 for spin0 at |
+| ([[0,],[]],             |   freeze at each kpt for given spin    | kpt0, and freeze orbital 0,1  |
+|  [[0,1],[4]])           | outer list: spin index                 | for spin1 at kpt0 and orbital |
+|                         |                                        | 4 at kpt1                     |
++————————-+—————————————-+——————————-+</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.kernel" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.padded_mo_coeff">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">padded_mo_coeff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#padded_mo_coeff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.padded_mo_coeff" title="Link to this definition">#</a></dt>
+<dd><p>Pads coefficients of active MOs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+mo_coeff (ndarray): original non-padded molecular coefficients;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Padded molecular coefficients.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.padded_mo_energy">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">padded_mo_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#padded_mo_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.padded_mo_energy" title="Link to this definition">#</a></dt>
+<dd><p>Pads energies of active MOs.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+mo_energy (ndarray): original non-padded molecular energies;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Padded molecular energies.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.kump2.padding_k_idx">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.kump2.</span></span><span class="sig-name descname"><span class="pre">padding_k_idx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'split'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/kump2.html#padding_k_idx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.kump2.padding_k_idx" title="Link to this definition">#</a></dt>
+<dd><p>For a description, see <cite>padding_k_idx</cite> in kmp2.py.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+kind (str): either “split” (occupied and virtual spaces are split) or “joint” (occupied and virtual spaces are
+the joint;</p>
+</dd>
+<dt>Returns:</dt><dd><p>Two lists corresponding to the occupied and virtual spaces for kind=”split”. Each list contains integer arrays
+with indexes pointing to actual non-zero entries in the padded vector/matrix/tensor. If kind=”joint”, a single
+list of arrays is returned corresponding to the entire MO space.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.mp.mp2">
+<span id="pyscf-pbc-mp-mp2-module"></span><h2>pyscf.pbc.mp.mp2 module<a class="headerlink" href="#module-pyscf.pbc.mp.mp2" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.GMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.mp2.</span></span><span class="sig-name descname"><span class="pre">GMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#GMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.GMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.mp.html#pyscf.mp.gmp2.GMP2" title="pyscf.mp.gmp2.GMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">GMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.GMP2.ao2mo">
+<span class="sig-name descname"><span class="pre">ao2mo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#GMP2.ao2mo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.GMP2.ao2mo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.RMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.mp2.</span></span><span class="sig-name descname"><span class="pre">RMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#RMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.RMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.mp.html#pyscf.mp.mp2.RMP2" title="pyscf.mp.mp2.RMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">RMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.RMP2.ao2mo">
+<span class="sig-name descname"><span class="pre">ao2mo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#RMP2.ao2mo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.RMP2.ao2mo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.UMP2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.mp2.</span></span><span class="sig-name descname"><span class="pre">UMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#UMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.UMP2" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.mp.html#pyscf.mp.ump2.UMP2" title="pyscf.mp.ump2.UMP2"><code class="xref py py-class docutils literal notranslate"><span class="pre">UMP2</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.mp2.UMP2.ao2mo">
+<span class="sig-name descname"><span class="pre">ao2mo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp/mp2.html#UMP2.ao2mo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.mp2.UMP2.ao2mo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.mp">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscf.pbc.mp" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.GMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">GMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp.html#GMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.GMP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.KMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">KMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.KMP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.KRMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">KRMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp.html#KRMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.KRMP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.MP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">MP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.mp.MP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.RMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">RMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp.html#RMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.RMP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.mp.UMP2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.mp.</span></span><span class="sig-name descname"><span class="pre">UMP2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/mp.html#UMP2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.mp.UMP2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp.kmp2">pyscf.pbc.mp.kmp2 module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2"><code class="docutils literal notranslate"><span class="pre">KMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.dump_flags"><code class="docutils literal notranslate"><span class="pre">KMP2.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">KMP2.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.get_nmo"><code class="docutils literal notranslate"><span class="pre">KMP2.get_nmo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.get_nocc"><code class="docutils literal notranslate"><span class="pre">KMP2.get_nocc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.kernel"><code class="docutils literal notranslate"><span class="pre">KMP2.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.make_rdm1"><code class="docutils literal notranslate"><span class="pre">KMP2.make_rdm1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.make_rdm2"><code class="docutils literal notranslate"><span class="pre">KMP2.make_rdm2()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KMP2.to_gpu"><code class="docutils literal notranslate"><span class="pre">KMP2.to_gpu()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.KRMP2"><code class="docutils literal notranslate"><span class="pre">KRMP2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">get_frozen_mask()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.get_nmo"><code class="docutils literal notranslate"><span class="pre">get_nmo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.get_nocc"><code class="docutils literal notranslate"><span class="pre">get_nocc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.make_rdm1"><code class="docutils literal notranslate"><span class="pre">make_rdm1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.make_rdm2"><code class="docutils literal notranslate"><span class="pre">make_rdm2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.padded_mo_coeff"><code class="docutils literal notranslate"><span class="pre">padded_mo_coeff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.padded_mo_energy"><code class="docutils literal notranslate"><span class="pre">padded_mo_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2.padding_k_idx"><code class="docutils literal notranslate"><span class="pre">padding_k_idx()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp.kmp2_ksymm">pyscf.pbc.mp.kmp2_ksymm module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KMP2"><code class="docutils literal notranslate"><span class="pre">KMP2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KRMP2"><code class="docutils literal notranslate"><span class="pre">KRMP2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2"><code class="docutils literal notranslate"><span class="pre">KsymAdaptedKMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.kernel"><code class="docutils literal notranslate"><span class="pre">KsymAdaptedKMP2.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm1"><code class="docutils literal notranslate"><span class="pre">KsymAdaptedKMP2.make_rdm1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.KsymAdaptedKMP2.make_rdm2"><code class="docutils literal notranslate"><span class="pre">KsymAdaptedKMP2.make_rdm2()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.kernel_with_t2"><code class="docutils literal notranslate"><span class="pre">kernel_with_t2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.make_rdm1"><code class="docutils literal notranslate"><span class="pre">make_rdm1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_ksymm.make_t2_for_rdm1"><code class="docutils literal notranslate"><span class="pre">make_t2_for_rdm1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp.kmp2_stagger">pyscf.pbc.mp.kmp2_stagger module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger"><code class="docutils literal notranslate"><span class="pre">KMP2_stagger</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.dump_flags"><code class="docutils literal notranslate"><span class="pre">KMP2_stagger.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_stagger.KMP2_stagger.kernel"><code class="docutils literal notranslate"><span class="pre">KMP2_stagger.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kmp2_stagger.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp.kump2">pyscf.pbc.mp.kump2 module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.KUMP2"><code class="docutils literal notranslate"><span class="pre">KUMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.KUMP2.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">KUMP2.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.KUMP2.get_nmo"><code class="docutils literal notranslate"><span class="pre">KUMP2.get_nmo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.KUMP2.get_nocc"><code class="docutils literal notranslate"><span class="pre">KUMP2.get_nocc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.KUMP2.kernel"><code class="docutils literal notranslate"><span class="pre">KUMP2.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">get_frozen_mask()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.get_nmo"><code class="docutils literal notranslate"><span class="pre">get_nmo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.get_nocc"><code class="docutils literal notranslate"><span class="pre">get_nocc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.padded_mo_coeff"><code class="docutils literal notranslate"><span class="pre">padded_mo_coeff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.padded_mo_energy"><code class="docutils literal notranslate"><span class="pre">padded_mo_energy()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.kump2.padding_k_idx"><code class="docutils literal notranslate"><span class="pre">padding_k_idx()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp.mp2">pyscf.pbc.mp.mp2 module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.GMP2"><code class="docutils literal notranslate"><span class="pre">GMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.GMP2.ao2mo"><code class="docutils literal notranslate"><span class="pre">GMP2.ao2mo()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.RMP2"><code class="docutils literal notranslate"><span class="pre">RMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.RMP2.ao2mo"><code class="docutils literal notranslate"><span class="pre">RMP2.ao2mo()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.UMP2"><code class="docutils literal notranslate"><span class="pre">UMP2</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.mp2.UMP2.ao2mo"><code class="docutils literal notranslate"><span class="pre">UMP2.ao2mo()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.mp">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.GMP2"><code class="docutils literal notranslate"><span class="pre">GMP2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.KMP2"><code class="docutils literal notranslate"><span class="pre">KMP2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.KRMP2"><code class="docutils literal notranslate"><span class="pre">KRMP2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.MP2"><code class="docutils literal notranslate"><span class="pre">MP2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.RMP2"><code class="docutils literal notranslate"><span class="pre">RMP2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.mp.UMP2"><code class="docutils literal notranslate"><span class="pre">UMP2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/pyscf_api_docs/pyscf.pbc.mp.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

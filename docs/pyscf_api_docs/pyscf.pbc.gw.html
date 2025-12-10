@@ -1,0 +1,1465 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyscf.pbc.gw package &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyscf_api_docs/pyscf.pbc.gw';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf.adc.html">pyscf.adc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.agf2.html">pyscf.agf2 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ao2mo.html">pyscf.ao2mo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.cc.html">pyscf.cc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ci.html">pyscf.ci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.data.html">pyscf.data package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.df.html">pyscf.df package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.grad.html">pyscf.df.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.hessian.html">pyscf.df.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.dft.html">pyscf.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.dft.xc.html">pyscf.dft.xc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.eph.html">pyscf.eph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.fci.html">pyscf.fci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.geomopt.html">pyscf.geomopt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.grad.html">pyscf.grad package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.gto.html">pyscf.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.gto.basis.html">pyscf.gto.basis package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.gto.basis.dyall-basis.html">pyscf.gto.basis.dyall-basis package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.gw.html">pyscf.gw package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.hessian.html">pyscf.hessian package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lib.html">pyscf.lib package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lo.html">pyscf.lo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcpdft.html">pyscf.mcpdft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcscf.html">pyscf.mcscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mp.html">pyscf.mp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mrpt.html">pyscf.mrpt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.nac.html">pyscf.nac package</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyscf.pbc.html">pyscf.pbc package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.adc.html">pyscf.pbc.adc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ao2mo.html">pyscf.pbc.ao2mo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.cc.html">pyscf.pbc.cc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ci.html">pyscf.pbc.ci package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.df.html">pyscf.pbc.df package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.dft.html">pyscf.pbc.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.dft.multigrid.html">pyscf.pbc.dft.multigrid package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.eph.html">pyscf.pbc.eph package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.geomopt.html">pyscf.pbc.geomopt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.grad.html">pyscf.pbc.grad package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.gto.html">pyscf.pbc.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.basis.html">pyscf.pbc.gto.basis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.pseudo.html">pyscf.pbc.gto.pseudo package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyscf.pbc.gw package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.lib.html">pyscf.pbc.lib package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mp.html">pyscf.pbc.mp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpicc.html">pyscf.pbc.mpicc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpitools.html">pyscf.pbc.mpitools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.scf.html">pyscf.pbc.scf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.symm.html">pyscf.pbc.symm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tddft.html">pyscf.pbc.tddft package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tdscf.html">pyscf.pbc.tdscf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tools.html">pyscf.pbc.tools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.x2c.html">pyscf.pbc.x2c package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.qmmm.html">pyscf.qmmm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.qmmm.pbc.html">pyscf.qmmm.pbc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.scf.html">pyscf.scf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.sgx.html">pyscf.sgx package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.solvent.html">pyscf.solvent package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.grad.html">pyscf.solvent.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.hessian.html">pyscf.solvent.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.soscf.html">pyscf.soscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.symm.html">pyscf.symm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tddft.html">pyscf.tddft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tdscf.html">pyscf.tdscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tools.html">pyscf.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.x2c.html">pyscf.x2c package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.pbc.gw package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyscf-pbc-gw-package">
+<h1>pyscf.pbc.gw package<a class="headerlink" href="#pyscf-pbc-gw-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.pbc.gw.gw_slow">
+<span id="pyscf-pbc-gw-gw-slow-module"></span><h2>pyscf.pbc.gw.gw_slow module<a class="headerlink" href="#module-pyscf.pbc.gw.gw_slow" title="Link to this heading">#</a></h2>
+<p>This module implements the G0W0 approximation on top of <cite>pyscf.tdscf.rhf_slow</cite> TDHF implementation. Unlike <cite>gw.py</cite>, all
+integrals are stored in memory. Several variants of GW are available:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>pyscf.gw_slow</cite>: the molecular implementation;</p></li>
+<li><p>(this module) <cite>pyscf.pbc.gw.gw_slow</cite>: single-kpoint PBC (periodic boundary condition) implementation;</p></li>
+<li><p><cite>pyscf.pbc.gw.kgw_slow_supercell</cite>: a supercell approach to PBC implementation with multiple k-points. Runs the
+molecular code for a model with several k-points for the cost of discarding momentum conservation and using dense
+instead of sparse matrixes;</p></li>
+<li><p><cite>pyscf.pbc.gw.kgw_slow</cite>: a PBC implementation with multiple k-points;</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="pyscf-pbc-gw-kgw-slow-module">
+<h2>pyscf.pbc.gw.kgw_slow module<a class="headerlink" href="#pyscf-pbc-gw-kgw-slow-module" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.pbc.gw.kgw_slow_supercell">
+<span id="pyscf-pbc-gw-kgw-slow-supercell-module"></span><h2>pyscf.pbc.gw.kgw_slow_supercell module<a class="headerlink" href="#module-pyscf.pbc.gw.kgw_slow_supercell" title="Link to this heading">#</a></h2>
+<p>This module implements the G0W0 approximation on top of <cite>pyscf.tdscf.rhf_slow</cite> TDHF implementation. Unlike <cite>gw.py</cite>, all
+integrals are stored in memory. Several variants of GW are available:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><cite>pyscf.gw_slow</cite>: the molecular implementation;</p></li>
+<li><p><cite>pyscf.pbc.gw.gw_slow</cite>: single-kpoint PBC (periodic boundary condition) implementation;</p></li>
+<li><p>(this module) <cite>pyscf.pbc.gw.kgw_slow_supercell</cite>: a supercell approach to PBC implementation with multiple k-points.
+Runs the molecular code for a model with several k-points for the cost of discarding momentum conservation and using
+dense instead of sparse matrixes;</p></li>
+<li><p><cite>pyscf.pbc.gw.kgw_slow</cite>: a PBC implementation with multiple k-points;</p></li>
+</ul>
+</div></blockquote>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.GW">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kgw_slow_supercell.</span></span><span class="sig-name descname"><span class="pre">GW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#GW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.GW" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.gw.html#pyscf.gw.gw_slow.GW" title="pyscf.gw.gw_slow.GW"><code class="xref py py-class docutils literal notranslate"><span class="pre">GW</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.GW.base_imds">
+<span class="sig-name descname"><span class="pre">base_imds</span></span><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.GW.base_imds" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS" title="pyscf.pbc.gw.kgw_slow_supercell.IMDS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IMDS</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kgw_slow_supercell.</span></span><span class="sig-name descname"><span class="pre">IMDS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">td</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eri</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#IMDS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.gw.html#pyscf.gw.gw_slow.IMDS" title="pyscf.gw.gw_slow.IMDS"><code class="xref py py-class docutils literal notranslate"><span class="pre">IMDS</span></code></a></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.entire_space">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">entire_space</span></span><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.entire_space" title="Link to this definition">#</a></dt>
+<dd><p>The entire orbital space.
+Returns:</p>
+<blockquote>
+<div><p>An iterable of the entire orbital space.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.eri_ov">
+<span class="sig-name descname"><span class="pre">eri_ov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#IMDS.eri_ov"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.eri_ov" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_rhs">
+<span class="sig-name descname"><span class="pre">get_rhs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">components</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#IMDS.get_rhs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_rhs" title="Link to this definition">#</a></dt>
+<dd><p>The right-hand side of the quasiparticle equation.
+Args:</p>
+<blockquote>
+<div><p>p (int, tuple): the orbital;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>Right-hand sides of the quasiparticle equation</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_sigma_element">
+<span class="sig-name descname"><span class="pre">get_sigma_element</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vir_sgn</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#IMDS.get_sigma_element"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_sigma_element" title="Link to this definition">#</a></dt>
+<dd><p>The diagonal matrix element of the self-energy matrix.
+Args:</p>
+<blockquote>
+<div><p>omega (float): the energy value;
+p (int, tuple): the orbital;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The diagonal matrix element.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.initial_guess">
+<span class="sig-name descname"><span class="pre">initial_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#IMDS.initial_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.initial_guess" title="Link to this definition">#</a></dt>
+<dd><p>Retrieves the initial guess for the quasiparticle energy for orbital <cite>p</cite>.
+Args:</p>
+<blockquote>
+<div><p>p (int, tuple): the orbital;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The value of initial guess (float).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.IMDS.orb_dims">
+<span class="sig-name descname"><span class="pre">orb_dims</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.orb_dims" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kgw_slow_supercell.corrected_moe">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kgw_slow_supercell.</span></span><span class="sig-name descname"><span class="pre">corrected_moe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eri</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kgw_slow_supercell.html#corrected_moe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kgw_slow_supercell.corrected_moe" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the corrected orbital energy.
+Args:</p>
+<blockquote>
+<div><p>eri (PhysERI): a container with electron repulsion integrals;
+k (int): the k-point index;
+p (int): orbital;</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>The corrected orbital energy.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.gw.krgw_ac">
+<span id="pyscf-pbc-gw-krgw-ac-module"></span><h2>pyscf.pbc.gw.krgw_ac module<a class="headerlink" href="#module-pyscf.pbc.gw.krgw_ac" title="Link to this heading">#</a></h2>
+<p>PBC spin-restricted G0W0-AC QP eigenvalues with k-point sampling
+This implementation has N^4 scaling, and is faster than GW-CD (N^4)
+and analytic GW (N^6) methods.
+GW-AC is recommended for valence states only, and is inaccurate for core states.</p>
+<dl class="simple">
+<dt>Method:</dt><dd><p>See T. Zhu and G.K.-L. Chan, arxiv:2007.03148 (2020) for details
+Compute Sigma on imaginary frequency with density fitting,
+then analytically continued to real frequency.
+Gaussian density fitting must be used (FFTDF and MDF are not supported).</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.AC_pade_thiele_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">AC_pade_thiele_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#AC_pade_thiele_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.AC_pade_thiele_diag" title="Link to this definition">#</a></dt>
+<dd><p>Analytic continuation to real axis using a Pade approximation
+from Thiele’s reciprocal difference method
+Reference: J. Low Temp. Phys. 29, 179 (1977)
+Returns:</p>
+<blockquote>
+<div><p>coeff: 2D array (ncoeff, norbs)
+omega: 2D array (norbs, npade)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.AC_twopole_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">AC_twopole_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nocc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#AC_twopole_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.AC_twopole_diag" title="Link to this definition">#</a></dt>
+<dd><p>Analytic continuation to real axis using a two-pole model
+Returns:</p>
+<blockquote>
+<div><p>coeff: 2D array (ncoeff, norbs)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">KRGWAC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#KRGWAC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.lib.html#pyscf.lib.misc.StreamObject" title="pyscf.lib.misc.StreamObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamObject</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.ac">
+<span class="sig-name descname"><span class="pre">ac</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pade'</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.ac" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#KRGWAC.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.fc">
+<span class="sig-name descname"><span class="pre">fc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.fc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.get_nmo">
+<span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.get_nocc">
+<span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#KRGWAC.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Input:</dt><dd><p>kptlist: self-energy k-points
+orbs: self-energy orbs
+nw: grid number</p>
+</dd>
+<dt>Output:</dt><dd><p>mo_energy: GW quasiparticle energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.linearized">
+<span class="sig-name descname"><span class="pre">linearized</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.linearized" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.nmo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nmo</span></span><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.nmo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.KRGWAC.nocc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nocc</span></span><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.nocc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.get_qij">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">get_qij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform_grids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#get_qij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.get_qij" title="Link to this definition">#</a></dt>
+<dd><p>Compute qij = 1/Omega * <a href="#id1"><span class="problematic" id="id2">|</span></a>&lt; psi_{ik} | e^{iqr} | psi_{ak-q} &gt;|^2 at q: (nkpts, nocc, nvir)
+through kp perturbation theory
+Ref: Phys. Rev. B 83, 245122 (2011)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.get_rho_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kidx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#get_rho_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.get_rho_response" title="Link to this definition">#</a></dt>
+<dd><p>Compute density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.get_rho_response_head">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#get_rho_response_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.get_rho_response_head" title="Link to this definition">#</a></dt>
+<dd><p>Compute head (G=0, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.get_rho_response_wing">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_wing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#get_rho_response_wing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.get_rho_response_wing" title="Link to this definition">#</a></dt>
+<dd><p>Compute wing (G=P, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.get_sigma_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">get_sigma_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iw_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#get_sigma_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.get_sigma_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute GW correlation self-energy (diagonal elements)
+in MO basis on imaginary axis</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.kernel" title="Link to this definition">#</a></dt>
+<dd><p>GW-corrected quasiparticle orbital energies</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A list :  converged, mo_energy, mo_coeff</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.pade_thiele">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">pade_thiele</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#pade_thiele"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.pade_thiele" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.thiele">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">thiele</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#thiele"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.thiele" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.two_pole">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">two_pole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#two_pole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.two_pole" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_ac.two_pole_fit">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_ac.</span></span><span class="sig-name descname"><span class="pre">two_pole_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_ac.html#two_pole_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_ac.two_pole_fit" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.gw.krgw_cd">
+<span id="pyscf-pbc-gw-krgw-cd-module"></span><h2>pyscf.pbc.gw.krgw_cd module<a class="headerlink" href="#module-pyscf.pbc.gw.krgw_cd" title="Link to this heading">#</a></h2>
+<p>PBC spin-restricted G0W0-CD QP eigenvalues with k-point sampling
+This implementation has the same scaling (N^4) as GW-AC, more robust but slower.
+GW-CD is particularly recommended for accurate core and high-energy states.</p>
+<dl class="simple">
+<dt>Method:</dt><dd><p>See T. Zhu and G.K.-L. Chan, arxiv:2007.03148 (2020) for details
+Compute Sigma directly on real axis with density fitting
+through a contour deformation method</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">KRGWCD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#KRGWCD"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.lib.html#pyscf.lib.misc.StreamObject" title="pyscf.lib.misc.StreamObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamObject</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#KRGWCD.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.eta">
+<span class="sig-name descname"><span class="pre">eta</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.001</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.eta" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.fc">
+<span class="sig-name descname"><span class="pre">fc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.fc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.get_nmo">
+<span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.get_nocc">
+<span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#KRGWCD.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Input:</dt><dd><p>kptlist: self-energy k-points
+orbs: self-energy orbs
+nw: grid number</p>
+</dd>
+<dt>Output:</dt><dd><p>mo_energy: GW quasiparticle energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.linearized">
+<span class="sig-name descname"><span class="pre">linearized</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.linearized" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.nmo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nmo</span></span><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.nmo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.KRGWCD.nocc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nocc</span></span><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.nocc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_WmnI_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_WmnI_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_WmnI_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_WmnI_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute GW correlation self-energy (diagonal elements)
+in MO basis on imaginary axis</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_qij">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_qij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform_grids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_qij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_qij" title="Link to this definition">#</a></dt>
+<dd><p>Compute qij = 1/Omega * <a href="#id3"><span class="problematic" id="id4">|</span></a>&lt; psi_{ik} | e^{iqr} | psi_{ak-q} &gt;|^2 at q: (nkpts, nocc, nvir)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kidx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response" title="Link to this definition">#</a></dt>
+<dd><p>Compute density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response_R">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kidx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response_R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_R" title="Link to this definition">#</a></dt>
+<dd><p>Compute density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response_head">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_head" title="Link to this definition">#</a></dt>
+<dd><p>Compute head (G=0, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response_head_R">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_head_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response_head_R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_head_R" title="Link to this definition">#</a></dt>
+<dd><p>Compute head (G=0, G’=0) density response function in auxiliary basis at freq w</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response_wing">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_wing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response_wing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_wing" title="Link to this definition">#</a></dt>
+<dd><p>Compute wing (G=P, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_rho_response_wing_R">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_wing_R</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_rho_response_wing_R"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_wing_R" title="Link to this definition">#</a></dt>
+<dd><p>Compute density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_sigmaI_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_sigmaI_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Wmn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Del_00</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Del_P0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sign</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wts</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_sigmaI_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_sigmaI_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute self-energy by integrating on imaginary axis</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_sigmaR_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_sigmaR_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_abs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_sigmaR_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_sigmaR_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute self-energy for poles inside contour
+(more and more expensive away from Fermi surface)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.get_sigma_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">get_sigma_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ep</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Wmn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Del_00</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Del_P0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q_abs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#get_sigma_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.get_sigma_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute self-energy on real axis using contour deformation</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.krgw_cd.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.krgw_cd.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/krgw_cd.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.krgw_cd.kernel" title="Link to this definition">#</a></dt>
+<dd><p>GW-corrected quasiparticle orbital energies</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>A list :  converged, mo_energy, mo_coeff</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.gw.kugw_ac">
+<span id="pyscf-pbc-gw-kugw-ac-module"></span><h2>pyscf.pbc.gw.kugw_ac module<a class="headerlink" href="#module-pyscf.pbc.gw.kugw_ac" title="Link to this heading">#</a></h2>
+<p>PBC spin-unrestricted G0W0-AC QP eigenvalues with k-point sampling
+GW-AC is recommended for valence states only, and is inaccurate for core states.</p>
+<dl class="simple">
+<dt>Method:</dt><dd><p>See T. Zhu and G.K.-L. Chan, arxiv:2007.03148 (2020) for details
+Compute Sigma on imaginary frequency with density fitting,
+then analytically continued to real frequency.
+Gaussian density fitting must be used (FFTDF and MDF are not supported).</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.AC_pade_thiele_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">AC_pade_thiele_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#AC_pade_thiele_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.AC_pade_thiele_diag" title="Link to this definition">#</a></dt>
+<dd><p>Analytic continuation to real axis using a Pade approximation
+from Thiele’s reciprocal difference method
+Reference: J. Low Temp. Phys. 29, 179 (1977)
+Returns:</p>
+<blockquote>
+<div><p>coeff: 2D array (ncoeff, norbs)
+omega: 2D array (norbs, npade)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.AC_twopole_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">AC_twopole_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nocc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#AC_twopole_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.AC_twopole_diag" title="Link to this definition">#</a></dt>
+<dd><p>Analytic continuation to real axis using a two-pole model
+Returns:</p>
+<blockquote>
+<div><p>coeff: 2D array (ncoeff, norbs)</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">KUGWAC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#KUGWAC"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.lib.html#pyscf.lib.misc.StreamObject" title="pyscf.lib.misc.StreamObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamObject</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.ac">
+<span class="sig-name descname"><span class="pre">ac</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pade'</span></em><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.ac" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#KUGWAC.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.fc">
+<span class="sig-name descname"><span class="pre">fc</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.fc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Boolean mask for orbitals in k-point post-HF method.</p>
+<p>Creates a boolean mask to remove frozen orbitals and keep other orbitals for post-HF
+calculations.</p>
+<dl class="simple">
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.</p>
+</dd>
+<dt>Returns:</dt><dd><p>moidx (list of <code class="xref py py-obj docutils literal notranslate"><span class="pre">ndarray</span></code> of <cite>bool</cite>): Boolean mask of orbitals to include.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.get_nmo">
+<span class="sig-name descname"><span class="pre">get_nmo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_nmo" title="Link to this definition">#</a></dt>
+<dd><p>Number of orbitals for k-point calculations.</p>
+<p>Number of orbitals for use in a calculation with k-points, taking into account
+frozen orbitals.</p>
+<dl>
+<dt>Note:</dt><dd><p>If <cite>per_kpoint</cite> is False, then the number of orbitals here is equal to max(nocc) + max(nvir),
+where each max is done over all k-points.  Otherwise the number of orbitals is returned
+as a list of number of orbitals at each k-point.</p>
+</dd>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of orbitals at each k-point.</p>
+<blockquote>
+<div><p>For a description of False, see Note.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nmo (int, list of int): Number of orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.get_nocc">
+<span class="sig-name descname"><span class="pre">get_nocc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">per_kpoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_nocc" title="Link to this definition">#</a></dt>
+<dd><p>Number of occupied orbitals for k-point calculations.</p>
+<p>Number of occupied orbitals for use in a calculation with k-points, taking into
+account frozen orbitals.</p>
+<dl>
+<dt>Args:</dt><dd><p>mp (<code class="xref py py-class docutils literal notranslate"><span class="pre">MP2</span></code>): An instantiation of an SCF or post-Hartree-Fock object.
+per_kpoint (bool, optional): True returns the number of occupied</p>
+<blockquote>
+<div><p>orbitals at each k-point.  False gives the max of this list.</p>
+</div></blockquote>
+</dd>
+<dt>Returns:</dt><dd><dl class="simple">
+<dt>nocc (int, list of int): Number of occupied orbitals. For return type, see description of arg</dt><dd><p><cite>per_kpoint</cite>.</p>
+</dd>
+</dl>
+</dd>
+<dt>Notes:</dt><dd><p>For specifying frozen orbitals inside mp, the following options are accepted:</p>
+<blockquote>
+<div><p>+=========================+========================================+===============================+
+| Argument (Example)      | Argument Meaning                       | Example Meaning               |
++=========================+========================================+===============================+
+| int (1)                 | Freeze the same number of orbitals     | Freeze one (lowest) orbital   |
+|                         | regardless of spin and/or kpt          | for all kpts and spin cases   |
++————————-+—————————————-+——————————-+
+| 2-tuple of list of int  | inner list: List of orbitals indices   | Freeze the orbitals [0,4] for |
+| ([0, 4], [0, 5, 6])     |   to freeze at all kpts                | spin0, and orbitals [0,5,6]   |
+|                         | outer list: Spin index                 | for spin1 at all kpts         |
++————————-+—————————————-+——————————-+
+| list(2) of list of list | inner list: list of orbital indices to | Freeze orbital 0 for spin0 at |
+| ([[0,],[]],             |   freeze at each kpt for given spin    | kpt0, and freeze orbital 0,1  |
+|  [[0,1],[4]])           | outer list: spin index                 | for spin1 at kpt0 and orbital |
+|                         |                                        | 4 at kpt1                     |
++————————-+—————————————-+——————————-+</p>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#KUGWAC.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.kernel" title="Link to this definition">#</a></dt>
+<dd><dl class="simple">
+<dt>Input:</dt><dd><p>kptlist: self-energy k-points
+orbs: self-energy orbs
+nw: grid number</p>
+</dd>
+<dt>Output:</dt><dd><p>mo_energy: GW quasiparticle energy</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.linearized">
+<span class="sig-name descname"><span class="pre">linearized</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></em><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.linearized" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.nmo">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nmo</span></span><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.nmo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.KUGWAC.nocc">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nocc</span></span><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.nocc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.get_qij">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">get_qij</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uniform_grids</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#get_qij"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.get_qij" title="Link to this definition">#</a></dt>
+<dd><p>Compute qij = 1/Omega * <a href="#id5"><span class="problematic" id="id6">|</span></a>&lt; psi_{ik} | e^{iqr} | psi_{ak-q} &gt;|^2 at q: (nkpts, nocc, nvir)
+through kp perturbation theory
+Ref: Phys. Rev. B 83, 245122 (2011)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.get_rho_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kL</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kidx</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#get_rho_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.get_rho_response" title="Link to this definition">#</a></dt>
+<dd><p>Compute density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.get_rho_response_head">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_head</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#get_rho_response_head"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.get_rho_response_head" title="Link to this definition">#</a></dt>
+<dd><p>Compute head (G=0, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.get_rho_response_wing">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">get_rho_response_wing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Lpq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qij</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#get_rho_response_wing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.get_rho_response_wing" title="Link to this definition">#</a></dt>
+<dd><p>Compute wing (G=P, G’=0) density response function in auxiliary basis at freq iw</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.get_sigma_diag">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">get_sigma_diag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wts</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iw_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#get_sigma_diag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.get_sigma_diag" title="Link to this definition">#</a></dt>
+<dd><p>Compute GW correlation self-energy (diagonal elements) in MO basis
+on imaginary axis</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.kernel">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gw</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orbs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kptlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nw</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.kernel" title="Link to this definition">#</a></dt>
+<dd><p>GW-corrected quasiparticle orbital energies
+Returns:</p>
+<blockquote>
+<div><p>A list :  converged, mo_energy, mo_coeff</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.pade_thiele">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">pade_thiele</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#pade_thiele"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.pade_thiele" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.thiele">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">thiele</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#thiele"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.thiele" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.two_pole">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">two_pole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">freqs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#two_pole"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.two_pole" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.kugw_ac.two_pole_fit">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.kugw_ac.</span></span><span class="sig-name descname"><span class="pre">two_pole_fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omega</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sigma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw/kugw_ac.html#two_pole_fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.kugw_ac.two_pole_fit" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.gw">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscf.pbc.gw" title="Link to this heading">#</a></h2>
+<p>Periodic G0W0 approximation</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.KGW">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.</span></span><span class="sig-name descname"><span class="pre">KGW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ac'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.gw.KGW" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.KRGW">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.</span></span><span class="sig-name descname"><span class="pre">KRGW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ac'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw.html#KRGW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.KRGW" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.gw.KUGW">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.gw.</span></span><span class="sig-name descname"><span class="pre">KUGW</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ac'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/gw.html#KUGW"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.gw.KUGW" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw.gw_slow">pyscf.pbc.gw.gw_slow module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf-pbc-gw-kgw-slow-module">pyscf.pbc.gw.kgw_slow module</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw.kgw_slow_supercell">pyscf.pbc.gw.kgw_slow_supercell module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.GW"><code class="docutils literal notranslate"><span class="pre">GW</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.GW.base_imds"><code class="docutils literal notranslate"><span class="pre">GW.base_imds</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS"><code class="docutils literal notranslate"><span class="pre">IMDS</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.entire_space"><code class="docutils literal notranslate"><span class="pre">IMDS.entire_space</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.eri_ov"><code class="docutils literal notranslate"><span class="pre">IMDS.eri_ov()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_rhs"><code class="docutils literal notranslate"><span class="pre">IMDS.get_rhs()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.get_sigma_element"><code class="docutils literal notranslate"><span class="pre">IMDS.get_sigma_element()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.initial_guess"><code class="docutils literal notranslate"><span class="pre">IMDS.initial_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.IMDS.orb_dims"><code class="docutils literal notranslate"><span class="pre">IMDS.orb_dims</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kgw_slow_supercell.corrected_moe"><code class="docutils literal notranslate"><span class="pre">corrected_moe()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw.krgw_ac">pyscf.pbc.gw.krgw_ac module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.AC_pade_thiele_diag"><code class="docutils literal notranslate"><span class="pre">AC_pade_thiele_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.AC_twopole_diag"><code class="docutils literal notranslate"><span class="pre">AC_twopole_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC"><code class="docutils literal notranslate"><span class="pre">KRGWAC</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.ac"><code class="docutils literal notranslate"><span class="pre">KRGWAC.ac</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.dump_flags"><code class="docutils literal notranslate"><span class="pre">KRGWAC.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.fc"><code class="docutils literal notranslate"><span class="pre">KRGWAC.fc</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">KRGWAC.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_nmo"><code class="docutils literal notranslate"><span class="pre">KRGWAC.get_nmo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.get_nocc"><code class="docutils literal notranslate"><span class="pre">KRGWAC.get_nocc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.kernel"><code class="docutils literal notranslate"><span class="pre">KRGWAC.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.linearized"><code class="docutils literal notranslate"><span class="pre">KRGWAC.linearized</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.nmo"><code class="docutils literal notranslate"><span class="pre">KRGWAC.nmo</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.KRGWAC.nocc"><code class="docutils literal notranslate"><span class="pre">KRGWAC.nocc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.get_qij"><code class="docutils literal notranslate"><span class="pre">get_qij()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.get_rho_response"><code class="docutils literal notranslate"><span class="pre">get_rho_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.get_rho_response_head"><code class="docutils literal notranslate"><span class="pre">get_rho_response_head()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.get_rho_response_wing"><code class="docutils literal notranslate"><span class="pre">get_rho_response_wing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.get_sigma_diag"><code class="docutils literal notranslate"><span class="pre">get_sigma_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.pade_thiele"><code class="docutils literal notranslate"><span class="pre">pade_thiele()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.thiele"><code class="docutils literal notranslate"><span class="pre">thiele()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.two_pole"><code class="docutils literal notranslate"><span class="pre">two_pole()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_ac.two_pole_fit"><code class="docutils literal notranslate"><span class="pre">two_pole_fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw.krgw_cd">pyscf.pbc.gw.krgw_cd module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD"><code class="docutils literal notranslate"><span class="pre">KRGWCD</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.dump_flags"><code class="docutils literal notranslate"><span class="pre">KRGWCD.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.eta"><code class="docutils literal notranslate"><span class="pre">KRGWCD.eta</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.fc"><code class="docutils literal notranslate"><span class="pre">KRGWCD.fc</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">KRGWCD.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_nmo"><code class="docutils literal notranslate"><span class="pre">KRGWCD.get_nmo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.get_nocc"><code class="docutils literal notranslate"><span class="pre">KRGWCD.get_nocc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.kernel"><code class="docutils literal notranslate"><span class="pre">KRGWCD.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.linearized"><code class="docutils literal notranslate"><span class="pre">KRGWCD.linearized</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.nmo"><code class="docutils literal notranslate"><span class="pre">KRGWCD.nmo</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.KRGWCD.nocc"><code class="docutils literal notranslate"><span class="pre">KRGWCD.nocc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_WmnI_diag"><code class="docutils literal notranslate"><span class="pre">get_WmnI_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_qij"><code class="docutils literal notranslate"><span class="pre">get_qij()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response"><code class="docutils literal notranslate"><span class="pre">get_rho_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_R"><code class="docutils literal notranslate"><span class="pre">get_rho_response_R()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_head"><code class="docutils literal notranslate"><span class="pre">get_rho_response_head()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_head_R"><code class="docutils literal notranslate"><span class="pre">get_rho_response_head_R()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_wing"><code class="docutils literal notranslate"><span class="pre">get_rho_response_wing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_rho_response_wing_R"><code class="docutils literal notranslate"><span class="pre">get_rho_response_wing_R()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_sigmaI_diag"><code class="docutils literal notranslate"><span class="pre">get_sigmaI_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_sigmaR_diag"><code class="docutils literal notranslate"><span class="pre">get_sigmaR_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.get_sigma_diag"><code class="docutils literal notranslate"><span class="pre">get_sigma_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.krgw_cd.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw.kugw_ac">pyscf.pbc.gw.kugw_ac module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.AC_pade_thiele_diag"><code class="docutils literal notranslate"><span class="pre">AC_pade_thiele_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.AC_twopole_diag"><code class="docutils literal notranslate"><span class="pre">AC_twopole_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC"><code class="docutils literal notranslate"><span class="pre">KUGWAC</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.ac"><code class="docutils literal notranslate"><span class="pre">KUGWAC.ac</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.dump_flags"><code class="docutils literal notranslate"><span class="pre">KUGWAC.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.fc"><code class="docutils literal notranslate"><span class="pre">KUGWAC.fc</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">KUGWAC.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_nmo"><code class="docutils literal notranslate"><span class="pre">KUGWAC.get_nmo()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.get_nocc"><code class="docutils literal notranslate"><span class="pre">KUGWAC.get_nocc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.kernel"><code class="docutils literal notranslate"><span class="pre">KUGWAC.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.linearized"><code class="docutils literal notranslate"><span class="pre">KUGWAC.linearized</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.nmo"><code class="docutils literal notranslate"><span class="pre">KUGWAC.nmo</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.KUGWAC.nocc"><code class="docutils literal notranslate"><span class="pre">KUGWAC.nocc</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.get_qij"><code class="docutils literal notranslate"><span class="pre">get_qij()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.get_rho_response"><code class="docutils literal notranslate"><span class="pre">get_rho_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.get_rho_response_head"><code class="docutils literal notranslate"><span class="pre">get_rho_response_head()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.get_rho_response_wing"><code class="docutils literal notranslate"><span class="pre">get_rho_response_wing()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.get_sigma_diag"><code class="docutils literal notranslate"><span class="pre">get_sigma_diag()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.kernel"><code class="docutils literal notranslate"><span class="pre">kernel()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.pade_thiele"><code class="docutils literal notranslate"><span class="pre">pade_thiele()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.thiele"><code class="docutils literal notranslate"><span class="pre">thiele()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.two_pole"><code class="docutils literal notranslate"><span class="pre">two_pole()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.kugw_ac.two_pole_fit"><code class="docutils literal notranslate"><span class="pre">two_pole_fit()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.gw">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.KGW"><code class="docutils literal notranslate"><span class="pre">KGW()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.KRGW"><code class="docutils literal notranslate"><span class="pre">KRGW()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.gw.KUGW"><code class="docutils literal notranslate"><span class="pre">KUGW()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/pyscf_api_docs/pyscf.pbc.gw.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

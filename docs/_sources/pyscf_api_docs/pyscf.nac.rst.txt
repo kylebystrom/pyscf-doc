@@ -1,0 +1,29 @@
+pyscf.nac package
+=================
+
+Submodules
+----------
+
+pyscf.nac.mspdft module
+-----------------------
+
+.. automodule:: pyscf.nac.mspdft
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pyscf.nac.sacasscf module
+-------------------------
+
+.. automodule:: pyscf.nac.sacasscf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pyscf.nac
+   :members:
+   :undoc-members:
+   :show-inheritance:

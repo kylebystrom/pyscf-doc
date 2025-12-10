@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.gto.ecp &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/gto/ecp';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.gto.ecp</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.gto.ecp</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2014-2018 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Qiming Sun &lt;osirpt.sun@gmail.com&gt;</span>
+<span class="c1">#</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Effective core potential (ECP)</span>
+
+<span class="sd">This module exposes some ecp integration functions from the C implementation.</span>
+
+<span class="sd">Reference for ecp integral computation</span>
+<span class="sd">* Analytical integration</span>
+<span class="sd">J. Chem. Phys. 65, 3826 (1976); https://doi.org/10.1063/1.432900</span>
+<span class="sd">J. Chem. Phys. 111, 8778 (1999); https://doi.org/10.1063/1.480225</span>
+<span class="sd">J. Comput. Phys. 44, 289 (1981); https://doi.org/10.1016/0021-9991(81)90053-X</span>
+
+<span class="sd">* Numerical integration</span>
+<span class="sd">J. Comput. Chem. 27, 1009 (2006); https://doi.org/10.1002/jcc.20410</span>
+<span class="sd">Chem. Phys. Lett. 296, 445 (1998); https://doi.org/10.1016/S0009-2614(98)01077-X</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf.gto</span> <span class="kn">import</span> <span class="n">moleintor</span>
+<span class="kn">from</span> <span class="nn">pyscf.data.elements</span> <span class="kn">import</span> <span class="n">ELEMENTS</span>
+
+<span class="n">libecp</span> <span class="o">=</span> <span class="n">moleintor</span><span class="o">.</span><span class="n">libcgto</span>
+<span class="n">libecp</span><span class="o">.</span><span class="n">ECPscalar_cache_size</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span>
+
+<div class="viewcode-block" id="type1_by_shell">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.gto.html#pyscf.gto.ecp.type1_by_shell">[docs]</a>
+<span class="k">def</span> <span class="nf">type1_by_shell</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">shls</span><span class="p">,</span> <span class="n">cart</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">lj</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">cart</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPtype1_cart</span>
+        <span class="n">di</span> <span class="o">=</span> <span class="p">(</span><span class="n">li</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">li</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">dj</span> <span class="o">=</span> <span class="p">(</span><span class="n">lj</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">lj</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPtype1_sph</span>
+        <span class="n">di</span> <span class="o">=</span> <span class="p">(</span><span class="n">li</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">dj</span> <span class="o">=</span> <span class="p">(</span><span class="n">lj</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">cache_size</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPscalar_cache_size</span><span class="p">(</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">shls</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">cache_size</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">di</span><span class="p">,</span><span class="n">dj</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+
+    <span class="n">fn</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+       <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">shls</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+       <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="p">)),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">lib</span><span class="o">.</span><span class="n">c_null_ptr</span><span class="p">(),</span>
+       <span class="n">cache</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">buf</span></div>
+
+
+<div class="viewcode-block" id="type2_by_shell">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.gto.html#pyscf.gto.ecp.type2_by_shell">[docs]</a>
+<span class="k">def</span> <span class="nf">type2_by_shell</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">shls</span><span class="p">,</span> <span class="n">cart</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">lj</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">cart</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPtype2_cart</span>
+        <span class="n">di</span> <span class="o">=</span> <span class="p">(</span><span class="n">li</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">li</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">dj</span> <span class="o">=</span> <span class="p">(</span><span class="n">lj</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">lj</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fn</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPtype2_sph</span>
+        <span class="n">di</span> <span class="o">=</span> <span class="p">(</span><span class="n">li</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">dj</span> <span class="o">=</span> <span class="p">(</span><span class="n">lj</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">cache_size</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPscalar_cache_size</span><span class="p">(</span>
+        <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">shls</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">cache_size</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">di</span><span class="p">,</span><span class="n">dj</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+
+    <span class="n">fn</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+       <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">shls</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+       <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="p">)),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">lib</span><span class="o">.</span><span class="n">c_null_ptr</span><span class="p">(),</span>
+       <span class="n">cache</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">buf</span></div>
+
+
+<span class="n">AS_ECPBAS_OFFSET</span><span class="o">=</span> <span class="mi">18</span>
+<span class="n">AS_NECPBAS</span>      <span class="o">=</span> <span class="mi">19</span>
+<div class="viewcode-block" id="so_by_shell">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.gto.html#pyscf.gto.ecp.so_by_shell">[docs]</a>
+<span class="k">def</span> <span class="nf">so_by_shell</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">shls</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Spin-orbit coupling ECP in spinor basis</span>
+<span class="sd">    i/2 &lt;Pauli_matrix dot l U(r)&gt;</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">lj</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_angular</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">di</span> <span class="o">=</span> <span class="p">(</span><span class="n">li</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">dj</span> <span class="o">=</span> <span class="p">(</span><span class="n">lj</span><span class="o">*</span><span class="mi">4</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">mol</span><span class="o">.</span><span class="n">bas_nctr</span><span class="p">(</span><span class="n">shls</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">bas</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="p">))</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="p">[</span><span class="n">AS_ECPBAS_OFFSET</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="p">)</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="p">[</span><span class="n">AS_NECPBAS</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">_ecpbas</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">di</span><span class="p">,</span><span class="n">dj</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+    <span class="n">cache</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">size</span><span class="o">*</span><span class="mi">48</span><span class="o">+</span><span class="mi">100000</span><span class="p">)</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">libecp</span><span class="o">.</span><span class="n">ECPso_spinor</span>
+    <span class="n">fn</span><span class="p">(</span><span class="n">buf</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+       <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="n">di</span><span class="p">,</span> <span class="n">dj</span><span class="p">),</span>
+       <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">2</span><span class="p">)(</span><span class="o">*</span><span class="n">shls</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+       <span class="n">bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+       <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">lib</span><span class="o">.</span><span class="n">c_null_ptr</span><span class="p">(),</span>
+       <span class="n">cache</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">buf</span></div>
+
+
+<div class="viewcode-block" id="core_configuration">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.gto.html#pyscf.gto.ecp.core_configuration">[docs]</a>
+<span class="k">def</span> <span class="nf">core_configuration</span><span class="p">(</span><span class="n">nelec_core</span><span class="p">,</span> <span class="n">atom_symbol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">conf_dic</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="mi">0</span> <span class="p">:</span> <span class="s1">&#39;0s0p0d0f&#39;</span><span class="p">,</span>
+        <span class="mi">2</span> <span class="p">:</span> <span class="s1">&#39;1s0p0d0f&#39;</span><span class="p">,</span>
+        <span class="mi">10</span><span class="p">:</span> <span class="s1">&#39;2s1p0d0f&#39;</span><span class="p">,</span>
+        <span class="mi">18</span><span class="p">:</span> <span class="s1">&#39;3s2p0d0f&#39;</span><span class="p">,</span>
+        <span class="mi">28</span><span class="p">:</span> <span class="s1">&#39;3s2p1d0f&#39;</span><span class="p">,</span>
+        <span class="mi">36</span><span class="p">:</span> <span class="s1">&#39;4s3p1d0f&#39;</span><span class="p">,</span>
+        <span class="mi">46</span><span class="p">:</span> <span class="s1">&#39;4s3p2d0f&#39;</span><span class="p">,</span>
+        <span class="mi">54</span><span class="p">:</span> <span class="s1">&#39;5s4p2d0f&#39;</span><span class="p">,</span>
+        <span class="mi">60</span><span class="p">:</span> <span class="s1">&#39;4s3p2d1f&#39;</span><span class="p">,</span>
+        <span class="mi">68</span><span class="p">:</span> <span class="s1">&#39;5s4p2d1f&#39;</span><span class="p">,</span>
+        <span class="mi">78</span><span class="p">:</span> <span class="s1">&#39;5s4p3d1f&#39;</span><span class="p">,</span>
+        <span class="mi">92</span><span class="p">:</span> <span class="s1">&#39;5s4p3d2f&#39;</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1"># Core configurations for f-in-core ECPs defined in the following references</span>
+    <span class="c1"># 10.1007/BF00528565 , 10.1007/s00214-005-0629-0 , 10.1007/s00214-009-0584-2</span>
+    <span class="n">elements_4f</span> <span class="o">=</span> <span class="n">ELEMENTS</span><span class="p">[</span><span class="mi">57</span><span class="p">:</span><span class="mi">71</span><span class="p">]</span>
+    <span class="n">elements_5f</span> <span class="o">=</span> <span class="n">ELEMENTS</span><span class="p">[</span><span class="mi">89</span><span class="p">:</span><span class="mi">103</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">atom_symbol</span> <span class="ow">in</span> <span class="n">elements_4f</span><span class="p">:</span>
+        <span class="c1"># TODO: fix La3+ and Ce4+ ECP46MWB f-in-core ECPs</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">47</span><span class="p">,</span> <span class="mi">59</span><span class="p">):</span>
+            <span class="n">conf_dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;4s3p2d1f&#39;</span>
+    <span class="k">if</span> <span class="n">atom_symbol</span> <span class="ow">in</span> <span class="n">elements_5f</span><span class="p">:</span>
+        <span class="c1"># TODO: fix Ac3+, Th4+, Pa5+ and U6+ ECP78MWB f-in-core ECPs</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">79</span><span class="p">,</span> <span class="mi">91</span><span class="p">):</span>
+            <span class="n">conf_dic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;5s4p3d2f&#39;</span>
+    <span class="k">if</span> <span class="n">nelec_core</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">conf_dic</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;Core configuration for </span><span class="si">%d</span><span class="s1"> core electrons is not available.&#39;</span> <span class="o">%</span> <span class="n">nelec_core</span><span class="p">)</span>
+    <span class="n">coreshell</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">conf_dic</span><span class="p">[</span><span class="n">nelec_core</span><span class="p">][::</span><span class="mi">2</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">coreshell</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">gto</span><span class="p">,</span> <span class="n">scf</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"> Cu 0. 0. 0.</span>
+<span class="s1"> H  0.  0. -1.56</span>
+<span class="s1"> H  0.  0.  1.56</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span>
+                <span class="n">basis</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Cu&#39;</span><span class="p">:</span><span class="s1">&#39;lanl2dz&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="s1">&#39;sto3g&#39;</span><span class="p">},</span>
+                <span class="n">ecp</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;cu&#39;</span><span class="p">:</span><span class="s1">&#39;lanl2dz&#39;</span><span class="p">},</span>
+                <span class="c1">#basis={&#39;Cu&#39;:&#39;crenbs&#39;, &#39;H&#39;:&#39;sto3g&#39;},</span>
+                <span class="c1">#ecp = {&#39;cu&#39;:&#39;crenbs&#39;},</span>
+                <span class="n">charge</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">mf</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">kernel</span><span class="p">(),</span> <span class="o">-</span><span class="mf">196.09477546034623</span><span class="p">)</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1"> Na 0. 0. 0.</span>
+<span class="s1"> H  0.  0.  1.</span>
+<span class="s1">&#39;&#39;&#39;</span><span class="p">,</span>
+                <span class="n">basis</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Na&#39;</span><span class="p">:</span><span class="s1">&#39;lanl2dz&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">:</span><span class="s1">&#39;sto3g&#39;</span><span class="p">},</span>
+                <span class="n">ecp</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Na&#39;</span><span class="p">:</span><span class="s1">&#39;lanl2dz&#39;</span><span class="p">},</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">mf</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">kernel</span><span class="p">(),</span> <span class="o">-</span><span class="mf">0.45002315562861461</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

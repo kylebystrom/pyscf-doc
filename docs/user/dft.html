@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Density functional theory (DFT) &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/dft';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Second-order Møller–Plesset perturbation theory (MP2)" href="mp.html" />
+    <link rel="prev" title="Self-consistent field (SCF) methods" href="scf.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">How to install PySCF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">How to use PySCF</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Building molecules and crystals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="gto.html">Molecular structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pbcgto.html">Crystal structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electronic structure methods</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="scf.html">Self-consistent field (SCF) methods</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Density functional theory (DFT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp.html">Second-order Møller–Plesset perturbation theory (MP2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gw.html">GW approximation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ci.html">Configuration interaction (CISD and FCI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cc.html">Coupled-cluster theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">Algebraic diagrammatic construction (ADC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agf2.html">Auxiliary second-order Green’s function perturbation theory (AGF2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcscf.html">Multi-configuration self-consistent field (MCSCF)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcpdft.html">Multi-configuration pair-density functional theory (MC-PDFT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrpt.html">Multi-reference perturbation theory (MRPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tddft.html">Time-dependent Hartree-Fock and density functional theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other functionalities</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="solvent.html">Solvation models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qmmm.html">QM/MM methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="df.html">Density fitting (DF)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pbc.html">Periodic boundary conditions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pbc/scf.html">SCF and DFT methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbc/df.html">Density fitting for crystalline calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbc/mix_mol.html">Mixing PBC and molecular modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="eph.html">Electron-phonon coupling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lo.html">Localized orbitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sgx.html">Seminumerical exchange (SGX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geomopt.html">Geometry optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Acceleration (GPU4PySCF)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PySCF-forge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf-forge.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pprpa.html">particle-particle Random Phase Approximation (ppRPA)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Density functional theory (DFT)</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="density-functional-theory-dft">
+<span id="user-dft"></span><h1>Density functional theory (DFT)<a class="headerlink" href="#density-functional-theory-dft" title="Link to this heading">#</a></h1>
+<p><em>Modules</em>: <a class="reference internal" href="../pyscf_api_docs/pyscf.dft.html#module-pyscf.dft" title="pyscf.dft"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf.dft</span></code></a>, <a class="reference internal" href="../pyscf_api_docs/pyscf.pbc.dft.html#module-pyscf.pbc.dft" title="pyscf.pbc.dft"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf.pbc.dft</span></code></a></p>
+<section id="introduction">
+<span id="user-dft-intro"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Kohn-Sham density functional theory (KS-DFT) has been implemented through derived classes of the <a class="reference internal" href="../pyscf_api_docs/pyscf.scf.html#pyscf.scf.hf.SCF" title="pyscf.scf.hf.SCF"><code class="xref py py-class docutils literal notranslate"><span class="pre">pyscf.scf.hf.SCF</span></code></a> parent class. As such, the methods and capabilities introduced in <a class="reference internal" href="scf.html#user-scf"><span class="std std-ref">Self-consistent field (SCF) methods</span></a> are also available to the <code class="xref py py-mod docutils literal notranslate"><span class="pre">dft</span></code> module, e.g., the efficient second-order Newton-Raphson algorithm.</p>
+<p>A minimal example of using the <code class="xref py py-mod docutils literal notranslate"><span class="pre">dft</span></code> module reads, cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/22-newton.py">dft/22-newton.py</a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">gto</span><span class="p">,</span> <span class="n">dft</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mol_hf</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span> <span class="o">=</span> <span class="s1">&#39;H 0 0 0; F 0 0 1.1&#39;</span><span class="p">,</span> <span class="n">basis</span> <span class="o">=</span> <span class="s1">&#39;ccpvdz&#39;</span><span class="p">,</span> <span class="n">symmetry</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="s1">&#39;lda,vwn&#39;</span> <span class="c1"># default</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span> <span class="o">=</span> <span class="n">mf_hf</span><span class="o">.</span><span class="n">newton</span><span class="p">()</span> <span class="c1"># second-order algortihm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This will run a restricted, closed-shell Kohn-Sham DFT calculation with the default LDA functional.</p>
+</section>
+<section id="theory">
+<span id="user-dft-theory"></span><h2>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h2>
+<p>In KS-DFT, as first proposed by Kohn and Sham <span id="id1">[<a class="reference internal" href="reference.html#id29" title="W. Kohn and L. J. Sham. Self-Consistent Equations Including Exchange and Correlation Effects. Phys. Rev., 140:A1133, 1965.">18</a>]</span>, the electron density of a reference noninteracting system is used to represent the density of the true interacting system. As a result, the computational formulation of KS-DFT resembles that of Hartree-Fock (HF) theory, but with a different effective Fock potential. In KS-DFT, the total electronic energy is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[E = T_s + E_{\rm ext} + E_J + E_{\rm xc} \ .\]</div>
+<p>Here, <span class="math notranslate nohighlight">\(T_s\)</span> is the noninteracting kinetic energy, <span class="math notranslate nohighlight">\(E_{\rm ext}\)</span> is the energy due to the external potential, <span class="math notranslate nohighlight">\(E_J\)</span> is the Coulomb energy, and
+<span class="math notranslate nohighlight">\(E_{\rm xc}\)</span> is the exchange-correlation (<em>xc</em>) energy. In practice, <span class="math notranslate nohighlight">\(E_{\rm xc}\)</span> is approximated by a density functional approximation, which themselves may be divided into several classes along different rungs of Jacob’s ladder <span id="id2">[<a class="reference internal" href="reference.html#id30" title="J. P. Perdew and K. Schmidt. Jacob's Ladder of Density Functional Approximations for the Exchange-Correlation Energy. AIP Conf. Proc., 577:1, 2001.">19</a>]</span>:</p>
+<ul class="simple">
+<li><p>local density approximations (e.g. LDA; <em>xc</em> energy depends only on the electron density, <span class="math notranslate nohighlight">\(\rho\)</span>),</p></li>
+<li><p>generalized gradient approximations (GGA; <em>xc</em> energy also depends on the density gradient, <span class="math notranslate nohighlight">\(|\nabla\rho|\)</span>),</p></li>
+<li><p>meta-GGAs (<em>xc</em> energy also depends on the kinetic energy density and/or the density Laplacian, <span class="math notranslate nohighlight">\(\sum_i |\nabla \psi_i|^2\)</span>, <span class="math notranslate nohighlight">\(\nabla^2\rho\)</span>; the latter is not supported in PySCF at the moment),</p></li>
+<li><p>non-local correlation functionals (<em>xc</em> energy involves a double integral)</p></li>
+<li><p>hybrid density functionals (a fraction of exact exchange is used), and</p></li>
+<li><p>long-range corrected density functionals (exact exchange is used with a modified interaction kernel)</p></li>
+</ul>
+<p>Variationally minimizing the total energy with respect to the density yields the KS equations for the non-interacting reference orbitals, on par with HF theory, and these have the same general form as the Fock equations in <a class="reference internal" href="scf.html#user-scf"><span class="std std-ref">Self-consistent field (SCF) methods</span></a>. However, the exact exchange, <span class="math notranslate nohighlight">\(\hat{K}\)</span>, is replaced by the <em>xc</em> potential, <span class="math notranslate nohighlight">\(\hat{v}_{\rm xc}=\delta E_{\rm xc}/\delta \rho\)</span>. For hybrid and meta-GGA calculations, PySCF uses the generalized KS formalism <span id="id3">[<a class="reference internal" href="reference.html#id35" title="A Seidl, A. Görling, P. Vogl, J. A. Majewski, and M. Levy. Generalized Kohn-Sham Schemes and the Band-Gap Problem. Phys. Rev. B, 53:3764, 1996.">20</a>]</span>, in which the so-called generalized KS equations minimize the total energy with respect to the orbitals themselves.</p>
+</section>
+<section id="predefined-xc-functionals-and-functional-aliases">
+<span id="user-dft-predef-func"></span><h2>Predefined <em>xc</em> Functionals and Functional Aliases<a class="headerlink" href="#predefined-xc-functionals-and-functional-aliases" title="Link to this heading">#</a></h2>
+<p>The choice of <em>xc</em> functional is assigned via the attribute <code class="xref py py-attr docutils literal notranslate"><span class="pre">DFT.xc</span></code>. This is a comma separated string (precise grammar discussed <a class="reference internal" href="#user-dft-custom-func"><span class="std std-ref">below</span></a>, e.g., <code class="docutils literal notranslate"><span class="pre">xc</span> <span class="pre">=</span> <span class="pre">'pbe,pbe'</span></code> denotes PBE exchange plus PBE correlation. In common usage, a single name (alias) is often used to refer to the combination of a particular exchange and correlation approximation instead. To support this, PySCF will first examine a lookup table to see if <code class="xref py py-attr docutils literal notranslate"><span class="pre">DFT.xc</span></code> corresponds to a common compound name, and if so, the implementation dispatches to the appropriate exchange and correlation forms, e.g., <code class="docutils literal notranslate"><span class="pre">xc</span> <span class="pre">=</span> <span class="pre">'pbe'</span></code> directly translates to <code class="docutils literal notranslate"><span class="pre">xc</span> <span class="pre">=</span> <span class="pre">'pbe,pbe'</span></code>. However, if the name is not found in the compound functional table, and only a single string is given, it will be treated as an exchange functional only, e.g., <code class="docutils literal notranslate"><span class="pre">xc</span> <span class="pre">=</span> <span class="pre">'b86'</span></code> leads to B86 exchange only (without correlation). Please note that earlier PySCF versions (1.5.0 or earlier)
+did not support compound functional aliases, and both exchange and correlation always had to be explicitly assigned.</p>
+<p>PySCF supports two independent libraries of <em>xc</em> functional implementations, namely <a class="reference external" href="https://libxc.gitlab.io">Libxc</a> and <a class="reference external" href="https://xcfun.readthedocs.io/en/latest/">XCFun</a>.
+The former of these is the default, but the latter may be selected by setting <code class="docutils literal notranslate"><span class="pre">DFT._numint.libxc</span> <span class="pre">=</span> <span class="pre">dft.xcfun</span></code>, cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/32-xcfun_as_default.py">dft/32-xcfun_as_default.py</a>.
+For complete lists of the available density functional approximations, the user is referred to the <code class="docutils literal notranslate"><span class="pre">XC_CODES</span></code> dictionaries in <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/pyscf/dft/libxc.py">pyscf/dft/libxc.py</a> and <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/pyscf/dft/xcfun.py">pyscf/dft/xcfun.py</a>, respectively. The user can choose the library at runtime in order to leverage any of its exclusive features.</p>
+<p>The constant maintenance and development of density functional libraries is hard work at little personal benefit, while everyone benefits from having a huge variety of density functionals in numerically stable form for use in applications. If you use Libxc in your calculations, please cite the most up-to-date work on Libxc in your paper. You can see the most up-to-date citation on the <a class="reference external" href="https://libxc.gitlab.io">Libxc web page</a>; at the moment, this is <span id="id4">[<a class="reference internal" href="reference.html#id31" title="S. Lehtola, C. Steigemann, M. J. T. Oliveira, and M. A. L. Marques. Recent Developments in LIBXC — a Comprehensive Library of Functionals for Density Functional Theory. SoftwareX, 7:1, 2018.">21</a>]</span>. Likewise, if you use XCFun in your calculations, please cite the most up-to-date work on XCFun in your paper. You can find recent citations on the <a class="reference external" href="https://github.com/dftlibs/xcfun/">XCFun web page</a>; at present, this is <span id="id5">[<a class="reference internal" href="reference.html#id32" title="U. Ekström, L. Visscher, R. Bast, A. J. Thorvaldsen, and K. Ruud. Arbitrary-Order Density Functional Response Theory from Automatic Differentiation. J. Chem. Theory Comput., 6:1971, 2010.">22</a>]</span>. Please check your log files for the library used in your calculation (you may need to increase the <code class="docutils literal notranslate"><span class="pre">DFT.verbose</span></code> setting of your calculation to see this).</p>
+</section>
+<section id="customizing-xc-functionals">
+<span id="user-dft-custom-func"></span><h2>Customizing <em>xc</em> functionals<a class="headerlink" href="#customizing-xc-functionals" title="Link to this heading">#</a></h2>
+<p>The <em>xc</em> functional of choice can be customized. The simplest way to customize to achieve this is to assign a string expression to the <code class="docutils literal notranslate"><span class="pre">DFT.xc</span></code> attribute:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">HF_X</span><span class="p">,</span> <span class="n">LDA_X</span> <span class="o">=</span> <span class="mf">.6</span><span class="p">,</span> <span class="mf">.08</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">B88_X</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">HF_X</span> <span class="o">-</span> <span class="n">LDA_X</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">LYP_C</span> <span class="o">=</span> <span class="mf">.81</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">VWN_C</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">LYP_C</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">HF_X</span><span class="si">:}</span><span class="s1"> * HF + </span><span class="si">{</span><span class="n">LDA_X</span><span class="si">:}</span><span class="s1"> * LDA + </span><span class="si">{</span><span class="n">B88_X</span><span class="si">:}</span><span class="s1"> * B88, </span><span class="si">{</span><span class="n">LYP_C</span><span class="si">:}</span><span class="s1"> * LYP + </span><span class="si">{</span><span class="n">VWN_C</span><span class="si">:}</span><span class="s1"> * VWN&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="s1">&#39;hf&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The XC functional string is parsed against a set of rules, as described below.</p>
+<ul class="simple">
+<li><p>The given functional description must be a one-line string</p></li>
+<li><p>The functional description is case-insensitive</p></li>
+<li><p>The functional description string has two parts, separated by a <code class="docutils literal notranslate"><span class="pre">,</span></code>.  The first part describes the exchange functional, the second part sets the correlation functional (as for <a class="reference internal" href="#user-dft-predef-func"><span class="std std-ref">aliases</span></a>)</p>
+<ul>
+<li><p>If a <code class="docutils literal notranslate"><span class="pre">&quot;,&quot;</span></code> does not appear in the string, the entire string is treated as the name of a compound functional (containing both the exchange and the correlation
+functional) which should be in the list of functional aliases. Again, if the string is not found in the aliased functional list, it is treated as an exchange functional</p></li>
+<li><p>To input only an exchange functional (without a correlation functional), one should leave the second part blank. E.g., <code class="docutils literal notranslate"><span class="pre">slater,</span></code> implies a functional with the LDA contribution only</p></li>
+<li><p>Correspondingly, to neglect the contribution of the exchange functional (i.e. to just use a correlation functional), one should leave the first part blank, e.g., <code class="docutils literal notranslate"><span class="pre">',vwn'</span></code> means a functional with VWN only</p></li>
+<li><p>If a compound <em>xc</em> functional is specified, no matter whether it is in the exchange part (the string in front of the comma) or the correlation part (the string behind the comma), both exchange and correlation functionals of the compound <em>xc</em> functional will be used</p></li>
+</ul>
+</li>
+<li><p>The functional name can be placed in an arbitrary order.  Two names need be separated by operators <code class="docutils literal notranslate"><span class="pre">+</span></code> or <code class="docutils literal notranslate"><span class="pre">-</span></code>.  Blank spaces are ignored.  NOTE the parser
+only reads the operators <code class="docutils literal notranslate"><span class="pre">+,</span> <span class="pre">-,</span> <span class="pre">*</span></code>, while <code class="docutils literal notranslate"><span class="pre">/</span></code> is not supported</p></li>
+<li><p>A functional name can have at most one factor.  If a factor is not given, it is set to <code class="docutils literal notranslate"><span class="pre">1</span></code>.  Compound functionals can be scaled as a unit. For example, <code class="docutils literal notranslate"><span class="pre">.5</span> <span class="pre">*</span> <span class="pre">b3lyp</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">.1</span> <span class="pre">*</span> <span class="pre">HF</span> <span class="pre">+</span> <span class="pre">.04</span> <span class="pre">*</span> <span class="pre">LDA</span> <span class="pre">+</span> <span class="pre">.36</span> <span class="pre">*</span> <span class="pre">B88,</span> <span class="pre">.405</span> <span class="pre">*</span> <span class="pre">LYP</span> <span class="pre">+</span> <span class="pre">.095</span> <span class="pre">*</span> <span class="pre">VWN</span></code></p></li>
+<li><p>The string <code class="docutils literal notranslate"><span class="pre">HF</span></code> stands for exact exchange (HF K matrix). <code class="docutils literal notranslate"><span class="pre">HF</span></code> can be put in the correlation functional part (after the comma). Putting <code class="docutils literal notranslate"><span class="pre">HF</span></code> in the correlation part is the same as putting <code class="docutils literal notranslate"><span class="pre">HF</span></code> in the exchange part</p></li>
+<li><p>The special string <code class="docutils literal notranslate"><span class="pre">RSH</span></code> means a range-separated operator. Its format is <code class="docutils literal notranslate"><span class="pre">RSH(omega,</span> <span class="pre">alpha,</span> <span class="pre">beta)</span></code>. Another way to input range separation is to use keywords <code class="docutils literal notranslate"><span class="pre">SR_HF</span></code> and <code class="docutils literal notranslate"><span class="pre">LR_HF</span></code>, e.g., <code class="docutils literal notranslate"><span class="pre">SR_HF(.1)</span> <span class="pre">*</span> <span class="pre">alpha_plus_beta</span></code> and <code class="docutils literal notranslate"><span class="pre">LR_HF(.1)</span> <span class="pre">*</span> <span class="pre">alpha</span></code> where the number in the parenthesis is the value of <code class="docutils literal notranslate"><span class="pre">omega</span></code></p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">RSH</span></code> kernel in PySCF is based on the error function kernel; Yukawa kernels are not supported at present</p></li>
+<li><p>One need in general be careful with the Libxc convention of GGA functionals, in which the LDA contribution is included</p></li>
+</ul>
+<p>For completeness, it’s worth mentioning that yet another way to customize <em>xc</em> functionals exists, which uses the <code class="xref py py-meth docutils literal notranslate"><span class="pre">eval_xc()</span></code> method of the numerical integral class:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">eval_xc</span><span class="p">(</span><span class="n">xc_code</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">relativity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="c1"># A fictitious functional to demonstrate the usage</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">rho0</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">dz</span> <span class="o">=</span> <span class="n">rho</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">gamma</span> <span class="o">=</span> <span class="p">(</span><span class="n">dx</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dy</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">dz</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">exc</span> <span class="o">=</span> <span class="mf">.01</span> <span class="o">*</span> <span class="n">rho0</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">.02</span> <span class="o">*</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mf">.001</span><span class="p">)</span> <span class="o">**</span> <span class="mf">.5</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">vrho</span> <span class="o">=</span> <span class="mf">.01</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">rho0</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">vgamma</span> <span class="o">=</span> <span class="mf">.02</span> <span class="o">*</span> <span class="mf">.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mf">.001</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">vlapl</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">vtau</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">vxc</span> <span class="o">=</span> <span class="p">(</span><span class="n">vrho</span><span class="p">,</span> <span class="n">vgamma</span><span class="p">,</span> <span class="n">vlapl</span><span class="p">,</span> <span class="n">vtau</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">fxc</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># 2nd-order functional derivative</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="n">kxc</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># 3rd-order functional derivative</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">return</span> <span class="n">exc</span><span class="p">,</span> <span class="n">vxc</span><span class="p">,</span> <span class="n">fxc</span><span class="p">,</span> <span class="n">kxc</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">dft</span><span class="o">.</span><span class="n">libxc</span><span class="o">.</span><span class="n">define_xc_</span><span class="p">(</span><span class="n">mf_hf</span><span class="o">.</span><span class="n">_numint</span><span class="p">,</span> <span class="n">eval_xc</span><span class="p">,</span> <span class="n">xctype</span><span class="o">=</span><span class="s1">&#39;GGA&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>By calling the <code class="xref py py-func docutils literal notranslate"><span class="pre">dft.libxc.define_xc_()</span></code> function, the customized <code class="xref py py-func docutils literal notranslate"><span class="pre">eval_xc()</span></code> function is patched to the numerical integration class <code class="docutils literal notranslate"><span class="pre">DFT._numint</span></code> dynamically.</p>
+<p>For more examples of DFT <em>xc</em> functional customization, cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/24-custom_xc_functional.py">dft/24-custom_xc_functional.py</a> and <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/24-define_xc_functional.py">dft/24-define_xc_functional.py</a>.</p>
+</section>
+<section id="numerical-integration-grids">
+<span id="user-dft-numint"></span><h2>Numerical integration grids<a class="headerlink" href="#numerical-integration-grids" title="Link to this heading">#</a></h2>
+<p>PySCF implements several numerical integration grids, which can be tuned in KS-DFT calculations following the examples in <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/11-grid_scheme.py">dft/11-grid_scheme.py</a>. For instance, predefined grids (identical to those used in <a class="reference external" href="https://www.turbomole.org/">TURBOMOLE</a>) may be set by using levels from <code class="docutils literal notranslate"><span class="pre">0</span></code> (very sparse) to <code class="docutils literal notranslate"><span class="pre">9</span></code> (very dense), with a default values of <code class="docutils literal notranslate"><span class="pre">3</span></code>, cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/pyscf/dft/gen_grid.py">pyscf/dft/gen_grid.py</a> for more details. Likewise, the default integration grids use Bragg radii for atoms, Treutler-Ahlrichs radial grids, Becke partitioning for grid weights, the pruning scheme of NWChem, and mesh grids, which are all setting that may be overwritten:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">radi_method</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">gauss_chebeshev</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">prune</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1"># disabling pruning of grids near core regions</span>
+</pre></div>
+</div>
+<p>In addition, these grids can be used for the general numerical evaluation of basis functions, electron densities, and integrals. Some examples of these functionalities can be found in <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/30-ao_value_on_grid.py">dft/30-ao_value_on_grid.py</a> and <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/31-xc_value_on_grid.py">dft/31-xc_value_on_grid.py</a>. For instance, the electron density may be readily obtained:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mf_hf</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="s1">&#39;b3lyp&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">coords</span> <span class="o">=</span> <span class="n">mf_hf</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">coords</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weights</span> <span class="o">=</span> <span class="n">mf_hf</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">weights</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao_value</span> <span class="o">=</span> <span class="n">numint</span><span class="o">.</span><span class="n">eval_ao</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># AO value and its gradients</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rho</span> <span class="o">=</span> <span class="n">numint</span><span class="o">.</span><span class="n">eval_rho</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">,</span> <span class="n">ao_value</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">xctype</span><span class="o">=</span><span class="s1">&#39;GGA&#39;</span><span class="p">)</span> <span class="c1"># density &amp; density gradients</span>
+</pre></div>
+</div>
+<p>From <code class="docutils literal notranslate"><span class="pre">rho</span></code>, the energy density and <em>xc</em> potential can be computed by calling into <code class="xref py py-func docutils literal notranslate"><span class="pre">dft.libxc.eval_xc()</span></code>.</p>
+<p>A more specialized example is the following on computing the kinetic energy from the nonnegative kinetic energy density according to the formulas:</p>
+<div class="math notranslate nohighlight">
+\[t_s(\mathbf{r}) = \frac{1}{2} \sum_{i\in occ} |\nabla\psi_i(\mathbf{r})|^2 \;,\]</div>
+<div class="math notranslate nohighlight">
+\[T_s = \int d\mathbf{r} t_s(\mathbf{r}) \;.\]</div>
+<p>In PySCF, the code boils down to:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">occ_orbs</span> <span class="o">=</span> <span class="n">mf_hf</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[:,</span> <span class="n">mf_hf</span><span class="o">.</span><span class="n">mo_occ</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grids</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">gen_grid</span><span class="o">.</span><span class="n">Grids</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">grids</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">with_non0tab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">weights</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ao1</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">numint</span><span class="o">.</span><span class="n">eval_ao</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">,</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">,</span> <span class="n">deriv</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">non0tab</span><span class="o">=</span><span class="n">grids</span><span class="o">.</span><span class="n">non0tab</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xgp,pi,xgq,qi-&gt;g&#39;</span><span class="p">,</span> <span class="n">ao1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">occ_orbs</span><span class="p">,</span> <span class="n">ao1</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">occ_orbs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;g,g-&gt;&#39;</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>or - as an alternative - the same may be achieved in the following way:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Ts_ao</span> <span class="o">=</span> <span class="n">mol_hf</span><span class="o">.</span><span class="n">intor</span><span class="p">(</span><span class="s1">&#39;int1e_kin&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Ts_analyt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ui,uv,vi-&gt;&#39;</span><span class="p">,</span> <span class="n">occ_orbs</span><span class="p">,</span> <span class="n">Ts_ao</span><span class="p">,</span> <span class="n">occ_orbs</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="dispersion-corrections">
+<span id="user-dft-disp-corr"></span><h2>Dispersion corrections<a class="headerlink" href="#dispersion-corrections" title="Link to this heading">#</a></h2>
+<p>Adding dispersion (van der Waals) corrections to KS-DFT calculations requires the <a class="reference external" href="https://github.com/pyscf/dispersion">pyscf-dispersion</a> extension,
+which implements a simplified interface to <a class="reference external" href="https://github.com/dftd3/simple-dftd3">simple-dftd3</a>
+and <a class="reference external" href="https://github.com/dftd4/dftd4">dftd4</a> libraries.</p>
+<p>It is recommended to enable D3 <span id="id6">[<a class="reference internal" href="reference.html#id33" title="S. Grimme, J. Antony, S. Ehrlich, and H. Krieg. A Consistent and Accurate \textit ab initio Parametrization of Density Functional Dispersion Correction (DFT-D) for the 94 Elements H-Pu. J. Chem. Phys., 132:154104, 2010.">23</a>]</span>, D4 dispersion corrections through the KS class instantiation.
+The values of attributes nlc, disp, and xc of KS object are automatically configured in this way.
+Both the <code class="docutils literal notranslate"><span class="pre">mol.KS</span></code> method or <code class="docutils literal notranslate"><span class="pre">dft.RKS</span></code> function can be used,
+cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/16-dft_d3.py">dft/16-dft_d3.py</a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mf_d3</span> <span class="o">=</span> <span class="n">mol_hf</span><span class="o">.</span><span class="n">KS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;wb97x-d4&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#mf_d3 = mol_hf.KS(xc=&#39;b3lyp-d3bj&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1">#mf_d3 = mol_hf.KS(xc=&#39;b3lyp-d3zero&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_d3</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, non-local correlation may be added through the VV10 functional <span id="id7">[<a class="reference internal" href="reference.html#id34" title="O. A. Vydrov and T. Van Voorhis. Nonlocal van der Waals Density Functional: The Simpler the Better. J. Chem. Phys., 133:244103, 2010.">24</a>]</span>,
+cf. <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/33-nlc_functionals.py">dft/33-nlc_functionals.py</a>:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mf_nlc</span> <span class="o">=</span> <span class="n">dft</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">mol_hf</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_nlc</span><span class="o">.</span><span class="n">xc</span> <span class="o">=</span> <span class="s1">&#39;wb97m_v&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mf_nlc</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/pyscf/pyscf/blob/master/examples/dft/33-nlc_functionals.py">dft/33-nlc_functionals.py</a>
+for more examples of setting the <code class="docutils literal notranslate"><span class="pre">nlc</span></code> and <code class="docutils literal notranslate"><span class="pre">nlcgrids</span></code> attribute.
+It’s important to keep in mind that the evaluation of the VV10 functional involves a double grid integration, so differences in grid size can make an enormous difference in time.</p>
+</section>
+<section id="generalized-ks-and-collinearity">
+<span id="user-dft-collinear"></span><h2>Generalized KS and collinearity<a class="headerlink" href="#generalized-ks-and-collinearity" title="Link to this heading">#</a></h2>
+<p>When the Hamiltonian does not commute with <span class="math notranslate nohighlight">\(\hat{S}_z\)</span>, e.g. in the presence of spin-orbit coupling, generalized Kohn-Sham theory (GKS) can be invoked by <code class="docutils literal notranslate"><span class="pre">mf</span> <span class="pre">=</span> <span class="pre">dft.GKS(mol)</span></code>, cf. <a class="reference internal" href="scf.html#user-scf-restrict"><span class="std std-ref">generalized calculations</span></a> and <a class="reference external" href="https://github.com/pyscf/pyscf/tree/master/examples/dft/02-gks.py">examples/dft/02-gks.py</a>. A molecular orbital from GKS may contain both spin-up and spin-down components. As a result, the spin magnetization vector may no longer be in the collinear form <span class="math notranslate nohighlight">\(\mathbf{m} = (0,0,m_z)\)</span> that an unrestricted calculation yields and which widely used collinear <cite>xc</cite> functionals assume. To handle any spin configuration, PySCF supports the non-collinear <cite>xc</cite> functionals from <a class="reference external" href="https://github.com/Multi-collinear/MCfun">mcfun</a> <span id="id9">[<a class="reference internal" href="reference.html#id87" title="Zhichen Pu, Hao Li, Ning Zhang, Hong Jiang, Yiqin Gao, Yunlong Xiao, Qiming Sun, Yong Zhang, and Sihong Shao. Noncollinear density functional theory. Physical Review Research, 5(1):013036, 2023.">25</a>]</span> via setting the DFT attribute <code class="docutils literal notranslate"><span class="pre">collinear</span> <span class="pre">=</span> <span class="pre">'mcol'</span></code> , cf. <a class="reference external" href="https://github.com/pyscf/pyscf/tree/master/examples/dft/14-collinear_gks.py">examples/dft/14-collinear_gks.py</a>. Such a non-collinear functional generalizes the widely used collinear functionals that depend on <span class="math notranslate nohighlight">\(m_z\)</span> to depend on <span class="math notranslate nohighlight">\(\mathbf{m}\)</span>. It preserves the invariance with respect to global rotations while maintaining the sensitivity to local spin rotations. It additionally has the advantage of well-defined functional derivatives, satisfying no net torque globally from the self-consistent xc magnetic field and retaining the local torque crucial to spin dynamics. For LDA functional, PySCF also implemented a non-collinear version that is accessible via <code class="docutils literal notranslate"><span class="pre">collinear</span> <span class="pre">=</span> <span class="pre">'ncol'</span></code>.</p>
+</section>
+<section id="periodic-boundary-conditions">
+<span id="user-dft-pbc"></span><h2>Periodic Boundary Conditions<a class="headerlink" href="#periodic-boundary-conditions" title="Link to this heading">#</a></h2>
+<p>Besides finite-sized systems, PySCF further supports KS-DFT calculations with PBCs for performing solid-state calculations. The APIs for molecular and crystalline KS-DFT calculations have deliberately been made to align to the greatest extent possible, and an all-electron KS-DFT calculation for an initialized <code class="docutils literal notranslate"><span class="pre">Cell</span></code> object at either the <span class="math notranslate nohighlight">\(\Gamma\)</span>-point or with k-point sampling may be run through <code class="xref py py-mod docutils literal notranslate"><span class="pre">dft</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">pbc.dft</span></code>, respectively. For more details on PBC functionalities, please see the dedicated sections on <a class="reference internal" href="pbc.html#user-pbc"><span class="std std-ref">PBC-KS-DFT</span></a>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">Theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#predefined-xc-functionals-and-functional-aliases">Predefined <em>xc</em> Functionals and Functional Aliases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-xc-functionals">Customizing <em>xc</em> functionals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-integration-grids">Numerical integration grids</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispersion-corrections">Dispersion corrections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generalized-ks-and-collinearity">Generalized KS and collinearity</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-boundary-conditions">Periodic Boundary Conditions</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/user/dft.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

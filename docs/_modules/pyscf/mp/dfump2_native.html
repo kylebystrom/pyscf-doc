@@ -1,0 +1,1135 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.mp.dfump2_native &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/mp/dfump2_native';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../mp.html" class="nav-link">pyscf.mp</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.mp.dfump2_native</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.mp.dfump2_native</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2014-2021 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">native implementation of DF-MP2/RI-MP2 with a UHF reference</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span>
+
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">scf</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">df</span>
+<span class="kn">from</span> <span class="nn">pyscf.scf</span> <span class="kn">import</span> <span class="n">ucphf</span>
+<span class="kn">from</span> <span class="nn">pyscf.mp.dfmp2_native</span> <span class="kn">import</span> <span class="n">DFRMP2</span><span class="p">,</span> <span class="n">ints3c_cholesky</span><span class="p">,</span> <span class="n">orbgrad_from_Gamma</span>
+
+
+<div class="viewcode-block" id="DFUMP2">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2">[docs]</a>
+<span class="k">class</span> <span class="nc">DFUMP2</span><span class="p">(</span><span class="n">DFRMP2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    native implementation of DF-MP2/RI-MP2 with a UHF reference</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">auxbasis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            mf : UHF instance</span>
+<span class="sd">            frozen : number of frozen orbitals or list of frozen orbitals</span>
+<span class="sd">            auxbasis : name of auxiliary basis set, otherwise determined automatically</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="c1"># UHF quantities are stored as numpy arrays</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mo_energy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nocc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mo_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mo_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">])])</span>
+        <span class="c1"># UHF MO coefficient matrix shape: (2, number of AOs, number of MOs)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nmo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_scf</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">e_tot</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scf</span> <span class="o">=</span> <span class="n">mf</span>
+
+        <span class="c1"># Process the frozen core option correctly as either an integer or two lists (alpha, beta).</span>
+        <span class="c1"># self.frozen_mask sets a flag for each orbital if it is frozen (True) or not (False).</span>
+        <span class="c1"># Only occupied orbitals can be frozen.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nmo</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">frozen</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="n">lib</span><span class="o">.</span><span class="n">isinteger</span><span class="p">(</span><span class="n">frozen</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">frozen</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nocc</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;only occupied orbitals can be frozen&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[:,</span> <span class="p">:</span><span class="n">frozen</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span>
+                <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">lib</span><span class="o">.</span><span class="n">isintsequence</span><span class="p">(</span><span class="n">frozen</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+                        <span class="k">raise</span> <span class="ne">TypeError</span>
+            <span class="k">except</span> <span class="p">(</span><span class="ne">TypeError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;frozen must be an integer or two integer lists&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">frozen</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;frozen orbital lists not of equal length&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">frozen</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># mask for occupied orbitals that are not frozen</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nmo</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">occ_mask</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">occ_mask</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">mol</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auxbasis</span><span class="p">:</span>
+            <span class="n">auxbasis</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">make_auxbasis</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="n">mp2fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">make_auxmol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="n">auxbasis</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">max_memory</span>
+
+        <span class="c1"># _intsfile will be a list with two elements for the alpha and beta integrals</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_corr</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Spin component scaling factors</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ps</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pt</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cphf_max_cycle</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cphf_tol</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">conv_tol</span>
+
+<div class="viewcode-block" id="DFUMP2.dump_flags">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.dump_flags">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prints selected information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            logger : Logger object</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">logger</span><span class="p">:</span>
+            <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;******** </span><span class="si">{0:s}</span><span class="s1"> ********&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;nmo = </span><span class="si">{0:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmo</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;nocc = </span><span class="si">{0:d}</span><span class="s1">, </span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">nfrozen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;no. of frozen = </span><span class="si">{0:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nfrozen</span><span class="p">))</span>
+        <span class="n">frozen_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmo</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;frozen (alpha) = </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frozen_tmp</span><span class="p">))</span>
+        <span class="n">frozen_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nmo</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;frozen (beta) = </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">frozen_tmp</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;basis = </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">basis</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;auxbasis = </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span><span class="o">.</span><span class="n">basis</span><span class="p">)))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;max_memory = </span><span class="si">{0:.1f}</span><span class="s1"> MB (current use </span><span class="si">{1:.1f}</span><span class="s1"> MB)&#39;</span><span class="o">.</span>
+                    <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.calculate_energy">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.calculate_energy">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Calculates the MP2 correlation energy.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="n">cput0</span> <span class="o">=</span> <span class="n">cput1</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_ints</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">calculate_integrals_</span><span class="p">()</span>
+
+        <span class="n">cput1</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;ao2mo&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput1</span><span class="p">)</span>
+
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Calculating DF-MP2 energy&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">e_corr</span> <span class="o">=</span> <span class="n">emp2_uhf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">,</span>
+                               <span class="n">logger</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ps</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pt</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">note</span><span class="p">(</span><span class="s1">&#39;DF-MP2 correlation energy: </span><span class="si">{0:.14f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">e_corr</span><span class="p">))</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;kernel&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput1</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="o">*</span><span class="n">cput0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">e_corr</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.make_rdm1">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.make_rdm1">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_rdm1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relaxed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ao_repr</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Calculates the MP2 1-RDM.</span>
+<span class="sd">        - The relaxed density matrix can be used to calculate properties of systems</span>
+<span class="sd">          for which MP2 is well-behaved.</span>
+<span class="sd">        - The unrelaxed density is less suited to calculate properties accurately,</span>
+<span class="sd">          but it can be used to calculate CASSCF starting orbitals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            relaxed : relaxed density if True, unrelaxed density if False</span>
+<span class="sd">            ao_repr : density in AO or in MO basis</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            the 1-RDM</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">relaxed</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;DF-MP2 relaxed density calculation&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;DF-MP2 unrelaxed density calculation&#39;</span><span class="p">)</span>
+        <span class="n">rdm1_mo</span> <span class="o">=</span> <span class="n">make_rdm1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relaxed</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ao_repr</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;sxp,spq,syq-&gt;sxy&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">,</span> <span class="n">rdm1_mo</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">rdm1_mo</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.make_natorbs">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.make_natorbs">[docs]</a>
+    <span class="k">def</span> <span class="nf">make_natorbs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rdm1_mo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">relaxed</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Calculate natural orbitals.</span>
+<span class="sd">        Note: the most occupied orbitals come first (left)</span>
+<span class="sd">              and the least occupied orbitals last (right).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rdm1_mo : 1-RDM in MO basis</span>
+<span class="sd">                      the function calculates a density matrix if none is provided</span>
+<span class="sd">            relaxed : calculated relaxed or unrelaxed density matrix</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            natural occupation numbers, natural orbitals</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">rdm1_mo</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_rdm1</span><span class="p">(</span><span class="n">ao_repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">relaxed</span><span class="o">=</span><span class="n">relaxed</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rdm1_mo</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">dm</span> <span class="o">=</span> <span class="n">rdm1_mo</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;rdm1_mo must be a 3-D array&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Transform the beta component to the alpha basis and sum both together.</span>
+        <span class="n">SAO</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">intor_symmetric</span><span class="p">(</span><span class="s1">&#39;int1e_ovlp&#39;</span><span class="p">)</span>
+        <span class="n">Sab</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xp,xy,yq-&gt;pq&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">SAO</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:])</span>
+        <span class="n">rdm1_abas</span> <span class="o">=</span> <span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;pr,rs,qs-&gt;pq&#39;</span><span class="p">,</span> <span class="n">Sab</span><span class="p">,</span> <span class="n">dm</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">Sab</span><span class="p">)</span>
+
+        <span class="c1"># Diagonalize the spin-traced 1-RDM in alpha basis to get the natural orbitals.</span>
+        <span class="n">eigval</span><span class="p">,</span> <span class="n">eigvec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigh</span><span class="p">(</span><span class="n">rdm1_abas</span><span class="p">)</span>
+        <span class="n">natocc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">eigval</span><span class="p">)</span>
+        <span class="n">natorb</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:],</span> <span class="n">np</span><span class="o">.</span><span class="n">fliplr</span><span class="p">(</span><span class="n">eigvec</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">natocc</span><span class="p">,</span> <span class="n">natorb</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.calculate_integrals_">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.calculate_integrals_">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate_integrals_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Calculates the three center integrals for MP2.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="n">scf</span><span class="o">.</span><span class="n">uhf</span><span class="o">.</span><span class="n">UHF</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Class initialization with non-UHF object&#39;</span><span class="p">)</span>
+        <span class="n">intsfile</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Calculating integrals&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
+            <span class="n">Co</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">occ_mask</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span>
+            <span class="n">Cv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]:]</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">ints3c_cholesky</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span><span class="p">,</span> <span class="n">Co</span><span class="p">,</span> <span class="n">Cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+            <span class="n">intsfile</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span> <span class="o">=</span> <span class="n">intsfile</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Stored in files:</span><span class="se">\n</span><span class="si">{0:s}</span><span class="se">\n</span><span class="si">{1:s}</span><span class="s1">&#39;</span><span class="o">.</span>
+                    <span class="nb">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.delete">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.delete">[docs]</a>
+    <span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Delete the temporary file(s).</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_intsfile</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="DFUMP2.nuc_grad_method">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.DFUMP2.nuc_grad_method">[docs]</a>
+    <span class="k">def</span> <span class="nf">nuc_grad_method</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+
+    <span class="n">to_gpu</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">to_gpu</span></div>
+
+
+
+<span class="n">MP2</span> <span class="o">=</span> <span class="n">UMP2</span> <span class="o">=</span> <span class="n">DFMP2</span> <span class="o">=</span> <span class="n">DFUMP2</span>
+
+
+<div class="viewcode-block" id="SCSDFUMP2">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.SCSDFUMP2">[docs]</a>
+<span class="k">class</span> <span class="nc">SCSDFUMP2</span><span class="p">(</span><span class="n">DFUMP2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    UHF-DF-MP2 with spin-component scaling</span>
+<span class="sd">    S. Grimme, J. Chem. Phys. 118 (2003), 9095</span>
+<span class="sd">    https://doi.org/10.1063/1.1569242</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="mi">6</span><span class="o">/</span><span class="mi">5</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        mf : UHF instance</span>
+<span class="sd">        ps : opposite-spin (singlet) scaling factor</span>
+<span class="sd">        pt : same-spin (triplet) scaling factor</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ps</span> <span class="o">=</span> <span class="n">ps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pt</span> <span class="o">=</span> <span class="n">pt</span>
+
+<div class="viewcode-block" id="SCSDFUMP2.dump_flags">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.SCSDFUMP2.dump_flags">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">logger</span><span class="p">:</span>
+            <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">dump_flags</span><span class="p">(</span><span class="n">logger</span><span class="o">=</span><span class="n">logger</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;pt(scs) = </span><span class="si">{0:.6f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pt</span><span class="p">))</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;ps(scs) = </span><span class="si">{0:.6f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ps</span><span class="p">))</span></div>
+</div>
+
+
+
+<span class="n">SCSMP2</span> <span class="o">=</span> <span class="n">SCSUMP2</span> <span class="o">=</span> <span class="n">SCSDFMP2</span> <span class="o">=</span> <span class="n">SCSDFUMP2</span>
+
+
+<div class="viewcode-block" id="emp2_uhf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.emp2_uhf">[docs]</a>
+<span class="k">def</span> <span class="nf">emp2_uhf</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">,</span> <span class="n">mo_energy</span><span class="p">,</span> <span class="n">frozen_mask</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the DF-MP2 energy with an UHF reference.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        intsfiles : contains the three center integrals in MO basis</span>
+<span class="sd">        mo_energy : energies of the molecular orbitals</span>
+<span class="sd">        frozen_mask : boolean mask for frozen orbitals</span>
+<span class="sd">        logger : Logger instance</span>
+<span class="sd">        ps : SCS factor for opposite-spin contributions</span>
+<span class="sd">        pt : SCS factor for same-spin contributions</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the MP2 correlation energy</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ints_a</span> <span class="o">=</span> <span class="n">intsfiles</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;ints_cholesky&#39;</span><span class="p">]</span>
+    <span class="n">ints_b</span> <span class="o">=</span> <span class="n">intsfiles</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;ints_cholesky&#39;</span><span class="p">]</span>
+    <span class="n">nocc_act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ints_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ints_b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+    <span class="n">nfrozen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">nfrozen</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;number of frozen alpha and beta orbitals differs&#39;</span><span class="p">)</span>
+    <span class="n">nocc</span> <span class="o">=</span> <span class="n">nocc_act</span> <span class="o">+</span> <span class="n">nfrozen</span>
+    <span class="n">nvirt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ints_a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">ints_b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]])</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    UHF-DF-MP2 energy routine&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Occupied orbitals: </span><span class="si">{0:d}</span><span class="s1">, </span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nocc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nocc</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Virtual orbitals:  </span><span class="si">{0:d}</span><span class="s1">, </span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Frozen orbitals:   </span><span class="si">{0:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nfrozen</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Integrals (alpha) from file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Integrals (beta)  from file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+
+    <span class="n">mo_energy_masked</span> <span class="o">=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="o">~</span><span class="n">frozen_mask</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">energy_total</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># loop over spins to calculate same-spin energies</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">energy_contrib</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    alpha-alpha pairs&#39;</span><span class="p">)</span>
+            <span class="n">ints</span> <span class="o">=</span> <span class="n">ints_a</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    beta-beta pairs&#39;</span><span class="p">)</span>
+            <span class="n">ints</span> <span class="o">=</span> <span class="n">ints_b</span>
+        <span class="c1"># precompute Eab[a, b] = mo_energy[a] + mo_energy[b] for the denominator</span>
+        <span class="n">Eab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s</span><span class="p">]))</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+            <span class="n">Eab</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">]</span>
+            <span class="n">Eab</span><span class="p">[:,</span> <span class="n">a</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">]</span>
+        <span class="c1"># loop over j &lt; i</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s</span><span class="p">]):</span>
+            <span class="n">ints3c_ia</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">ints3c_jb</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+                <span class="n">Kab</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ints3c_ia</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ints3c_jb</span><span class="p">)</span>
+                <span class="n">DE</span> <span class="o">=</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">Eab</span>
+                <span class="n">Tab</span> <span class="o">=</span> <span class="p">(</span><span class="n">Kab</span> <span class="o">-</span> <span class="n">Kab</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">/</span> <span class="n">DE</span>
+                <span class="n">energy_contrib</span> <span class="o">+=</span> <span class="n">pt</span> <span class="o">*</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ab,ab&#39;</span><span class="p">,</span> <span class="n">Tab</span><span class="p">,</span> <span class="n">Kab</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;      E = </span><span class="si">{0:.14f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy_contrib</span><span class="p">))</span>
+        <span class="n">energy_total</span> <span class="o">+=</span> <span class="n">energy_contrib</span>
+
+    <span class="c1"># opposite-spin energy</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    alpha-beta pairs&#39;</span><span class="p">)</span>
+    <span class="c1"># precompute Eab[a, b] = mo_energy[a] + mo_energy[b] for the denominator</span>
+    <span class="n">Eab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nvirt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">Eab</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">Eab</span><span class="p">[:,</span> <span class="n">b</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">]</span>
+    <span class="c1"># loop over i(alpha), j(beta)</span>
+    <span class="n">energy_contrib</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">ints3c_ia</span> <span class="o">=</span> <span class="n">ints_a</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">ints3c_jb</span> <span class="o">=</span> <span class="n">ints_b</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+            <span class="n">Kab</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ints3c_ia</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ints3c_jb</span><span class="p">)</span>
+            <span class="n">DE</span> <span class="o">=</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">Eab</span>
+            <span class="n">Tab</span> <span class="o">=</span> <span class="n">Kab</span> <span class="o">/</span> <span class="n">DE</span>
+            <span class="n">energy_contrib</span> <span class="o">+=</span> <span class="n">ps</span> <span class="o">*</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ab,ab&#39;</span><span class="p">,</span> <span class="n">Tab</span><span class="p">,</span> <span class="n">Kab</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;      E = </span><span class="si">{0:.14f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy_contrib</span><span class="p">))</span>
+    <span class="n">energy_total</span> <span class="o">+=</span> <span class="n">energy_contrib</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    DF-MP2 correlation energy: </span><span class="si">{0:.14f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">energy_total</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">energy_total</span></div>
+
+
+
+<div class="viewcode-block" id="make_rdm1">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.make_rdm1">[docs]</a>
+<span class="k">def</span> <span class="nf">make_rdm1</span><span class="p">(</span><span class="n">mp2</span><span class="p">,</span> <span class="n">relaxed</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the unrelaxed or relaxed MP2 density matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mp2 : DFUMP2 instance</span>
+<span class="sd">        relaxed : relaxed density if True, unrelaxed density if False</span>
+<span class="sd">        logger : Logger instance</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        the 1-RDM in MO basis</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mp2</span><span class="o">.</span><span class="n">has_ints</span><span class="p">:</span>
+        <span class="n">mp2</span><span class="o">.</span><span class="n">calculate_integrals_</span><span class="p">()</span>
+
+    <span class="c1"># Calculate the unrelaxed 1-RDM.</span>
+    <span class="k">if</span> <span class="n">logger</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">logger</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="n">mp2</span><span class="p">)</span>
+    <span class="n">rdm1</span><span class="p">,</span> <span class="n">GammaFile</span> <span class="o">=</span> \
+        <span class="n">ump2_densities_contribs</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">_intsfile</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">max_memory</span><span class="p">,</span>
+                                <span class="n">logger</span><span class="p">,</span> <span class="n">calcGamma</span><span class="o">=</span><span class="n">relaxed</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="n">mp2</span><span class="o">.</span><span class="n">auxmol</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="n">mp2</span><span class="o">.</span><span class="n">ps</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="n">mp2</span><span class="o">.</span><span class="n">pt</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">relaxed</span><span class="p">:</span>
+
+        <span class="n">Lvo</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">s</span><span class="p">,</span> <span class="n">sstr</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">)]:</span>
+
+            <span class="c1"># right-hand side for the CPHF equation</span>
+            <span class="n">Gamma</span> <span class="o">=</span> <span class="n">GammaFile</span><span class="p">[</span><span class="s1">&#39;Gamma_&#39;</span><span class="o">+</span><span class="n">sstr</span><span class="p">]</span>
+            <span class="n">Lvo</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">Lfo_s</span> <span class="o">=</span> \
+                <span class="n">orbgrad_from_Gamma</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">auxmol</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">mp2</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="n">s</span><span class="p">],</span>
+                                   <span class="n">mp2</span><span class="o">.</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+
+            <span class="c1"># frozen core orbital relaxation contribution</span>
+            <span class="n">frozen_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">nmo</span><span class="p">)[</span><span class="n">mp2</span><span class="o">.</span><span class="n">frozen_mask</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">fm</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">frozen_list</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">nmo</span><span class="p">)[</span><span class="n">mp2</span><span class="o">.</span><span class="n">occ_mask</span><span class="p">[</span><span class="n">s</span><span class="p">]]:</span>
+                    <span class="n">zfo</span> <span class="o">=</span> <span class="n">Lfo_s</span><span class="p">[</span><span class="n">fm</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">]</span> <span class="o">-</span> <span class="n">mp2</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+                    <span class="n">rdm1</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">zfo</span>
+                    <span class="n">rdm1</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span><span class="p">]</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">zfo</span>
+
+        <span class="c1"># Fock response</span>
+        <span class="n">Lvo_a</span><span class="p">,</span> <span class="n">Lvo_b</span> <span class="o">=</span> <span class="n">fock_response_uhf</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="n">rdm1</span><span class="p">)</span>
+        <span class="n">Lvo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="n">Lvo_a</span>
+        <span class="n">Lvo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">Lvo_b</span>
+        <span class="c1"># solving the CPHF equations</span>
+        <span class="n">minusLvo</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">Lvo</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">-</span><span class="n">Lvo</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="n">zvo</span> <span class="o">=</span> <span class="n">solve_cphf_uhf</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="n">minusLvo</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">cphf_max_cycle</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">cphf_tol</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+
+        <span class="c1"># add the relaxation contribution to the density</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">rdm1</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]:,</span> <span class="p">:</span><span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">zvo</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
+            <span class="n">rdm1</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:</span><span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]:]</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">zvo</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># HF contribution</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">rdm1</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:</span><span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="p">:</span><span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">]]</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">mp2</span><span class="o">.</span><span class="n">nocc</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">rdm1</span></div>
+
+
+
+<div class="viewcode-block" id="ump2_densities_contribs">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.ump2_densities_contribs">[docs]</a>
+<span class="k">def</span> <span class="nf">ump2_densities_contribs</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">,</span> <span class="n">mo_energy</span><span class="p">,</span> <span class="n">frozen_mask</span><span class="p">,</span> <span class="n">max_memory</span><span class="p">,</span> <span class="n">logger</span><span class="p">,</span>
+                            <span class="n">calcGamma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ps</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">pt</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculates the unrelaxed DF-MP2 density matrix contribution with a UHF reference.</span>
+<span class="sd">    Note: this is the difference density, i.e. without HF contribution.A</span>
+<span class="sd">    lso calculates the three-center two-particle density if requested.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        intsfile : contains the three center integrals</span>
+<span class="sd">        mo_energy : molecular orbital energies</span>
+<span class="sd">        frozen_mask : boolean mask for frozen orbitals</span>
+<span class="sd">        max_memory : memory threshold in MB</span>
+<span class="sd">        logger : Logger instance</span>
+<span class="sd">        calcGamma : if True, calculate 3c2e density</span>
+<span class="sd">        auxmol : required if relaxed is True</span>
+<span class="sd">        ps : SCS factor for opposite-spin contributions</span>
+<span class="sd">        pt : SCS factor for same-spin contributions</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        matrix containing the 1-RDM contribution, file with 3c2e density if requested</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ints</span> <span class="o">=</span> <span class="p">[</span><span class="n">intsfiles</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;ints_cholesky&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">nocc_act</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ints</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="n">naux</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">ints</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">naux</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;integrals have inconsistent aux dimensions&#39;</span><span class="p">)</span>
+    <span class="n">nvirt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ints</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+    <span class="n">nmo</span> <span class="o">=</span> <span class="n">mo_energy</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">nfrozen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">frozen_mask</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">nfrozen</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;unequal numbers of frozen orbitals for alpha and beta&#39;</span><span class="p">)</span>
+    <span class="n">nocc</span> <span class="o">=</span> <span class="n">nfrozen</span> <span class="o">+</span> <span class="n">nocc_act</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">nocc</span> <span class="o">+</span> <span class="n">nvirt</span> <span class="o">!=</span> <span class="n">nmo</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;numbers of frozen, occupied and virtual orbitals inconsistent&#39;</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Density matrix contributions for DF-MP2&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Occupied orbitals: </span><span class="si">{0:d}</span><span class="s1">, </span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nocc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nocc</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Virtual orbitals:  </span><span class="si">{0:d}</span><span class="s1">, </span><span class="si">{1:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Frozen orbitals:   </span><span class="si">{0:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nfrozen</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Three center integrals (alpha) from file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Three center integrals (beta) from file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intsfiles</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+
+    <span class="n">GammaFile</span><span class="p">,</span> <span class="n">LT</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">calcGamma</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auxmol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s1">&#39;auxmol needs to be specified for relaxed density computation&#39;</span><span class="p">)</span>
+        <span class="c1"># create temporary file to store the two-body density Gamma</span>
+        <span class="n">GammaFile</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">H5TmpFile</span><span class="p">(</span><span class="n">libver</span><span class="o">=</span><span class="s1">&#39;latest&#39;</span><span class="p">)</span>
+        <span class="n">GammaFile</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;Gamma_alpha&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">naux</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f8&#39;</span><span class="p">)</span>
+        <span class="n">GammaFile</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;Gamma_beta&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">naux</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f8&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Storing 3c2e density in file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">GammaFile</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+        <span class="c1"># We will need LT = L^T, where L L^T = V</span>
+        <span class="n">LT</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">auxmol</span><span class="o">.</span><span class="n">intor</span><span class="p">(</span><span class="s1">&#39;int2c2e&#39;</span><span class="p">),</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># We start forming P with contiguous frozen, occupied, virtual subblocks.</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">nmo</span><span class="p">,</span> <span class="n">nmo</span><span class="p">))</span>
+    <span class="n">mo_energy_masked</span> <span class="o">=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="o">~</span><span class="n">frozen_mask</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">nmo</span><span class="o">-</span><span class="n">nfrozen</span><span class="p">)</span>
+
+    <span class="c1"># Loop over all the spin variants</span>
+    <span class="k">for</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="ow">in</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]:</span>
+        <span class="k">with</span> <span class="n">lib</span><span class="o">.</span><span class="n">H5TmpFile</span><span class="p">(</span><span class="n">libver</span><span class="o">=</span><span class="s1">&#39;latest&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tfile</span><span class="p">:</span>
+
+            <span class="n">tiset</span> <span class="o">=</span> \
+                <span class="n">tfile</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s1">&#39;amplitudes&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;f8&#39;</span><span class="p">)</span>
+
+            <span class="n">s1_str</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">)[</span><span class="n">s1</span><span class="p">]</span>
+            <span class="n">s2_str</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">)[</span><span class="n">s2</span><span class="p">]</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    </span><span class="si">{0:s}</span><span class="s1">-</span><span class="si">{1:s}</span><span class="s1"> pairs&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">s1_str</span><span class="p">,</span> <span class="n">s2_str</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Storing amplitudes in temporary file: </span><span class="si">{0:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tfile</span><span class="o">.</span><span class="n">filename</span><span class="p">))</span>
+
+            <span class="c1"># Precompute Eab[a, b] = mo_energy[a] + mo_energy[b] for division with numpy.</span>
+            <span class="n">Eab</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">],</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">]):</span>
+                <span class="n">Eab</span><span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s1</span><span class="p">]</span><span class="o">+</span><span class="n">a</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]):</span>
+                <span class="n">Eab</span><span class="p">[:,</span> <span class="n">b</span><span class="p">]</span> <span class="o">+=</span> <span class="n">mo_energy</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span><span class="o">+</span><span class="n">b</span><span class="p">]</span>
+
+            <span class="c1"># For each occupied spin orbital i, all amplitudes are calculated once and</span>
+            <span class="c1"># stored on disk. The occupied 1-RDM contribution is calculated in a batched</span>
+            <span class="c1"># algorithm. More memory -&gt; more efficient I/O.</span>
+            <span class="c1"># The virtual contribution to the 1-RDM is calculated in memory.</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s1</span><span class="p">]):</span>
+                <span class="n">ints3c_ia</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="n">s1</span><span class="p">][</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+
+                <span class="c1"># Amplitudes T^ij_ab are calculated for a given orbital i with spin s1,</span>
+                <span class="c1"># and all j (s2), a (s1) and b (s2). These amplitudes are stored on disk.</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">]):</span>
+                    <span class="n">ints3c_jb</span> <span class="o">=</span> <span class="n">ints</span><span class="p">[</span><span class="n">s2</span><span class="p">][</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+                    <span class="n">Kab</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ints3c_ia</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ints3c_jb</span><span class="p">)</span>
+                    <span class="n">DE</span> <span class="o">=</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">mo_energy_masked</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">Eab</span>
+                    <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">:</span>
+                        <span class="n">numerator</span> <span class="o">=</span> <span class="n">Kab</span> <span class="o">-</span> <span class="n">Kab</span><span class="o">.</span><span class="n">T</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">pt</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">numerator</span> <span class="o">=</span> <span class="n">Kab</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="n">ps</span>
+                    <span class="n">Tab</span> <span class="o">=</span> <span class="n">numerator</span> <span class="o">/</span> <span class="n">DE</span>
+                    <span class="n">tiset</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Tab</span>
+                    <span class="c1"># virtual 1-RDM contribution</span>
+                    <span class="n">P</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s1</span><span class="p">]:,</span> <span class="n">nocc</span><span class="p">[</span><span class="n">s1</span><span class="p">]:]</span> <span class="o">+=</span> <span class="n">prefactor</span> <span class="o">*</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Tab</span><span class="p">,</span> <span class="n">Tab</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">ints3c_jb</span><span class="p">,</span> <span class="n">Kab</span><span class="p">,</span> <span class="n">DE</span><span class="p">,</span> <span class="n">numerator</span><span class="p">,</span> <span class="n">Tab</span>
+
+                <span class="c1"># Batches of amplitudes are read from disk to calculate the occupied</span>
+                <span class="c1"># 1-RDM contribution.</span>
+                <span class="n">batchsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1e6</span> <span class="o">/</span> <span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span> <span class="o">*</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span>
+                <span class="n">batchsize</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">],</span> <span class="n">batchsize</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">batchsize</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">MemoryError</span><span class="p">(</span><span class="s1">&#39;Insufficient memory (PYSCF_MAX_MEMORY).&#39;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug2</span><span class="p">(</span><span class="s1">&#39;    Batch size: </span><span class="si">{0:d}</span><span class="s1"> (of </span><span class="si">{1:d}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">batchsize</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">]))</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug2</span><span class="p">(</span><span class="s1">&#39;      Pij formation - MO </span><span class="si">{0:d}</span><span class="s1"> (</span><span class="si">{1:s}</span><span class="s1">), batch size </span><span class="si">{2:d}</span><span class="s1"> (of </span><span class="si">{3:d}</span><span class="s1">)&#39;</span><span class="o">.</span>
+                              <span class="nb">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">s1_str</span><span class="p">,</span> <span class="n">batchsize</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">]))</span>
+                <span class="k">for</span> <span class="n">astart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">],</span> <span class="n">batchsize</span><span class="p">):</span>
+                    <span class="n">aend</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">astart</span><span class="o">+</span><span class="n">batchsize</span><span class="p">,</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">])</span>
+                    <span class="n">tbatch</span> <span class="o">=</span> <span class="n">tiset</span><span class="p">[:,</span> <span class="n">astart</span><span class="p">:</span><span class="n">aend</span><span class="p">,</span> <span class="p">:]</span>
+                    <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">:</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">pt</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="n">ps</span>
+                    <span class="n">P</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="n">nfrozen</span><span class="p">:</span><span class="n">nocc</span><span class="p">[</span><span class="n">s2</span><span class="p">],</span> <span class="n">nfrozen</span><span class="p">:</span><span class="n">nocc</span><span class="p">[</span><span class="n">s2</span><span class="p">]]</span> <span class="o">-=</span> \
+                        <span class="n">prefactor</span> <span class="o">*</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;iab,jab-&gt;ij&#39;</span><span class="p">,</span> <span class="n">tbatch</span><span class="p">,</span> <span class="n">tbatch</span><span class="p">)</span>
+                <span class="k">del</span> <span class="n">tbatch</span>
+
+                <span class="k">if</span> <span class="n">calcGamma</span><span class="p">:</span>
+                    <span class="c1"># This produces (P | Q)^-1 (Q | i a)</span>
+                    <span class="n">ints3cV1_ia</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve_triangular</span><span class="p">(</span><span class="n">LT</span><span class="p">,</span> <span class="n">ints3c_ia</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                    <span class="c1"># Here, we construct Gamma for spin s2</span>
+                    <span class="n">Gamma</span> <span class="o">=</span> <span class="n">GammaFile</span><span class="p">[</span><span class="s1">&#39;Gamma_&#39;</span><span class="o">+</span><span class="n">s2_str</span><span class="p">]</span>
+                    <span class="c1"># Read batches of amplitudes from disk and calculate the two-body density Gamma</span>
+                    <span class="n">size</span> <span class="o">=</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s1</span><span class="p">]</span> <span class="o">*</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">+</span> <span class="n">naux</span> <span class="o">*</span> <span class="n">nvirt</span><span class="p">[</span><span class="n">s2</span><span class="p">]</span> <span class="o">*</span> <span class="mi">8</span>
+                    <span class="n">batchsize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">1e6</span> <span class="o">/</span> <span class="n">size</span><span class="p">)</span>
+                    <span class="n">batchsize</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">],</span> <span class="n">batchsize</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">batchsize</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">MemoryError</span><span class="p">(</span><span class="s1">&#39;Insufficient memory (PYSCF_MAX_MEMORY).&#39;</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug2</span><span class="p">(</span><span class="s1">&#39;      Gamma (</span><span class="si">{0:s}</span><span class="s1">) formation - MO </span><span class="si">{1:d}</span><span class="s1"> (</span><span class="si">{2:s}</span><span class="s1">), batch size </span><span class="si">{3:d}</span><span class="s1"> (of </span><span class="si">{4:d}</span><span class="s1">)&#39;</span><span class="o">.</span>
+                                  <span class="nb">format</span><span class="p">(</span><span class="n">s2_str</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">s1_str</span><span class="p">,</span> <span class="n">batchsize</span><span class="p">,</span> <span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">]))</span>
+                    <span class="k">if</span> <span class="n">s1</span> <span class="o">==</span> <span class="n">s2</span><span class="p">:</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">pt</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">prefactor</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">ps</span>
+                    <span class="k">for</span> <span class="n">jstart</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">],</span> <span class="n">batchsize</span><span class="p">):</span>
+                        <span class="n">jend</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">jstart</span><span class="o">+</span><span class="n">batchsize</span><span class="p">,</span> <span class="n">nocc_act</span><span class="p">[</span><span class="n">s2</span><span class="p">])</span>
+                        <span class="n">tbatch</span> <span class="o">=</span> <span class="n">tiset</span><span class="p">[</span><span class="n">jstart</span><span class="p">:</span><span class="n">jend</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+                        <span class="c1"># Here, we collect two-body density contributions for spin s2</span>
+                        <span class="n">Gbatch</span> <span class="o">=</span> <span class="n">Gamma</span><span class="p">[</span><span class="n">jstart</span><span class="p">:</span><span class="n">jend</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+                        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">jend</span><span class="o">-</span><span class="n">jstart</span><span class="p">):</span>
+                            <span class="n">Tijab</span> <span class="o">=</span> <span class="n">tbatch</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span>
+                            <span class="n">Gbatch</span><span class="p">[</span><span class="n">jj</span><span class="p">]</span> <span class="o">+=</span> <span class="n">prefactor</span> <span class="o">*</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ints3cV1_ia</span><span class="p">,</span> <span class="n">Tijab</span><span class="p">)</span>
+                        <span class="n">Gamma</span><span class="p">[</span><span class="n">jstart</span><span class="p">:</span><span class="n">jend</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">Gbatch</span>
+                    <span class="k">del</span> <span class="n">tbatch</span><span class="p">,</span> <span class="n">Gbatch</span>
+
+    <span class="c1"># now reorder P such that the frozen orbitals correspond to frozen_mask</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">idx_reordered</span> <span class="o">=</span> \
+            <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nmo</span><span class="p">)[</span><span class="n">frozen_mask</span><span class="p">[</span><span class="n">s</span><span class="p">]],</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nmo</span><span class="p">)[</span><span class="o">~</span><span class="n">frozen_mask</span><span class="p">[</span><span class="n">s</span><span class="p">]]])</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="n">idx_reordered</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="n">idx_reordered</span><span class="p">]</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;    Density matrix contributions calculation finished&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">P</span><span class="p">,</span> <span class="n">GammaFile</span></div>
+
+
+
+<div class="viewcode-block" id="fock_response_uhf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.fock_response_uhf">[docs]</a>
+<span class="k">def</span> <span class="nf">fock_response_uhf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Calculate the unrestricted Fock response function for a given density matrix.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mf : UHF instance</span>
+<span class="sd">        dm : density matrix in MO basis</span>
+<span class="sd">        full : full MO density matrix if True, [virt. x occ., virt. x occ.] if False</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Fock response in MO basis. Shape: [virt. x occ., virt. x occ.]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mo_coeff</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">mo_coeff</span>
+    <span class="n">mo_occ</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">mo_occ</span>
+    <span class="n">nao</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">nao</span>
+    <span class="n">dmao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">nao</span><span class="p">,</span> <span class="n">nao</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">full</span><span class="p">:</span>
+            <span class="n">dmao</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xp,pq,yq-&gt;xy&#39;</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">dm</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">Ci</span> <span class="o">=</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="n">mo_occ</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">Ca</span> <span class="o">=</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="n">mo_occ</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">dmao</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xa,ai,yi-&gt;xy&#39;</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">dm</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">Ci</span><span class="p">)</span>
+    <span class="n">rao</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">get_veff</span><span class="p">(</span><span class="n">dm</span><span class="o">=</span><span class="n">dmao</span><span class="o">+</span><span class="n">dmao</span><span class="o">.</span><span class="n">transpose</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">rvo</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">Ci</span> <span class="o">=</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="n">mo_occ</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">Ca</span> <span class="o">=</span> <span class="n">mo_coeff</span><span class="p">[</span><span class="n">s</span><span class="p">][:,</span> <span class="n">mo_occ</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">rvo</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xa,xy,yi-&gt;ai&#39;</span><span class="p">,</span> <span class="n">Ca</span><span class="p">,</span> <span class="n">rao</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">Ci</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">rvo</span></div>
+
+
+
+<div class="viewcode-block" id="solve_cphf_uhf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.mp.html#pyscf.mp.dfump2_native.solve_cphf_uhf">[docs]</a>
+<span class="k">def</span> <span class="nf">solve_cphf_uhf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">Lvo</span><span class="p">,</span> <span class="n">max_cycle</span><span class="p">,</span> <span class="n">tol</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Solve the CPHF equations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mf : a UHF object</span>
+<span class="sd">        Lvo : right-hand side the the response equation</span>
+<span class="sd">        max_cycle : number of iterations for the CPHF solver</span>
+<span class="sd">        tol : convergence tolerance for the CPHF solver</span>
+<span class="sd">        logger : Logger object</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Solving the CPHF response equations&#39;</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Max. iterations: </span><span class="si">{0:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">max_cycle</span><span class="p">))</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Convergence tolerance: </span><span class="si">{0:.3g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tol</span><span class="p">))</span>
+
+    <span class="c1"># Currently we need to make the CPHF solver somewhat more talkative to see anything at all.</span>
+    <span class="n">cphf_verbose</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">verbose</span>
+    <span class="k">if</span> <span class="n">logger</span><span class="o">.</span><span class="n">verbose</span> <span class="o">==</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span>
+        <span class="n">cphf_verbose</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">DEBUG</span>
+
+    <span class="n">nva</span><span class="p">,</span> <span class="n">noa</span> <span class="o">=</span> <span class="n">Lvo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">nvb</span><span class="p">,</span> <span class="n">nob</span> <span class="o">=</span> <span class="n">Lvo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">def</span> <span class="nf">fvind</span><span class="p">(</span><span class="n">zflat</span><span class="p">):</span>
+        <span class="n">za</span> <span class="o">=</span> <span class="n">zflat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nva</span><span class="p">,</span> <span class="n">noa</span><span class="p">)</span>
+        <span class="n">zb</span> <span class="o">=</span> <span class="n">zflat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nvb</span><span class="p">,</span> <span class="n">nob</span><span class="p">)</span>
+        <span class="n">ra</span><span class="p">,</span> <span class="n">rb</span> <span class="o">=</span> <span class="n">fock_response_uhf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="p">[</span><span class="n">za</span><span class="p">,</span> <span class="n">zb</span><span class="p">],</span> <span class="n">full</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">rflat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">ra</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">noa</span><span class="o">*</span><span class="n">nva</span><span class="p">)),</span> <span class="n">rb</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">nob</span><span class="o">*</span><span class="n">nvb</span><span class="p">))])</span>
+        <span class="k">return</span> <span class="n">rflat</span>
+
+    <span class="n">zvo</span> <span class="o">=</span> <span class="n">ucphf</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">fvind</span><span class="p">,</span> <span class="n">mf</span><span class="o">.</span><span class="n">mo_energy</span><span class="p">,</span> <span class="n">mf</span><span class="o">.</span><span class="n">mo_occ</span><span class="p">,</span> <span class="n">Lvo</span><span class="p">,</span>
+                      <span class="n">max_cycle</span><span class="o">=</span><span class="n">max_cycle</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">cphf_verbose</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;CPHF iterations finished&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">zvo</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.df.df &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/df/df';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../df.html" class="nav-link">pyscf.df</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.df.df</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.df.df</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2014-2020 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Qiming Sun &lt;osirpt.sun@gmail.com&gt;</span>
+<span class="c1">#</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">J-metric density fitting</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">contextlib</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">h5py</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">ao2mo</span>
+<span class="kn">from</span> <span class="nn">pyscf.lib</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">pyscf.df</span> <span class="kn">import</span> <span class="n">incore</span>
+<span class="kn">from</span> <span class="nn">pyscf.df</span> <span class="kn">import</span> <span class="n">outcore</span>
+<span class="kn">from</span> <span class="nn">pyscf.df</span> <span class="kn">import</span> <span class="n">r_incore</span>
+<span class="kn">from</span> <span class="nn">pyscf.df</span> <span class="kn">import</span> <span class="n">addons</span>
+<span class="kn">from</span> <span class="nn">pyscf.df</span> <span class="kn">import</span> <span class="n">df_jk</span>
+<span class="kn">from</span> <span class="nn">pyscf.ao2mo</span> <span class="kn">import</span> <span class="n">_ao2mo</span>
+<span class="kn">from</span> <span class="nn">pyscf.ao2mo.incore</span> <span class="kn">import</span> <span class="n">_conc_mos</span><span class="p">,</span> <span class="n">iden_coeffs</span>
+<span class="kn">from</span> <span class="nn">pyscf.ao2mo.outcore</span> <span class="kn">import</span> <span class="n">_load_from_h5g</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">__config__</span>
+
+<div class="viewcode-block" id="DF">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF">[docs]</a>
+<span class="k">class</span> <span class="nc">DF</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">StreamObject</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Object to hold 3-index tensor</span>
+
+<span class="sd">    Input Attributes:</span>
+<span class="sd">        auxbasis : str or dict</span>
+<span class="sd">            Same format as the input attribute mol.basis. If auxbasis is set to</span>
+<span class="sd">            None, an optimal auxiliary basis set will be selected based on the</span>
+<span class="sd">            AO basis set, according to the records in the basis set exchange</span>
+<span class="sd">            database and the predefined mappings in `pyscf.df.addons.DEFAULT_AUXBASIS`.</span>
+<span class="sd">            For DFT methods, the selection of auxiliary basis sets is also</span>
+<span class="sd">            influenced by the xc functional. The J-FIT basis set will be used for</span>
+<span class="sd">            local and semi-local functionals (LDA, GGA, and meta-GGA). JK-FIT</span>
+<span class="sd">            basis set will be employed for hybrid and RSH functionals.</span>
+<span class="sd">            If optimal auxiliary basis sets are not available, the PySCF built-in</span>
+<span class="sd">            even-tempered Gaussian basis set will be used.</span>
+<span class="sd">        _cderi_to_save : str</span>
+<span class="sd">            If _cderi_to_save is specified, the DF integral tensor will be</span>
+<span class="sd">            saved in this file.</span>
+<span class="sd">        _cderi : str or numpy array</span>
+<span class="sd">            If _cderi is specified, the DF integral tensor will be read from</span>
+<span class="sd">            this HDF5 file (or numpy array). When the DF integral tensor is</span>
+<span class="sd">            provided from the HDF5 file, its dataset name should be consistent</span>
+<span class="sd">            with DF._dataname, which is &#39;j3c&#39; by default.</span>
+<span class="sd">            The DF integral tensor :math:`V_{x,ij}` should be a 2D array in C</span>
+<span class="sd">            (row-major) convention, where x corresponds to index of auxiliary</span>
+<span class="sd">            basis, and the composite index ij is the orbital pair index. The</span>
+<span class="sd">            hermitian symmetry is assumed for the composite ij index, ie</span>
+<span class="sd">            the elements of :math:`V_{x,i,j}` with :math:`i\geq j` are existed</span>
+<span class="sd">            in the DF integral tensor.  Thus the shape of DF integral tensor</span>
+<span class="sd">            is (M,N*(N+1)/2), where M is the number of auxbasis functions and</span>
+<span class="sd">            N is the number of basis functions of the orbital basis.</span>
+<span class="sd">            This attribute is not compatible between the CPU and GPU implementations.</span>
+<span class="sd">            It will not be transferred during the to_cpu() and to_gpu() calls.</span>
+<span class="sd">        blockdim : int</span>
+<span class="sd">            When reading DF integrals from disk the chunk size to load.  It is</span>
+<span class="sd">            used to improve IO performance.</span>
+
+<span class="sd">    Intermediate Attributes (These attributes are generated during calculations</span>
+<span class="sd">    and should not be modified. Additionally, they may not be compatible between</span>
+<span class="sd">    GPU and CPU implementations.)</span>
+<span class="sd">        auxmol : Mole object</span>
+<span class="sd">            Read only Mole object to hold the auxiliary basis.  auxmol is</span>
+<span class="sd">            generated automatically in the initialization step based on the</span>
+<span class="sd">            given auxbasis.  It is used in the rest part of the code to</span>
+<span class="sd">            determine the problem size, the integral batches etc.  This object</span>
+<span class="sd">            should NOT be modified.</span>
+<span class="sd">        _vjopt : _VHFOpt instance</span>
+<span class="sd">            An instance that caches precomputation variables to optimize the</span>
+<span class="sd">            computation of the Coulomb matrix.</span>
+<span class="sd">        _rsh_df : dict</span>
+<span class="sd">            For range-separated DFT functionals, this object stores the density fitting</span>
+<span class="sd">            instances for long-range or short-range Coulomb integrals.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">blockdim</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;df_df_DF_blockdim&#39;</span><span class="p">,</span> <span class="mi">240</span><span class="p">)</span>
+
+    <span class="c1"># Store DF tensor in a format compatible to pyscf-1.1 - pyscf-1.6</span>
+    <span class="n">_compatible_format</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;df_df_DF_compatible_format&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">_dataname</span> <span class="o">=</span> <span class="s1">&#39;j3c&#39;</span>
+
+    <span class="n">_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="s1">&#39;auxmol&#39;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">auxbasis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol</span> <span class="o">=</span> <span class="n">mol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">stdout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">max_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auxbasis</span> <span class="o">=</span> <span class="n">auxbasis</span>
+
+<span class="c1">##################################################</span>
+<span class="c1"># Following are not input options</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># If _cderi_to_save is specified, the 3C-integral tensor will be saved in this file.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cderi_to_save</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1"># If _cderi is specified, the 3C-integral tensor will be read from this file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vjopt</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rsh_df</span> <span class="o">=</span> <span class="p">{}</span>  <span class="c1"># Range separated Coulomb DF objects</span>
+
+    <span class="n">__getstate__</span><span class="p">,</span> <span class="n">__setstate__</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">generate_pickle_methods</span><span class="p">(</span>
+            <span class="n">excludes</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;_cderi_to_save&#39;</span><span class="p">,</span> <span class="s1">&#39;_cderi&#39;</span><span class="p">,</span> <span class="s1">&#39;_vjopt&#39;</span><span class="p">,</span> <span class="s1">&#39;_rsh_df&#39;</span><span class="p">),</span>
+            <span class="n">reset_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">auxbasis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxbasis</span>
+    <span class="nd">@auxbasis</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">auxbasis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auxbasis</span> <span class="o">!=</span> <span class="n">x</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_auxbasis</span> <span class="o">=</span> <span class="n">x</span>
+
+<div class="viewcode-block" id="DF.dump_flags">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.dump_flags">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">new_logger</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;******** </span><span class="si">%s</span><span class="s1"> ********&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;auxbasis = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxbasis</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;auxbasis = auxmol.basis = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span><span class="o">.</span><span class="n">basis</span><span class="p">)</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;max_memory = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;_cderi = </span><span class="si">%s</span><span class="s1">  where DF integrals are loaded (readonly).&#39;</span><span class="p">,</span>
+                     <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="DF.build">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.build">[docs]</a>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_sanity</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dump_flags</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Skip DF.build(). Tensor _cderi will be used.&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">auxmol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="o">=</span> <span class="n">addons</span><span class="o">.</span><span class="n">make_auxmol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxbasis</span><span class="p">)</span>
+        <span class="n">nao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">nao_nr</span><span class="p">()</span>
+        <span class="n">naux</span> <span class="o">=</span> <span class="n">auxmol</span><span class="o">.</span><span class="n">nao_nr</span><span class="p">()</span>
+        <span class="n">nao_pair</span> <span class="o">=</span> <span class="n">nao</span><span class="o">*</span><span class="p">(</span><span class="n">nao</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+
+        <span class="n">is_custom_storage</span> <span class="o">=</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi_to_save</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+        <span class="n">max_memory</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">int3c</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">_add_suffix</span><span class="p">(</span><span class="s1">&#39;int3c2e&#39;</span><span class="p">)</span>
+        <span class="n">int2c</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">_add_suffix</span><span class="p">(</span><span class="s1">&#39;int2c2e&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nao_pair</span><span class="o">*</span><span class="n">naux</span><span class="o">*</span><span class="mi">8</span><span class="o">/</span><span class="mf">1e6</span> <span class="o">&lt;</span> <span class="mf">.9</span><span class="o">*</span><span class="n">max_memory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_custom_storage</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="o">=</span> <span class="n">incore</span><span class="o">.</span><span class="n">cholesky_eri</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">int3c</span><span class="o">=</span><span class="n">int3c</span><span class="p">,</span> <span class="n">int2c</span><span class="o">=</span><span class="n">int2c</span><span class="p">,</span>
+                                              <span class="n">auxmol</span><span class="o">=</span><span class="n">auxmol</span><span class="p">,</span>
+                                              <span class="n">max_memory</span><span class="o">=</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">log</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi_to_save</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_cderi_to_save</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">lib</span><span class="o">.</span><span class="n">param</span><span class="o">.</span><span class="n">TMPDIR</span><span class="p">)</span>
+            <span class="n">cderi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi_to_save</span>
+
+            <span class="k">if</span> <span class="n">is_custom_storage</span><span class="p">:</span>
+                <span class="n">cderi_name</span> <span class="o">=</span> <span class="n">cderi</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cderi_name</span> <span class="o">=</span> <span class="n">cderi</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;_cderi_to_save = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cderi_name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If cderi needs to be saved in</span>
+                <span class="n">log</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Value of _cderi is ignored. DF integrals will be &#39;</span>
+                         <span class="s1">&#39;saved in file </span><span class="si">%s</span><span class="s1"> .&#39;</span><span class="p">,</span> <span class="n">cderi_name</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compatible_format</span><span class="p">:</span>
+                <span class="n">outcore</span><span class="o">.</span><span class="n">cholesky_eri</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cderi</span><span class="p">,</span> <span class="n">dataname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">,</span>
+                                     <span class="n">int3c</span><span class="o">=</span><span class="n">int3c</span><span class="p">,</span> <span class="n">int2c</span><span class="o">=</span><span class="n">int2c</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="n">auxmol</span><span class="p">,</span>
+                                     <span class="n">max_memory</span><span class="o">=</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">log</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Store DF tensor in blocks. This is to reduce the</span>
+                <span class="c1"># initialization overhead</span>
+                <span class="n">outcore</span><span class="o">.</span><span class="n">cholesky_eri_b</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cderi</span><span class="p">,</span> <span class="n">dataname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">,</span>
+                                       <span class="n">int3c</span><span class="o">=</span><span class="n">int3c</span><span class="p">,</span> <span class="n">int2c</span><span class="o">=</span><span class="n">int2c</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="n">auxmol</span><span class="p">,</span>
+                                       <span class="n">max_memory</span><span class="o">=</span><span class="n">max_memory</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">log</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="o">=</span> <span class="n">cderi</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="s1">&#39;Generate density fitting integrals&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">t0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="DF.kernel">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.kernel">[docs]</a>
+    <span class="k">def</span> <span class="nf">kernel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DF.reset">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Reset mol and clean up relevant attributes for scanner mode&#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mol</span> <span class="o">=</span> <span class="n">mol</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_vjopt</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rsh_df</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="DF.loop">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.loop">[docs]</a>
+    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blksize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">blksize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">blksize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blockdim</span>
+
+        <span class="k">with</span> <span class="n">addons</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">)</span> <span class="k">as</span> <span class="n">feri</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feri</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">naoaux</span> <span class="o">=</span> <span class="n">feri</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">naoaux</span><span class="p">,</span> <span class="n">blksize</span><span class="p">):</span>
+                    <span class="k">yield</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">feri</span><span class="p">[</span><span class="n">b0</span><span class="p">:</span><span class="n">b1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feri</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+                    <span class="c1"># starting from pyscf-1.7, DF tensor may be stored in</span>
+                    <span class="c1"># block format</span>
+                    <span class="n">naoaux</span> <span class="o">=</span> <span class="n">feri</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">aux_slice</span><span class="p">):</span>
+                        <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">aux_slice</span>
+                        <span class="k">return</span> <span class="n">_load_from_h5g</span><span class="p">(</span><span class="n">feri</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">naoaux</span> <span class="o">=</span> <span class="n">feri</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">aux_slice</span><span class="p">):</span>
+                        <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span> <span class="o">=</span> <span class="n">aux_slice</span>
+                        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">feri</span><span class="p">[</span><span class="n">b0</span><span class="p">:</span><span class="n">b1</span><span class="p">])</span>
+
+                <span class="k">for</span> <span class="n">dat</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">map_with_prefetch</span><span class="p">(</span><span class="n">load</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">naoaux</span><span class="p">,</span> <span class="n">blksize</span><span class="p">)):</span>
+                    <span class="k">yield</span> <span class="n">dat</span>
+                    <span class="n">dat</span> <span class="o">=</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="DF.prange">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.prange">[docs]</a>
+    <span class="k">def</span> <span class="nf">prange</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="n">i</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">step</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DF.get_naoaux">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.get_naoaux">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_naoaux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># determine naoaux with self._cderi, because DF object may be used as CD</span>
+        <span class="c1"># object when self._cderi is provided.</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">addons</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">)</span> <span class="k">as</span> <span class="n">feri</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">feri</span><span class="p">,</span> <span class="n">h5py</span><span class="o">.</span><span class="n">Group</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">feri</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">feri</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="DF.get_jk">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.get_jk">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_jk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">with_j</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_k</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">direct_scf_tol</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;scf_hf_SCF_direct_scf_tol&#39;</span><span class="p">,</span> <span class="mf">1e-13</span><span class="p">),</span>
+               <span class="n">omega</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">omega</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df_jk</span><span class="o">.</span><span class="n">get_jk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">)</span>
+
+        <span class="c1"># A temporary treatment for RSH-DF integrals</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">range_coulomb</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span> <span class="k">as</span> <span class="n">rsh_df</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df_jk</span><span class="o">.</span><span class="n">get_jk</span><span class="p">(</span><span class="n">rsh_df</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DF.get_eri">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.get_eri">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_eri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">nao</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">nao_nr</span><span class="p">()</span>
+        <span class="n">nao_pair</span> <span class="o">=</span> <span class="n">nao</span> <span class="o">*</span> <span class="p">(</span><span class="n">nao</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">ao_eri</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nao_pair</span><span class="p">,</span><span class="n">nao_pair</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">eri1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">():</span>
+            <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">eri1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">eri1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ao_eri</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">restore</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">ao_eri</span><span class="p">,</span> <span class="n">nao</span><span class="p">)</span></div>
+
+    <span class="n">get_ao_eri</span> <span class="o">=</span> <span class="n">get_eri</span>
+
+<div class="viewcode-block" id="DF.ao2mo">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.ao2mo">[docs]</a>
+    <span class="k">def</span> <span class="nf">ao2mo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">,</span>
+              <span class="n">compact</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;df_df_DF_ao2mo_compact&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">mo_coeffs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">mo_coeffs</span> <span class="o">=</span> <span class="p">(</span><span class="n">mo_coeffs</span><span class="p">,)</span> <span class="o">*</span> <span class="mi">4</span>
+        <span class="n">ijmosym</span><span class="p">,</span> <span class="n">nij_pair</span><span class="p">,</span> <span class="n">moij</span><span class="p">,</span> <span class="n">ijslice</span> <span class="o">=</span> <span class="n">_conc_mos</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">compact</span><span class="p">)</span>
+        <span class="n">klmosym</span><span class="p">,</span> <span class="n">nkl_pair</span><span class="p">,</span> <span class="n">mokl</span><span class="p">,</span> <span class="n">klslice</span> <span class="o">=</span> <span class="n">_conc_mos</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">compact</span><span class="p">)</span>
+        <span class="n">mo_eri</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nij_pair</span><span class="p">,</span><span class="n">nkl_pair</span><span class="p">))</span>
+        <span class="n">sym</span> <span class="o">=</span> <span class="p">(</span><span class="n">iden_coeffs</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">and</span>
+               <span class="n">iden_coeffs</span><span class="p">(</span><span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mo_coeffs</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
+        <span class="n">Lij</span> <span class="o">=</span> <span class="n">Lkl</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">eri1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">():</span>
+            <span class="n">Lij</span> <span class="o">=</span> <span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">eri1</span><span class="p">,</span> <span class="n">moij</span><span class="p">,</span> <span class="n">ijslice</span><span class="p">,</span> <span class="n">aosym</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="n">mosym</span><span class="o">=</span><span class="n">ijmosym</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">Lij</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">sym</span><span class="p">:</span>
+                <span class="n">Lkl</span> <span class="o">=</span> <span class="n">Lij</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">Lkl</span> <span class="o">=</span> <span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">eri1</span><span class="p">,</span> <span class="n">mokl</span><span class="p">,</span> <span class="n">klslice</span><span class="p">,</span> <span class="n">aosym</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="n">mosym</span><span class="o">=</span><span class="n">klmosym</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">Lkl</span><span class="p">)</span>
+            <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Lij</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">Lkl</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">mo_eri</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mo_eri</span></div>
+
+    <span class="n">get_mo_eri</span> <span class="o">=</span> <span class="n">ao2mo</span>
+
+<div class="viewcode-block" id="DF.range_coulomb">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF.range_coulomb">[docs]</a>
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">range_coulomb</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">omega</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Creates a temporary density fitting object for RSH-DF integrals.</span>
+<span class="sd">        In this context, only LR or SR integrals for mol and auxmol are computed.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">omega</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">omega</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.6f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">omega</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rsh_df</span><span class="p">:</span>
+            <span class="n">rsh_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rsh_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rsh_df</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rsh_df</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_dataname&#39;</span><span class="p">):</span>
+                <span class="n">rsh_df</span><span class="o">.</span><span class="n">_dataname</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="si">}</span><span class="s1">-lr/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;Create RSH-DF object </span><span class="si">%s</span><span class="s1"> for omega=</span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">rsh_df</span><span class="p">,</span> <span class="n">omega</span><span class="p">)</span>
+
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">auxmol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span>
+
+        <span class="n">mol_omega</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">omega</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">omega</span>
+        <span class="n">auxmol_omega</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">auxmol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">auxmol_omega</span> <span class="o">=</span> <span class="n">auxmol</span><span class="o">.</span><span class="n">omega</span>
+            <span class="n">auxmol</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">omega</span>
+
+        <span class="k">assert</span> <span class="n">rsh_df</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">omega</span> <span class="o">==</span> <span class="n">omega</span>
+        <span class="k">if</span> <span class="n">rsh_df</span><span class="o">.</span><span class="n">auxmol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="n">rsh_df</span><span class="o">.</span><span class="n">auxmol</span><span class="o">.</span><span class="n">omega</span> <span class="o">==</span> <span class="n">omega</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">rsh_df</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">mol</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">mol_omega</span>
+            <span class="k">if</span> <span class="n">auxmol_omega</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">auxmol</span><span class="o">.</span><span class="n">omega</span> <span class="o">=</span> <span class="n">auxmol_omega</span></div>
+
+
+    <span class="n">to_gpu</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">to_gpu</span></div>
+
+
+<span class="n">GDF</span> <span class="o">=</span> <span class="n">DF</span>
+
+
+<div class="viewcode-block" id="DF4C">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C">[docs]</a>
+<span class="k">class</span> <span class="nc">DF4C</span><span class="p">(</span><span class="n">DF</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Relativistic 4-component&#39;&#39;&#39;</span>
+<div class="viewcode-block" id="DF4C.build">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C.build">[docs]</a>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">auxmol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxmol</span> <span class="o">=</span> <span class="n">addons</span><span class="o">.</span><span class="n">make_auxmol</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">auxbasis</span><span class="p">)</span>
+        <span class="n">n2c</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">nao_2c</span><span class="p">()</span>
+        <span class="n">naux</span> <span class="o">=</span> <span class="n">auxmol</span><span class="o">.</span><span class="n">nao_nr</span><span class="p">()</span>
+        <span class="n">nao_pair</span> <span class="o">=</span> <span class="n">n2c</span><span class="o">*</span><span class="p">(</span><span class="n">n2c</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+
+        <span class="n">max_memory</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="mf">.8</span>
+        <span class="k">if</span> <span class="n">nao_pair</span><span class="o">*</span><span class="n">naux</span><span class="o">*</span><span class="mi">3</span><span class="o">*</span><span class="mi">16</span><span class="o">/</span><span class="mf">1e6</span><span class="o">*</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">max_memory</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="o">=</span><span class="p">(</span><span class="n">r_incore</span><span class="o">.</span><span class="n">cholesky_eri</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="n">auxmol</span><span class="p">,</span> <span class="n">aosym</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">,</span>
+                                                <span class="n">int3c</span><span class="o">=</span><span class="s1">&#39;int3c2e_spinor&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">log</span><span class="p">),</span>
+                          <span class="n">r_incore</span><span class="o">.</span><span class="n">cholesky_eri</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">auxmol</span><span class="o">=</span><span class="n">auxmol</span><span class="p">,</span> <span class="n">aosym</span><span class="o">=</span><span class="s1">&#39;s2&#39;</span><span class="p">,</span>
+                                                <span class="n">int3c</span><span class="o">=</span><span class="s1">&#39;int3c2e_spsp1_spinor&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">log</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="DF4C.loop">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C.loop">[docs]</a>
+    <span class="k">def</span> <span class="nf">loop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">blksize</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">blksize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">blksize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blockdim</span>
+        <span class="k">with</span> <span class="n">addons</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">)</span> <span class="k">as</span> <span class="n">ferill</span><span class="p">:</span>
+            <span class="n">naoaux</span> <span class="o">=</span> <span class="n">ferill</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">with</span> <span class="n">addons</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cderi</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dataname</span><span class="p">)</span> <span class="k">as</span> <span class="n">feriss</span><span class="p">:</span> <span class="c1"># python2.6 not support multiple with</span>
+                <span class="k">for</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b1</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">naoaux</span><span class="p">,</span> <span class="n">blksize</span><span class="p">):</span>
+                    <span class="n">erill</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ferill</span><span class="p">[</span><span class="n">b0</span><span class="p">:</span><span class="n">b1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+                    <span class="n">eriss</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">feriss</span><span class="p">[</span><span class="n">b0</span><span class="p">:</span><span class="n">b1</span><span class="p">],</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+                    <span class="k">yield</span> <span class="n">erill</span><span class="p">,</span> <span class="n">eriss</span></div>
+
+
+<div class="viewcode-block" id="DF4C.get_jk">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C.get_jk">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_jk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">with_j</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_k</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+               <span class="n">direct_scf_tol</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;scf_hf_SCF_direct_scf_tol&#39;</span><span class="p">,</span> <span class="mf">1e-13</span><span class="p">),</span>
+               <span class="n">omega</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">omega</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df_jk</span><span class="o">.</span><span class="n">r_get_jk</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">range_coulomb</span><span class="p">(</span><span class="n">omega</span><span class="p">)</span> <span class="k">as</span> <span class="n">rsh_df</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">df_jk</span><span class="o">.</span><span class="n">r_get_jk</span><span class="p">(</span><span class="n">rsh_df</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DF4C.get_eri">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C.get_eri">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_eri</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+    <span class="n">get_ao_eri</span> <span class="o">=</span> <span class="n">get_eri</span>
+
+<div class="viewcode-block" id="DF4C.ao2mo">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.df.html#pyscf.df.df.DF4C.ao2mo">[docs]</a>
+    <span class="k">def</span> <span class="nf">ao2mo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mo_coeffs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+    <span class="n">get_mo_eri</span> <span class="o">=</span> <span class="n">ao2mo</span></div>
+
+
+<span class="n">GDF4C</span> <span class="o">=</span> <span class="n">DF4C</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

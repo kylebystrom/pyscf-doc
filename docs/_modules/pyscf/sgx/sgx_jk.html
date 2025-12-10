@@ -1,0 +1,809 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.sgx.sgx_jk &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/sgx/sgx_jk';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.sgx.sgx_jk</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.sgx.sgx_jk</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2018-2019 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Peng Bao &lt;baopeng@iccas.ac.cn&gt;</span>
+<span class="c1">#         Qiming Sun &lt;osirpt.sun@gmail.com&gt;</span>
+<span class="c1">#</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">semi-grid Coulomb and eXchange without differential density matrix</span>
+
+<span class="sd">To lower the scaling of coulomb and exchange matrix construction for large system, one</span>
+<span class="sd">coordinate is analytical and the other is grid. The traditional two electron</span>
+<span class="sd">integrals turn to analytical one electron integrals and numerical integration</span>
+<span class="sd">based on grid.(see Friesner, R. A. Chem. Phys. Lett. 1985, 116, 39)</span>
+
+<span class="sd">Minimizing numerical errors using overlap fitting correction.(see</span>
+<span class="sd">Lzsak, R. et. al. J. Chem. Phys. 2011, 135, 144105)</span>
+<span class="sd">Grid screening for weighted AO value and DktXkg.</span>
+<span class="sd">Two SCF steps: coarse grid then fine grid. There are 5 parameters can be changed:</span>
+<span class="sd"># threshold for Xg and Fg screening</span>
+<span class="sd">gthrd = 1e-10</span>
+<span class="sd"># initial and final grids level</span>
+<span class="sd">grdlvl_i = 0</span>
+<span class="sd">grdlvl_f = 1</span>
+<span class="sd"># norm_ddm threshold for grids change</span>
+<span class="sd">thrd_nddm = 0.03</span>
+<span class="sd"># set block size to adapt memory</span>
+<span class="sd">sblk = 200</span>
+
+<span class="sd">Set mf.direct_scf = False because no traditional 2e integrals</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">gto</span>
+<span class="kn">from</span> <span class="nn">pyscf.lib</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">pyscf.df.incore</span> <span class="kn">import</span> <span class="n">aux_e2</span>
+<span class="kn">from</span> <span class="nn">pyscf.gto</span> <span class="kn">import</span> <span class="n">moleintor</span>
+<span class="kn">from</span> <span class="nn">pyscf.scf</span> <span class="kn">import</span> <span class="n">_vhf</span>
+<span class="kn">from</span> <span class="nn">pyscf.dft</span> <span class="kn">import</span> <span class="n">gen_grid</span>
+
+
+<div class="viewcode-block" id="get_jk_favork">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.sgx.html#pyscf.sgx.sgx_jk.get_jk_favork">[docs]</a>
+<span class="k">def</span> <span class="nf">get_jk_favork</span><span class="p">(</span><span class="n">sgx</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">with_j</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_k</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">direct_scf_tol</span><span class="o">=</span><span class="mf">1e-13</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">mol</span>
+    <span class="n">grids</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">grids</span>
+    <span class="n">gthrd</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">grids_thrd</span>
+
+    <span class="n">dms</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+    <span class="n">dm_shape</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">nao</span> <span class="o">=</span> <span class="n">dm_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dms</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">)</span>
+    <span class="n">nset</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">sgx</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">batch_nuc</span> <span class="o">=</span> <span class="n">_gen_batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">batch_jk</span> <span class="o">=</span> <span class="n">_gen_jk_direct</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">,</span>
+                                  <span class="n">sgx</span><span class="o">.</span><span class="n">_opt</span><span class="p">,</span> <span class="n">sgx</span><span class="o">.</span><span class="n">pjs</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;sgX initialization&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t0</span><span class="p">)</span>
+
+    <span class="n">sn</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">))</span>
+    <span class="n">vj</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">dms</span><span class="p">)</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">dms</span><span class="p">)</span>
+
+    <span class="n">ngrids</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">max_memory</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sblk</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">blockdim</span>
+    <span class="n">blksize</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ngrids</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">sblk</span><span class="p">,</span> <span class="n">max_memory</span><span class="o">*</span><span class="mf">1e6</span><span class="o">/</span><span class="mi">8</span><span class="o">/</span><span class="n">nao</span><span class="o">**</span><span class="mi">2</span><span class="p">))))</span>
+    <span class="n">tnuc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ngrids</span><span class="p">,</span> <span class="n">blksize</span><span class="p">):</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">]</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">ao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">eval_gto</span><span class="p">(</span><span class="s1">&#39;GTOval&#39;</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+        <span class="n">wao</span> <span class="o">=</span> <span class="n">ao</span> <span class="o">*</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">sn</span> <span class="o">+=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ao</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">wao</span><span class="p">)</span>
+
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gi,xij-&gt;xgj&#39;</span><span class="p">,</span> <span class="n">wao</span><span class="p">,</span> <span class="n">dms</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">i1</span><span class="o">-</span><span class="n">i0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+            <span class="n">mask</span> <span class="o">|=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">fg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">mask</span> <span class="o">|=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">fg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="n">ao</span> <span class="o">=</span> <span class="n">ao</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">wao</span> <span class="o">=</span> <span class="n">wao</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">fg</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[:,</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">sgx</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="n">gbn</span> <span class="o">=</span> <span class="n">batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+                <span class="n">jg</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gij,xij-&gt;xg&#39;</span><span class="p">,</span> <span class="n">gbn</span><span class="p">,</span> <span class="n">dms</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+                <span class="n">gv</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gvt,xgt-&gt;xgv&#39;</span><span class="p">,</span> <span class="n">gbn</span><span class="p">,</span> <span class="n">fg</span><span class="p">)</span>
+            <span class="n">gbn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="n">jg</span><span class="p">,</span> <span class="n">gv</span> <span class="o">=</span> <span class="n">batch_jk</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">dms</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">weights</span><span class="p">)</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+            <span class="n">xj</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gv,xg-&gt;xgv&#39;</span><span class="p">,</span> <span class="n">ao</span><span class="p">,</span> <span class="n">jg</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+                <span class="n">vj</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gu,gv-&gt;uv&#39;</span><span class="p">,</span> <span class="n">wao</span><span class="p">,</span> <span class="n">xj</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+                <span class="n">vk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gu,gv-&gt;uv&#39;</span><span class="p">,</span> <span class="n">ao</span><span class="p">,</span> <span class="n">gv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">jg</span> <span class="o">=</span> <span class="n">gv</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;sgX J/K builder&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t1</span><span class="p">)</span>
+    <span class="n">tdot</span> <span class="o">=</span> <span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug1</span><span class="p">(</span><span class="n">sgx</span><span class="p">,</span> <span class="s1">&#39;(CPU, wall) time for integrals (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">); &#39;</span>
+                  <span class="s1">&#39;for tensor contraction (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">)&#39;</span><span class="p">,</span>
+                  <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tdot</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tdot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="n">ovlp</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">intor_symmetric</span><span class="p">(</span><span class="s1">&#39;int1e_ovlp&#39;</span><span class="p">)</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">ovlp</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+        <span class="n">vj</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;pi,xpj-&gt;xij&#39;</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">vj</span><span class="p">)</span>
+        <span class="n">vj</span> <span class="o">=</span> <span class="p">(</span><span class="n">vj</span> <span class="o">+</span> <span class="n">vj</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mf">.5</span>
+    <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+        <span class="n">vk</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;pi,xpj-&gt;xij&#39;</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">vk</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hermi</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">vk</span> <span class="o">=</span> <span class="p">(</span><span class="n">vk</span> <span class="o">+</span> <span class="n">vk</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mf">.5</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;vj and vk&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vj</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dm_shape</span><span class="p">),</span> <span class="n">vk</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dm_shape</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="get_jk_favorj">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.sgx.html#pyscf.sgx.sgx_jk.get_jk_favorj">[docs]</a>
+<span class="k">def</span> <span class="nf">get_jk_favorj</span><span class="p">(</span><span class="n">sgx</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">hermi</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">with_j</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">with_k</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                  <span class="n">direct_scf_tol</span><span class="o">=</span><span class="mf">1e-13</span><span class="p">):</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">mol</span>
+    <span class="n">grids</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">grids</span>
+    <span class="n">gthrd</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">grids_thrd</span>
+
+    <span class="n">dms</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+    <span class="n">dm_shape</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">nao</span> <span class="o">=</span> <span class="n">dm_shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">dms</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">)</span>
+    <span class="n">nset</span> <span class="o">=</span> <span class="n">dms</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">sgx</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+        <span class="n">batch_nuc</span> <span class="o">=</span> <span class="n">_gen_batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">batch_jk</span> <span class="o">=</span> <span class="n">_gen_jk_direct</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">,</span>
+                                  <span class="n">sgx</span><span class="o">.</span><span class="n">_opt</span><span class="p">,</span> <span class="n">sgx</span><span class="o">.</span><span class="n">pjs</span><span class="p">)</span>
+
+    <span class="n">sn</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">))</span>
+    <span class="n">ngrids</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">max_memory</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">max_memory</span> <span class="o">-</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sblk</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">blockdim</span>
+    <span class="n">blksize</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ngrids</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">sblk</span><span class="p">,</span> <span class="n">max_memory</span><span class="o">*</span><span class="mf">1e6</span><span class="o">/</span><span class="mi">8</span><span class="o">/</span><span class="n">nao</span><span class="o">**</span><span class="mi">2</span><span class="p">))))</span>
+    <span class="k">for</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ngrids</span><span class="p">,</span> <span class="n">blksize</span><span class="p">):</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">]</span>
+        <span class="n">ao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">eval_gto</span><span class="p">(</span><span class="s1">&#39;GTOval&#39;</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+        <span class="n">wao</span> <span class="o">=</span> <span class="n">ao</span> <span class="o">*</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">sn</span> <span class="o">+=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ao</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">wao</span><span class="p">)</span>
+
+    <span class="n">ovlp</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">intor_symmetric</span><span class="p">(</span><span class="s1">&#39;int1e_ovlp&#39;</span><span class="p">)</span>
+    <span class="n">proj</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">sn</span><span class="p">,</span> <span class="n">ovlp</span><span class="p">)</span>
+    <span class="n">proj_dm</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ki,xij-&gt;xkj&#39;</span><span class="p">,</span> <span class="n">proj</span><span class="p">,</span> <span class="n">dms</span><span class="p">)</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;sgX initialization&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t0</span><span class="p">)</span>
+    <span class="n">vj</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">dms</span><span class="p">)</span>
+    <span class="n">vk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">dms</span><span class="p">)</span>
+    <span class="n">tnuc</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i0</span><span class="p">,</span> <span class="n">i1</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ngrids</span><span class="p">,</span> <span class="n">blksize</span><span class="p">):</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">]</span>
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">ao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">eval_gto</span><span class="p">(</span><span class="s1">&#39;GTOval&#39;</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+        <span class="n">wao</span> <span class="o">=</span> <span class="n">ao</span> <span class="o">*</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">i0</span><span class="p">:</span><span class="n">i1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gi,xij-&gt;xgj&#39;</span><span class="p">,</span> <span class="n">wao</span><span class="p">,</span> <span class="n">proj_dm</span><span class="p">)</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">i1</span><span class="o">-</span><span class="n">i0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+            <span class="n">mask</span> <span class="o">|=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">fg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&gt;</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">mask</span> <span class="o">|=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">fg</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">&lt;-</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mask</span><span class="p">):</span>
+            <span class="n">ao</span> <span class="o">=</span> <span class="n">ao</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">fg</span> <span class="o">=</span> <span class="n">fg</span><span class="p">[:,</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+            <span class="n">rhog</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xgu,gu-&gt;xg&#39;</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">ao</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rhog</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">sgx</span><span class="o">.</span><span class="n">debug</span><span class="p">:</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="n">gbn</span> <span class="o">=</span> <span class="n">batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">coords</span><span class="p">)</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+                <span class="n">jpart</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;guv,xg-&gt;xuv&#39;</span><span class="p">,</span> <span class="n">gbn</span><span class="p">,</span> <span class="n">rhog</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+                <span class="n">gv</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gtv,xgt-&gt;xgv&#39;</span><span class="p">,</span> <span class="n">gbn</span><span class="p">,</span> <span class="n">fg</span><span class="p">)</span>
+            <span class="n">gbn</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span> <span class="n">rhog</span> <span class="o">=</span> <span class="n">rhog</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">jpart</span><span class="p">,</span> <span class="n">gv</span> <span class="o">=</span> <span class="n">batch_jk</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">rhog</span><span class="p">,</span> <span class="n">fg</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">weights</span><span class="p">)</span>
+            <span class="n">tnuc</span> <span class="o">=</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+            <span class="n">vj</span> <span class="o">+=</span> <span class="n">jpart</span>
+        <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+                <span class="n">vk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">lib</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;gu,gv-&gt;uv&#39;</span><span class="p">,</span> <span class="n">ao</span><span class="p">,</span> <span class="n">gv</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">jpart</span> <span class="o">=</span> <span class="n">gv</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;sgX J/K builder&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t1</span><span class="p">)</span>
+    <span class="n">tdot</span> <span class="o">=</span> <span class="n">t2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">t1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">t2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug1</span><span class="p">(</span><span class="n">sgx</span><span class="p">,</span> <span class="s1">&#39;(CPU, wall) time for integrals (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">); &#39;</span>
+                  <span class="s1">&#39;for tensor contraction (</span><span class="si">%.2f</span><span class="s1">, </span><span class="si">%.2f</span><span class="s1">)&#39;</span><span class="p">,</span>
+                  <span class="n">tnuc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tnuc</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tdot</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tdot</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nset</span><span class="p">):</span>
+        <span class="n">lib</span><span class="o">.</span><span class="n">hermi_triu</span><span class="p">(</span><span class="n">vj</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">with_k</span> <span class="ow">and</span> <span class="n">hermi</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">vk</span> <span class="o">=</span> <span class="p">(</span><span class="n">vk</span> <span class="o">+</span> <span class="n">vk</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span><span class="o">*</span><span class="mf">.5</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;vj and vk&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">t0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">vj</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dm_shape</span><span class="p">),</span> <span class="n">vk</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">dm_shape</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_gen_batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Coulomb integrals of the given points and orbital pairs&#39;&#39;&#39;</span>
+    <span class="n">cintopt</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">moleintor</span><span class="o">.</span><span class="n">make_cintopt</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="p">,</span> <span class="s1">&#39;int3c2e&#39;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">batch_nuc</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">grid_coords</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">fakemol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">fakemol_for_charges</span><span class="p">(</span><span class="n">grid_coords</span><span class="p">)</span>
+        <span class="n">j3c</span> <span class="o">=</span> <span class="n">aux_e2</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fakemol</span><span class="p">,</span> <span class="n">intor</span><span class="o">=</span><span class="s1">&#39;int3c2e&#39;</span><span class="p">,</span> <span class="n">aosym</span><span class="o">=</span><span class="s1">&#39;s2ij&#39;</span><span class="p">,</span> <span class="n">cintopt</span><span class="o">=</span><span class="n">cintopt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">unpack_tril</span><span class="p">(</span><span class="n">j3c</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">batch_nuc</span>
+
+<span class="k">def</span> <span class="nf">_gen_jk_direct</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">aosym</span><span class="p">,</span> <span class="n">with_j</span><span class="p">,</span> <span class="n">with_k</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">,</span> <span class="n">sgxopt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pjs</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Contraction between sgX Coulomb integrals and density matrices</span>
+
+<span class="sd">    J: einsum(&#39;guv,xg-&gt;xuv&#39;, gbn, dms) if dms == rho at grid,</span>
+<span class="sd">    or einsum(&#39;gij,xij-&gt;xg&#39;, gbn, dms) if dms are density matrices</span>
+
+<span class="sd">    K: einsum(&#39;gtv,xgt-&gt;xgv&#39;, gbn, fg)</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">sgxopt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">pyscf.sgx</span> <span class="kn">import</span> <span class="n">sgx</span>
+        <span class="n">sgxopt</span> <span class="o">=</span> <span class="n">sgx</span><span class="o">.</span><span class="n">_make_opt</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">pjs</span><span class="p">,</span> <span class="n">direct_scf_tol</span><span class="p">)</span>
+    <span class="n">sgxopt</span><span class="o">.</span><span class="n">direct_scf_tol</span> <span class="o">=</span> <span class="n">direct_scf_tol</span>
+
+    <span class="n">ncomp</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">nao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">nao</span>
+    <span class="n">cintor</span> <span class="o">=</span> <span class="n">_vhf</span><span class="o">.</span><span class="n">_fpointer</span><span class="p">(</span><span class="n">sgxopt</span><span class="o">.</span><span class="n">_intor</span><span class="p">)</span>
+    <span class="n">fdot</span> <span class="o">=</span> <span class="n">_vhf</span><span class="o">.</span><span class="n">_fpointer</span><span class="p">(</span><span class="s1">&#39;SGXdot_nrk&#39;</span><span class="p">)</span>
+    <span class="n">drv</span> <span class="o">=</span> <span class="n">_vhf</span><span class="o">.</span><span class="n">libcvhf</span><span class="o">.</span><span class="n">SGXnr_direct_drv</span>
+
+    <span class="k">def</span> <span class="nf">jk_part</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">grid_coords</span><span class="p">,</span> <span class="n">dms</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+        <span class="n">atm</span><span class="p">,</span> <span class="n">bas</span><span class="p">,</span> <span class="n">env</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_env</span>
+        <span class="n">ngrids</span> <span class="o">=</span> <span class="n">grid_coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">env</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">grid_coords</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+        <span class="n">env</span><span class="p">[</span><span class="n">gto</span><span class="o">.</span><span class="n">NGRIDS</span><span class="p">]</span> <span class="o">=</span> <span class="n">ngrids</span>
+        <span class="n">env</span><span class="p">[</span><span class="n">gto</span><span class="o">.</span><span class="n">PTR_GRIDS</span><span class="p">]</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">_env</span><span class="o">.</span><span class="n">size</span>
+        <span class="k">if</span> <span class="n">pjs</span><span class="p">:</span>
+            <span class="n">sgxopt</span><span class="o">.</span><span class="n">set_dm</span><span class="p">(</span><span class="n">fg</span> <span class="o">/</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="kc">None</span><span class="p">,:])),</span>
+                          <span class="n">mol</span><span class="o">.</span><span class="n">_atm</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">_bas</span><span class="p">,</span> <span class="n">env</span><span class="p">)</span>
+
+        <span class="n">ao_loc</span> <span class="o">=</span> <span class="n">moleintor</span><span class="o">.</span><span class="n">make_loc</span><span class="p">(</span><span class="n">bas</span><span class="p">,</span> <span class="n">sgxopt</span><span class="o">.</span><span class="n">_intor</span><span class="p">)</span>
+        <span class="n">shls_slice</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">)</span>
+
+        <span class="n">fg</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">fg</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+        <span class="n">vj</span> <span class="o">=</span> <span class="n">vk</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">fjk</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">dmsptr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">vjkptr</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">with_j</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">dms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># the value of density at each grid</span>
+                <span class="n">vj</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">dms</span><span class="p">),</span><span class="n">ncomp</span><span class="p">,</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">))[:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dms</span><span class="p">):</span>
+                    <span class="n">dmsptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                    <span class="n">vjkptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vj</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                    <span class="n">fjk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_vhf</span><span class="o">.</span><span class="n">_fpointer</span><span class="p">(</span><span class="s1">&#39;SGXnr&#39;</span><span class="o">+</span><span class="n">aosym</span><span class="o">+</span><span class="s1">&#39;_ijg_g_ij&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">vj</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">dms</span><span class="p">),</span><span class="n">ncomp</span><span class="p">,</span><span class="n">ngrids</span><span class="p">))[:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dms</span><span class="p">):</span>
+                    <span class="n">dmsptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                    <span class="n">vjkptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vj</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                    <span class="n">fjk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_vhf</span><span class="o">.</span><span class="n">_fpointer</span><span class="p">(</span><span class="s1">&#39;SGXnr&#39;</span><span class="o">+</span><span class="n">aosym</span><span class="o">+</span><span class="s1">&#39;_ijg_ji_g&#39;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">with_k</span><span class="p">:</span>
+            <span class="n">vk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">fg</span><span class="p">),</span><span class="n">ncomp</span><span class="p">,</span><span class="n">nao</span><span class="p">,</span><span class="n">ngrids</span><span class="p">))[:,</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dm</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fg</span><span class="p">):</span>
+                <span class="n">dmsptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                <span class="n">vjkptr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">vk</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">))</span>
+                <span class="n">fjk</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_vhf</span><span class="o">.</span><span class="n">_fpointer</span><span class="p">(</span><span class="s1">&#39;SGXnr&#39;</span><span class="o">+</span><span class="n">aosym</span><span class="o">+</span><span class="s1">&#39;_ijg_gj_gi&#39;</span><span class="p">))</span>
+
+        <span class="n">n_dm</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fjk</span><span class="p">)</span>
+        <span class="n">fjk</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="o">*</span><span class="p">(</span><span class="n">n_dm</span><span class="p">))(</span><span class="o">*</span><span class="n">fjk</span><span class="p">)</span>
+        <span class="n">dmsptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="o">*</span><span class="p">(</span><span class="n">n_dm</span><span class="p">))(</span><span class="o">*</span><span class="n">dmsptr</span><span class="p">)</span>
+        <span class="n">vjkptr</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="o">*</span><span class="p">(</span><span class="n">n_dm</span><span class="p">))(</span><span class="o">*</span><span class="n">vjkptr</span><span class="p">)</span>
+
+        <span class="n">drv</span><span class="p">(</span><span class="n">cintor</span><span class="p">,</span> <span class="n">fdot</span><span class="p">,</span> <span class="n">fjk</span><span class="p">,</span> <span class="n">dmsptr</span><span class="p">,</span> <span class="n">vjkptr</span><span class="p">,</span> <span class="n">n_dm</span><span class="p">,</span> <span class="n">ncomp</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="o">*</span><span class="mi">4</span><span class="p">)(</span><span class="o">*</span><span class="n">shls_slice</span><span class="p">),</span>
+            <span class="n">ao_loc</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+            <span class="n">sgxopt</span><span class="o">.</span><span class="n">_cintopt</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">byref</span><span class="p">(</span><span class="n">sgxopt</span><span class="o">.</span><span class="n">_this</span><span class="p">),</span>
+            <span class="n">atm</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">),</span>
+            <span class="n">bas</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">nbas</span><span class="p">),</span>
+            <span class="n">env</span><span class="o">.</span><span class="n">ctypes</span><span class="o">.</span><span class="n">data_as</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="n">env</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+            <span class="n">ctypes</span><span class="o">.</span><span class="n">c_int</span><span class="p">(</span><span class="mi">2</span> <span class="k">if</span> <span class="n">aosym</span> <span class="o">==</span> <span class="s1">&#39;s2&#39;</span> <span class="k">else</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">vk</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">vk</span> <span class="o">=</span> <span class="n">vk</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">vk</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">vk</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">vj</span><span class="p">,</span> <span class="n">vk</span>
+    <span class="k">return</span> <span class="n">jk_part</span>
+
+
+<span class="c1"># pre for get_k</span>
+<span class="c1"># Use default mesh grids and weights</span>
+<div class="viewcode-block" id="get_gridss">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.sgx.html#pyscf.sgx.sgx_jk.get_gridss">[docs]</a>
+<span class="k">def</span> <span class="nf">get_gridss</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">gthrd</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">):</span>
+    <span class="n">Ktime</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+    <span class="n">grids</span> <span class="o">=</span> <span class="n">gen_grid</span><span class="o">.</span><span class="n">Grids</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">grids</span><span class="o">.</span><span class="n">level</span> <span class="o">=</span> <span class="n">level</span>
+    <span class="n">grids</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+    <span class="n">ngrids</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">lib</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ngrids</span><span class="p">,</span> <span class="mi">10000</span><span class="p">):</span>
+        <span class="n">ao_v</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">eval_gto</span><span class="p">(</span><span class="s1">&#39;GTOval&#39;</span><span class="p">,</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">])</span>
+        <span class="n">ao_v</span> <span class="o">*=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">,</span><span class="kc">None</span><span class="p">]</span>
+        <span class="n">wao_v0</span> <span class="o">=</span> <span class="n">ao_v</span>
+        <span class="n">mask</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wao_v0</span><span class="o">&gt;</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span>
+                    <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">wao_v0</span><span class="o">&lt;-</span><span class="n">gthrd</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">hstack</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+    <span class="n">grids</span><span class="o">.</span><span class="n">coords</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">coords</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">grids</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s1">&#39;threshold for grids screening </span><span class="si">%g</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">gthrd</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s1">&#39;number of grids </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">grids</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">timer_debug1</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="s2">&quot;Xg screening&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">Ktime</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grids</span></div>
+
+
+<span class="n">get_jk</span> <span class="o">=</span> <span class="n">get_jk_favorj</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

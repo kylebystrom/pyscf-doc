@@ -1,0 +1,1105 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyscf.hessian package &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyscf_api_docs/pyscf.hessian';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf.adc.html">pyscf.adc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.agf2.html">pyscf.agf2 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ao2mo.html">pyscf.ao2mo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.cc.html">pyscf.cc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ci.html">pyscf.ci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.data.html">pyscf.data package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.df.html">pyscf.df package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.grad.html">pyscf.df.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.hessian.html">pyscf.df.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.dft.html">pyscf.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.dft.xc.html">pyscf.dft.xc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.eph.html">pyscf.eph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.fci.html">pyscf.fci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.geomopt.html">pyscf.geomopt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.grad.html">pyscf.grad package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.gto.html">pyscf.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.gto.basis.html">pyscf.gto.basis package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.gto.basis.dyall-basis.html">pyscf.gto.basis.dyall-basis package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.gw.html">pyscf.gw package</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">pyscf.hessian package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lib.html">pyscf.lib package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lo.html">pyscf.lo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcpdft.html">pyscf.mcpdft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcscf.html">pyscf.mcscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mp.html">pyscf.mp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mrpt.html">pyscf.mrpt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.nac.html">pyscf.nac package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.pbc.html">pyscf.pbc package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.adc.html">pyscf.pbc.adc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ao2mo.html">pyscf.pbc.ao2mo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.cc.html">pyscf.pbc.cc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ci.html">pyscf.pbc.ci package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.df.html">pyscf.pbc.df package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.dft.html">pyscf.pbc.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.dft.multigrid.html">pyscf.pbc.dft.multigrid package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.eph.html">pyscf.pbc.eph package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.geomopt.html">pyscf.pbc.geomopt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.grad.html">pyscf.pbc.grad package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.gto.html">pyscf.pbc.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.basis.html">pyscf.pbc.gto.basis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.pseudo.html">pyscf.pbc.gto.pseudo package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.gw.html">pyscf.pbc.gw package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.lib.html">pyscf.pbc.lib package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mp.html">pyscf.pbc.mp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpicc.html">pyscf.pbc.mpicc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpitools.html">pyscf.pbc.mpitools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.scf.html">pyscf.pbc.scf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.symm.html">pyscf.pbc.symm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tddft.html">pyscf.pbc.tddft package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tdscf.html">pyscf.pbc.tdscf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tools.html">pyscf.pbc.tools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.x2c.html">pyscf.pbc.x2c package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.qmmm.html">pyscf.qmmm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.qmmm.pbc.html">pyscf.qmmm.pbc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.scf.html">pyscf.scf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.sgx.html">pyscf.sgx package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.solvent.html">pyscf.solvent package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.grad.html">pyscf.solvent.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.hessian.html">pyscf.solvent.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.soscf.html">pyscf.soscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.symm.html">pyscf.symm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tddft.html">pyscf.tddft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tdscf.html">pyscf.tdscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tools.html">pyscf.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.x2c.html">pyscf.x2c package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.hessian package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyscf-hessian-package">
+<h1>pyscf.hessian package<a class="headerlink" href="#pyscf-hessian-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.hessian.dispersion">
+<span id="pyscf-hessian-dispersion-module"></span><h2>pyscf.hessian.dispersion module<a class="headerlink" href="#module-pyscf.hessian.dispersion" title="Link to this heading">#</a></h2>
+<p>Hessian of dispersion correction for HF and DFT</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.dispersion.get_dispersion">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.dispersion.</span></span><span class="sig-name descname"><span class="pre">get_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">disp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_3body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/dispersion.html#get_dispersion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.dispersion.get_dispersion" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.hessian.rhf">
+<span id="pyscf-hessian-rhf-module"></span><h2>pyscf.hessian.rhf module<a class="headerlink" href="#module-pyscf.hessian.rhf" title="Link to this heading">#</a></h2>
+<p>Non-relativistic RHF analytical Hessian</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.Hessian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">Hessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scf_method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#Hessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.Hessian" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.hessian.rhf.HessianBase" title="pyscf.hessian.rhf.HessianBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">HessianBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.Hessian.hess_elec">
+<span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.Hessian.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.Hessian.make_h1">
+<span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.Hessian.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.Hessian.partial_hess_elec">
+<span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.Hessian.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd><p>Partial derivative</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">HessianBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scf_method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.lib.html#pyscf.lib.misc.StreamObject" title="pyscf.lib.misc.StreamObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamObject</span></code></a></p>
+<p>Non-relativistic restricted Hartree-Fock hessian</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.gen_hop">
+<span class="sig-name descname"><span class="pre">gen_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.gen_hop" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.get_dispersion">
+<span class="sig-name descname"><span class="pre">get_dispersion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">disp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_3body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.get_dispersion" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.get_hcore">
+<span class="sig-name descname"><span class="pre">get_hcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.get_hcore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.get_hcore" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.hcore_generator">
+<span class="sig-name descname"><span class="pre">hcore_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.hcore_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.hcore_generator" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.hess">
+<span class="sig-name descname"><span class="pre">hess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.hess" title="Link to this definition">#</a></dt>
+<dd><p>Kernel function is the main driver of a method.  Every method should
+define the kernel function as the entry of the calculation.  Note the
+return value of kernel function is not strictly defined.  It can be
+anything related to the method (such as the energy, the wave-function,
+the DFT mesh grids etc.).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.hess_elec">
+<span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.hess_nuc">
+<span class="sig-name descname"><span class="pre">hess_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.hess_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.hess_nuc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.kernel" title="Link to this definition">#</a></dt>
+<dd><p>Kernel function is the main driver of a method.  Every method should
+define the kernel function as the entry of the calculation.  Note the
+return value of kernel function is not strictly defined.  It can be
+anything related to the method (such as the energy, the wave-function,
+the DFT mesh grids etc.).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.level_shift">
+<span class="sig-name descname"><span class="pre">level_shift</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.level_shift" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.make_h1">
+<span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.make_h1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.max_cycle">
+<span class="sig-name descname"><span class="pre">max_cycle</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">50</span></em><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.max_cycle" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.solve_mo1">
+<span class="sig-name descname"><span class="pre">solve_mo1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.solve_mo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.solve_mo1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.HessianBase.to_gpu">
+<span class="sig-name descname"><span class="pre">to_gpu</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#HessianBase.to_gpu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.HessianBase.to_gpu" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.gen_hop">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">gen_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#gen_hop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.gen_hop" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.gen_vind">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.get_hcore">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">get_hcore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#get_hcore"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.get_hcore" title="Link to this definition">#</a></dt>
+<dd><p>Part of the second derivatives of core Hamiltonian</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.get_ovlp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">get_ovlp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#get_ovlp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.get_ovlp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.hess_nuc">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">hess_nuc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#hess_nuc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.hess_nuc" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.make_h1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#make_h1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.partial_hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#partial_hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd><p>Partial derivative</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rhf.solve_mo1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rhf.</span></span><span class="sig-name descname"><span class="pre">solve_mo1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rhf.html#solve_mo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rhf.solve_mo1" title="Link to this definition">#</a></dt>
+<dd><p>Solve the first order equation</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>fx<span class="classifier">function(dm_mo) =&gt; v1_mo</span></dt><dd><p>A function to generate the induced potential.
+See also the function gen_vind.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.hessian.rks">
+<span id="pyscf-hessian-rks-module"></span><h2>pyscf.hessian.rks module<a class="headerlink" href="#module-pyscf.hessian.rks" title="Link to this heading">#</a></h2>
+<p>Non-relativistic RKS analytical Hessian</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.Hessian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">Hessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#Hessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.Hessian" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.hessian.rhf.HessianBase" title="pyscf.hessian.rhf.HessianBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">HessianBase</span></code></a></p>
+<p>Non-relativistic RKS hessian</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.Hessian.hess_elec">
+<span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rks.Hessian.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.Hessian.make_h1">
+<span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rks.Hessian.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.Hessian.partial_hess_elec">
+<span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.rks.Hessian.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.contract_d2rhodAdB_d2gammadAdB">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">contract_d2rhodAdB_d2gammadAdB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d3mu_dr3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d2mu_dr2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmu_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drho_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aoslices</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fw_rho</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fw_gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#contract_d2rhodAdB_d2gammadAdB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.contract_d2rhodAdB_d2gammadAdB" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_d2mu_dr2">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_d2mu_dr2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ao</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_d2mu_dr2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_d2mu_dr2" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_d2rho_dAdr_grid_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_d2rho_dAdr_grid_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d2mu_dr2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmu_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_to_grid_index_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_atom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_d2rho_dAdr_grid_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_d2rho_dAdr_grid_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_d2rho_dAdr_orbital_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_d2rho_dAdr_orbital_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d2mu_dr2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmu_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aoslices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_d2rho_dAdr_orbital_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_d2rho_dAdr_orbital_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_d2rhodAdB_d2gammadAdB">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_d2rhodAdB_d2gammadAdB</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grids_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_d2rhodAdB_d2gammadAdB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_d2rhodAdB_d2gammadAdB" title="Link to this definition">#</a></dt>
+<dd><p>This function should never be used in practice. It requires crazy amount of memory,
+and it’s left for debug purpose only. Use the contract function instead.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_d3mu_dr3">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_d3mu_dr3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ao</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_d3mu_dr3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_d3mu_dr3" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_drhodA_dgammadA_grid_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_drhodA_dgammadA_grid_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d2mu_dr2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmu_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drho_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_to_grid_index_map</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_atom</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_drhodA_dgammadA_grid_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_drhodA_dgammadA_grid_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_drhodA_dgammadA_orbital_response">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_drhodA_dgammadA_orbital_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d2mu_dr2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dmu_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drho_dr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">aoslices</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_drhodA_dgammadA_orbital_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_drhodA_dgammadA_orbital_response" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_dweight_dA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_dweight_dA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grids</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_dweight_dA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_dweight_dA" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.get_vnlc_resp">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">get_vnlc_resp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dm1s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#get_vnlc_resp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.get_vnlc_resp" title="Link to this definition">#</a></dt>
+<dd><p>Equation notation follows:
+Liang J, Feng X, Liu X, Head-Gordon M. Analytical harmonic vibrational frequencies with
+VV10-containing density functionals: Theory, efficient implementation, and
+benchmark assessments. J Chem Phys. 2023 May 28;158(20):204109. doi: 10.1063/5.0152838.</p>
+<p>mo_coeff, mo_occ are 0-th order
+dm1s is first order</p>
+<p>TODO: check the effect of different grid, using mf.nlcgrids right now</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.make_h1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#make_h1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.rks.partial_hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.rks.</span></span><span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/rks.html#partial_hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.rks.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.hessian.thermo">
+<span id="pyscf-hessian-thermo-module"></span><h2>pyscf.hessian.thermo module<a class="headerlink" href="#module-pyscf.hessian.thermo" title="Link to this heading">#</a></h2>
+<p>Thermochemistry analysis.</p>
+<dl class="simple">
+<dt>Ref:</dt><dd><p>psi4/psi4/driver/qcdb/vib.py
+<a class="reference external" href="http://gaussian.com/vib/">http://gaussian.com/vib/</a></p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.dump_normal_mode">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">dump_normal_mode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#dump_normal_mode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.dump_normal_mode" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.dump_thermo">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">dump_thermo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#dump_thermo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.dump_thermo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.harmonic_analysis">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">harmonic_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hess</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_trans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exclude_rot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">imaginary_freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#harmonic_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.harmonic_analysis" title="Link to this definition">#</a></dt>
+<dd><p>Each column is one mode</p>
+<p>imaginary_freq (boolean): save imaginary_freq as complex number (if True)
+or negative real number (if False)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.rotation_const">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">rotation_const</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atom_coords</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'GHz'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#rotation_const"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.rotation_const" title="Link to this definition">#</a></dt>
+<dd><p>Rotational constants to characterize rotational spectra</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><p>unit (string) : One of GHz, wavenumber</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.rotational_symmetry_number">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">rotational_symmetry_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mol</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#rotational_symmetry_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.rotational_symmetry_number" title="Link to this definition">#</a></dt>
+<dd><p>Number of unique orientations of the rigid molecule that only
+interchange identical atoms.</p>
+<p>Source <a class="reference external" href="http://cccbdb.nist.gov/thermo.asp">http://cccbdb.nist.gov/thermo.asp</a> (search “symmetry number”)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.thermo.thermo">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.thermo.</span></span><span class="sig-name descname"><span class="pre">thermo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">298.15</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pressure</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">101325</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/thermo.html#thermo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.thermo.thermo" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.hessian.uhf">
+<span id="pyscf-hessian-uhf-module"></span><h2>pyscf.hessian.uhf module<a class="headerlink" href="#module-pyscf.hessian.uhf" title="Link to this heading">#</a></h2>
+<p>Non-relativistic UHF analytical Hessian</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">Hessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scf_method</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#Hessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.Hessian" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.hessian.rhf.HessianBase" title="pyscf.hessian.rhf.HessianBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">HessianBase</span></code></a></p>
+<p>Non-relativistic UHF hessian</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian.gen_hop">
+<span class="sig-name descname"><span class="pre">gen_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uhf.Hessian.gen_hop" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian.hess_elec">
+<span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uhf.Hessian.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian.make_h1">
+<span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uhf.Hessian.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian.partial_hess_elec">
+<span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uhf.Hessian.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.Hessian.solve_mo1">
+<span class="sig-name descname"><span class="pre">solve_mo1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#Hessian.solve_mo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.Hessian.solve_mo1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.gen_hop">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">gen_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#gen_hop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.gen_hop" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.gen_vind">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.make_h1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#make_h1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.partial_hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#partial_hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uhf.solve_mo1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uhf.</span></span><span class="sig-name descname"><span class="pre">solve_mo1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_cycle</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#solve_mo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uhf.solve_mo1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.hessian.uks">
+<span id="pyscf-hessian-uks-module"></span><h2>pyscf.hessian.uks module<a class="headerlink" href="#module-pyscf.hessian.uks" title="Link to this heading">#</a></h2>
+<p>Non-relativistic UKS analytical Hessian</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uks.</span></span><span class="sig-name descname"><span class="pre">Hessian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uks.html#Hessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uks.Hessian" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.hessian.rhf.HessianBase" title="pyscf.hessian.rhf.HessianBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">HessianBase</span></code></a></p>
+<p>Non-relativistic UKS hessian</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian.gen_hop">
+<span class="sig-name descname"><span class="pre">gen_hop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uks.Hessian.gen_hop" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian.hess_elec">
+<span class="sig-name descname"><span class="pre">hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_e1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uks.Hessian.hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian.make_h1">
+<span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uks.Hessian.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian.partial_hess_elec">
+<span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.hessian.uks.Hessian.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.Hessian.solve_mo1">
+<span class="sig-name descname"><span class="pre">solve_mo1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">h1ao</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fx</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uhf.html#Hessian.solve_mo1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uks.Hessian.solve_mo1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.make_h1">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uks.</span></span><span class="sig-name descname"><span class="pre">make_h1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chkfile</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uks.html#make_h1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uks.make_h1" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.hessian.uks.partial_hess_elec">
+<span class="sig-prename descclassname"><span class="pre">pyscf.hessian.uks.</span></span><span class="sig-name descname"><span class="pre">partial_hess_elec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hessobj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_energy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_coeff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mo_occ</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atmlst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_memory</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/hessian/uks.html#partial_hess_elec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.hessian.uks.partial_hess_elec" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-pyscf.hessian">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscf.hessian" title="Link to this heading">#</a></h2>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.dispersion">pyscf.hessian.dispersion module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.dispersion.get_dispersion"><code class="docutils literal notranslate"><span class="pre">get_dispersion()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.rhf">pyscf.hessian.rhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.Hessian"><code class="docutils literal notranslate"><span class="pre">Hessian</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.Hessian.hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.Hessian.make_h1"><code class="docutils literal notranslate"><span class="pre">Hessian.make_h1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.Hessian.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.partial_hess_elec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase"><code class="docutils literal notranslate"><span class="pre">HessianBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.gen_hop"><code class="docutils literal notranslate"><span class="pre">HessianBase.gen_hop()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.get_dispersion"><code class="docutils literal notranslate"><span class="pre">HessianBase.get_dispersion()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.get_hcore"><code class="docutils literal notranslate"><span class="pre">HessianBase.get_hcore()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.hcore_generator"><code class="docutils literal notranslate"><span class="pre">HessianBase.hcore_generator()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.hess"><code class="docutils literal notranslate"><span class="pre">HessianBase.hess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.hess_elec"><code class="docutils literal notranslate"><span class="pre">HessianBase.hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.hess_nuc"><code class="docutils literal notranslate"><span class="pre">HessianBase.hess_nuc()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.kernel"><code class="docutils literal notranslate"><span class="pre">HessianBase.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.level_shift"><code class="docutils literal notranslate"><span class="pre">HessianBase.level_shift</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.make_h1"><code class="docutils literal notranslate"><span class="pre">HessianBase.make_h1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.max_cycle"><code class="docutils literal notranslate"><span class="pre">HessianBase.max_cycle</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.solve_mo1"><code class="docutils literal notranslate"><span class="pre">HessianBase.solve_mo1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.HessianBase.to_gpu"><code class="docutils literal notranslate"><span class="pre">HessianBase.to_gpu()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.gen_hop"><code class="docutils literal notranslate"><span class="pre">gen_hop()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.gen_vind"><code class="docutils literal notranslate"><span class="pre">gen_vind()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.get_hcore"><code class="docutils literal notranslate"><span class="pre">get_hcore()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.get_ovlp"><code class="docutils literal notranslate"><span class="pre">get_ovlp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.hess_elec"><code class="docutils literal notranslate"><span class="pre">hess_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.hess_nuc"><code class="docutils literal notranslate"><span class="pre">hess_nuc()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.make_h1"><code class="docutils literal notranslate"><span class="pre">make_h1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">partial_hess_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rhf.solve_mo1"><code class="docutils literal notranslate"><span class="pre">solve_mo1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.rks">pyscf.hessian.rks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.Hessian"><code class="docutils literal notranslate"><span class="pre">Hessian</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.Hessian.hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.Hessian.make_h1"><code class="docutils literal notranslate"><span class="pre">Hessian.make_h1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.Hessian.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.partial_hess_elec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.contract_d2rhodAdB_d2gammadAdB"><code class="docutils literal notranslate"><span class="pre">contract_d2rhodAdB_d2gammadAdB()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_d2mu_dr2"><code class="docutils literal notranslate"><span class="pre">get_d2mu_dr2()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_d2rho_dAdr_grid_response"><code class="docutils literal notranslate"><span class="pre">get_d2rho_dAdr_grid_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_d2rho_dAdr_orbital_response"><code class="docutils literal notranslate"><span class="pre">get_d2rho_dAdr_orbital_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_d2rhodAdB_d2gammadAdB"><code class="docutils literal notranslate"><span class="pre">get_d2rhodAdB_d2gammadAdB()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_d3mu_dr3"><code class="docutils literal notranslate"><span class="pre">get_d3mu_dr3()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_drhodA_dgammadA_grid_response"><code class="docutils literal notranslate"><span class="pre">get_drhodA_dgammadA_grid_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_drhodA_dgammadA_orbital_response"><code class="docutils literal notranslate"><span class="pre">get_drhodA_dgammadA_orbital_response()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_dweight_dA"><code class="docutils literal notranslate"><span class="pre">get_dweight_dA()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.get_vnlc_resp"><code class="docutils literal notranslate"><span class="pre">get_vnlc_resp()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.make_h1"><code class="docutils literal notranslate"><span class="pre">make_h1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.rks.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">partial_hess_elec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.thermo">pyscf.hessian.thermo module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.dump_normal_mode"><code class="docutils literal notranslate"><span class="pre">dump_normal_mode()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.dump_thermo"><code class="docutils literal notranslate"><span class="pre">dump_thermo()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.harmonic_analysis"><code class="docutils literal notranslate"><span class="pre">harmonic_analysis()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.rotation_const"><code class="docutils literal notranslate"><span class="pre">rotation_const()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.rotational_symmetry_number"><code class="docutils literal notranslate"><span class="pre">rotational_symmetry_number()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.thermo.thermo"><code class="docutils literal notranslate"><span class="pre">thermo()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.uhf">pyscf.hessian.uhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian"><code class="docutils literal notranslate"><span class="pre">Hessian</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian.gen_hop"><code class="docutils literal notranslate"><span class="pre">Hessian.gen_hop()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian.hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian.make_h1"><code class="docutils literal notranslate"><span class="pre">Hessian.make_h1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.partial_hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.Hessian.solve_mo1"><code class="docutils literal notranslate"><span class="pre">Hessian.solve_mo1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.gen_hop"><code class="docutils literal notranslate"><span class="pre">gen_hop()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.gen_vind"><code class="docutils literal notranslate"><span class="pre">gen_vind()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.hess_elec"><code class="docutils literal notranslate"><span class="pre">hess_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.make_h1"><code class="docutils literal notranslate"><span class="pre">make_h1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">partial_hess_elec()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uhf.solve_mo1"><code class="docutils literal notranslate"><span class="pre">solve_mo1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian.uks">pyscf.hessian.uks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian"><code class="docutils literal notranslate"><span class="pre">Hessian</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian.gen_hop"><code class="docutils literal notranslate"><span class="pre">Hessian.gen_hop()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian.hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian.make_h1"><code class="docutils literal notranslate"><span class="pre">Hessian.make_h1()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">Hessian.partial_hess_elec()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.Hessian.solve_mo1"><code class="docutils literal notranslate"><span class="pre">Hessian.solve_mo1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.make_h1"><code class="docutils literal notranslate"><span class="pre">make_h1()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.hessian.uks.partial_hess_elec"><code class="docutils literal notranslate"><span class="pre">partial_hess_elec()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.hessian">Module contents</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/pyscf_api_docs/pyscf.hessian.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

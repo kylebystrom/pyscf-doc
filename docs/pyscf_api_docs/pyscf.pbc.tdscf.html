@@ -1,0 +1,1625 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pyscf.pbc.tdscf package &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pyscf_api_docs/pyscf.pbc.tdscf';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf.adc.html">pyscf.adc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.agf2.html">pyscf.agf2 package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ao2mo.html">pyscf.ao2mo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.cc.html">pyscf.cc package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.ci.html">pyscf.ci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.data.html">pyscf.data package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.df.html">pyscf.df package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.grad.html">pyscf.df.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.df.hessian.html">pyscf.df.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.dft.html">pyscf.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.dft.xc.html">pyscf.dft.xc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.eph.html">pyscf.eph package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.fci.html">pyscf.fci package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.geomopt.html">pyscf.geomopt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.grad.html">pyscf.grad package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.gto.html">pyscf.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.gto.basis.html">pyscf.gto.basis package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.gto.basis.dyall-basis.html">pyscf.gto.basis.dyall-basis package</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.gw.html">pyscf.gw package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.hessian.html">pyscf.hessian package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lib.html">pyscf.lib package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.lo.html">pyscf.lo package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcpdft.html">pyscf.mcpdft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mcscf.html">pyscf.mcscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mp.html">pyscf.mp package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.mrpt.html">pyscf.mrpt package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.nac.html">pyscf.nac package</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="pyscf.pbc.html">pyscf.pbc package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.adc.html">pyscf.pbc.adc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ao2mo.html">pyscf.pbc.ao2mo package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.cc.html">pyscf.pbc.cc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.ci.html">pyscf.pbc.ci package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.df.html">pyscf.pbc.df package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.dft.html">pyscf.pbc.dft package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.dft.multigrid.html">pyscf.pbc.dft.multigrid package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.eph.html">pyscf.pbc.eph package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.geomopt.html">pyscf.pbc.geomopt package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.grad.html">pyscf.pbc.grad package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="pyscf.pbc.gto.html">pyscf.pbc.gto package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.basis.html">pyscf.pbc.gto.basis package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pyscf.pbc.gto.pseudo.html">pyscf.pbc.gto.pseudo package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.gw.html">pyscf.pbc.gw package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.lib.html">pyscf.pbc.lib package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mp.html">pyscf.pbc.mp package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpicc.html">pyscf.pbc.mpicc package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.mpitools.html">pyscf.pbc.mpitools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.scf.html">pyscf.pbc.scf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.symm.html">pyscf.pbc.symm package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tddft.html">pyscf.pbc.tddft package</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyscf.pbc.tdscf package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.tools.html">pyscf.pbc.tools package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.pbc.x2c.html">pyscf.pbc.x2c package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.qmmm.html">pyscf.qmmm package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.qmmm.pbc.html">pyscf.qmmm.pbc package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.scf.html">pyscf.scf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.sgx.html">pyscf.sgx package</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pyscf.solvent.html">pyscf.solvent package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.grad.html">pyscf.solvent.grad package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyscf.solvent.hessian.html">pyscf.solvent.hessian package</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.soscf.html">pyscf.soscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.symm.html">pyscf.symm package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tddft.html">pyscf.tddft package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tdscf.html">pyscf.tdscf package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.tools.html">pyscf.tools package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyscf.x2c.html">pyscf.x2c package</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.pbc.tdscf package</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="pyscf-pbc-tdscf-package">
+<h1>pyscf.pbc.tdscf package<a class="headerlink" href="#pyscf-pbc-tdscf-package" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-pyscf.pbc.tdscf.krhf">
+<span id="pyscf-pbc-tdscf-krhf-module"></span><h2>pyscf.pbc.tdscf.krhf module<a class="headerlink" href="#module-pyscf.pbc.tdscf.krhf" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.CIS">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">CIS</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.CIS" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDA" title="pyscf.pbc.tdscf.krhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">KTDA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDA" title="pyscf.pbc.tdscf.krhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">KTDBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#KTDBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDBase" title="pyscf.pbc.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><dl class="simple">
+<dt>kshift_lst<span class="classifier">list of integers</span></dt><dd><p>Each element in the list is the index of the k-point that
+represents the transition between k-points in the excitation
+coefficients. For excitation amplitude T_{ai}[k] at point k,
+the kshift connects orbital i at k and orbital a at k+kshift</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDBase.check_sanity">
+<span class="sig-name descname"><span class="pre">check_sanity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#KTDBase.check_sanity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDBase.check_sanity" title="Link to this definition">#</a></dt>
+<dd><p>Check input of class/object attributes, check whether a class method is
+overwritten.  It does not check the attributes which are prefixed with
+“_”.  The
+return value of method set is the object itself.  This allows a series
+of functions/methods to be executed in pipe.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDBase.conv_tol">
+<span class="sig-name descname"><span class="pre">conv_tol</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0001</span></em><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDBase.conv_tol" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDBase.dump_flags">
+<span class="sig-name descname"><span class="pre">dump_flags</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#KTDBase.dump_flags"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDBase.dump_flags" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDBase.get_nto">
+<span class="sig-name descname"><span class="pre">get_nto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDBase.get_nto" title="Link to this definition">#</a></dt>
+<dd><p>Natural transition orbital analysis.</p>
+<p>The natural transition density matrix between ground state and excited
+state <span class="math notranslate nohighlight">\(Tia = \langle \Psi_{ex} | i a^\dagger | \Psi_0 \rangle\)</span> can
+be transformed to diagonal form through SVD
+<span class="math notranslate nohighlight">\(T = O \sqrt{\lambda} V^\dagger\)</span>. O and V are occupied and virtual
+natural transition orbitals. The diagonal elements <span class="math notranslate nohighlight">\(\lambda\)</span> are the
+weights of the occupied-virtual orbital pair in the excitation.</p>
+<p>Ref: Martin, R. L., JCP, 118, 4775-4777</p>
+<p>Note in the TDHF/TDDFT calculations, the excitation part (X) is
+interpreted as the CIS coefficients and normalized to 1. The de-excitation
+part (Y) is ignored.</p>
+<dl>
+<dt>Args:</dt><dd><p>tdobj : TDA, or TDHF, or TDDFT object</p>
+<dl class="simple">
+<dt>state<span class="classifier">int</span></dt><dd><p>Excited state ID.  state = 1 means the first excited state.
+If state &lt; 0, state ID is counted from the last excited state.</p>
+</dd>
+</dl>
+</dd>
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>threshold<span class="classifier">float</span></dt><dd><p>Above which the NTO coefficients will be printed in the output.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A list (weights, NTOs).  NTOs are natural orbitals represented in AO
+basis. The first N_occ NTOs are occupied NTOs and the rest are virtual
+NTOs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.KTDHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">KTDHF</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.KTDHF" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDHF" title="pyscf.pbc.tdscf.krhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDHF" title="pyscf.pbc.tdscf.krhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.KTDBase" title="pyscf.pbc.tdscf.krhf.KTDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">KTDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDA.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDA.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDA.gen_vind" title="Link to this definition">#</a></dt>
+<dd><p>Compute Ax</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDA.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDA.get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDA.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDA.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDA.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDA.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>x0: list of init guess arrays for each k-shift specified in <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.kshift_lst</span></code></dt><dd><p>[x0_1, x0_2, …, x0_nshift]</p>
+</dd>
+</dl>
+<p>x0_i ~ (nstates, nkpts*nocc*nvir)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">TDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.KTDBase" title="pyscf.pbc.tdscf.krhf.KTDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">KTDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDHF.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF.gen_vind" title="Link to this definition">#</a></dt>
+<dd><p>[ A   B ][X]
+[-B* -A*][Y]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDHF.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF.get_precond">
+<span class="sig-name descname"><span class="pre">get_precond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdiag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF.get_precond" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.TDHF.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#TDHF.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.TDHF.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krhf.get_ab">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krhf.</span></span><span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krhf.html#get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krhf.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.krks">
+<span id="pyscf-pbc-tdscf-krks-module"></span><h2>pyscf.pbc.tdscf.krks module<a class="headerlink" href="#module-pyscf.pbc.tdscf.krks" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.KTDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krks.</span></span><span class="sig-name descname"><span class="pre">KTDA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krks.KTDA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krks.TDA" title="pyscf.pbc.tdscf.krks.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.KTDDFT">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krks.</span></span><span class="sig-name descname"><span class="pre">KTDDFT</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krks.KTDDFT" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krks.TDDFT" title="pyscf.pbc.tdscf.krks.TDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krks.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.krks.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.krks.TDDFT" title="pyscf.pbc.tdscf.krks.TDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krks.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krks.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krks.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDA" title="pyscf.pbc.tdscf.krhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krks.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krks.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+<dl>
+<dt>Args:</dt><dd><dl class="simple">
+<dt>x0: list of init guess arrays for each k-shift specified in <code class="xref py py-attr docutils literal notranslate"><span class="pre">self.kshift_lst</span></code></dt><dd><p>[x0_1, x0_2, …, x0_nshift]</p>
+</dd>
+</dl>
+<p>x0_i ~ (nstates, nkpts*nocc*nvir)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.TDDFT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.krks.</span></span><span class="sig-name descname"><span class="pre">TDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krks.html#TDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krks.TDDFT" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.TDHF" title="pyscf.pbc.tdscf.krhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.krks.TDDFT.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/krks.html#TDDFT.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.krks.TDDFT.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.kuhf">
+<span id="pyscf-pbc-tdscf-kuhf-module"></span><h2>pyscf.pbc.tdscf.kuhf module<a class="headerlink" href="#module-pyscf.pbc.tdscf.kuhf" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.CIS">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">CIS</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.CIS" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDA" title="pyscf.pbc.tdscf.kuhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.KTDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">KTDA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.KTDA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDA" title="pyscf.pbc.tdscf.kuhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.KTDHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">KTDHF</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.KTDHF" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDHF" title="pyscf.pbc.tdscf.kuhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDHF" title="pyscf.pbc.tdscf.kuhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.KTDBase" title="pyscf.pbc.tdscf.krhf.KTDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">KTDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDA.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDA.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDA.gen_vind" title="Link to this definition">#</a></dt>
+<dd><p>Compute Ax</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDA.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDA.get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDA.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDA.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDA.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDA.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">TDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.krhf.KTDBase" title="pyscf.pbc.tdscf.krhf.KTDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">KTDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDHF.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDHF.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF.get_precond">
+<span class="sig-name descname"><span class="pre">get_precond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hdiag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_precond" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.TDHF.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#TDHF.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.TDHF.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuhf.get_ab">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuhf.</span></span><span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuhf.html#get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuhf.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>kshift<span class="classifier">integer</span></dt><dd><p>The index of the k-point that represents the transition between
+k-points in the excitation coefficients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.kuks">
+<span id="pyscf-pbc-tdscf-kuks-module"></span><h2>pyscf.pbc.tdscf.kuks module<a class="headerlink" href="#module-pyscf.pbc.tdscf.kuks" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.KTDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuks.</span></span><span class="sig-name descname"><span class="pre">KTDA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.KTDA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuks.TDA" title="pyscf.pbc.tdscf.kuks.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.KTDDFT">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuks.</span></span><span class="sig-name descname"><span class="pre">KTDDFT</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.KTDDFT" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuks.TDDFT" title="pyscf.pbc.tdscf.kuks.TDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuks.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.kuks.TDDFT" title="pyscf.pbc.tdscf.kuks.TDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuks.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuks.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDA" title="pyscf.pbc.tdscf.kuhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuks.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.TDDFT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.kuks.</span></span><span class="sig-name descname"><span class="pre">TDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kshift_lst</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuks.html#TDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.TDDFT" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.kuhf.TDHF" title="pyscf.pbc.tdscf.kuhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.kuks.TDDFT.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/kuks.html#TDDFT.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.kuks.TDDFT.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.rhf">
+<span id="pyscf-pbc-tdscf-rhf-module"></span><h2>pyscf.pbc.tdscf.rhf module<a class="headerlink" href="#module-pyscf.pbc.tdscf.rhf" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.CIS">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">CIS</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.CIS" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDA" title="pyscf.pbc.tdscf.rhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDHF" title="pyscf.pbc.tdscf.rhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDBase" title="pyscf.pbc.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDA.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDA.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDA.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDA.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/rhf.html#TDA.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDA.get_init_guess" title="Link to this definition">#</a></dt>
+<dd><p>Generate initial guess for TDA</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>nstates<span class="classifier">int</span></dt><dd><p>The number of initial guess vectors.</p>
+</dd>
+<dt>wfnsym<span class="classifier">int or str</span></dt><dd><p>The irrep label or ID of the wavefunction.</p>
+</dd>
+<dt>return_symmetry<span class="classifier">bool</span></dt><dd><p>Whether to return symmetry labels for initial guess vectors.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/rhf.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">TDBase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDBase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="pyscf.tdscf.html#pyscf.tdscf.rhf.TDBase" title="pyscf.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.analyze">
+<span class="sig-name descname"><span class="pre">analyze</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.analyze" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDBase.get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.get_nto">
+<span class="sig-name descname"><span class="pre">get_nto</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.get_nto" title="Link to this definition">#</a></dt>
+<dd><p>Natural transition orbital analysis.</p>
+<p>The natural transition density matrix between ground state and excited
+state <span class="math notranslate nohighlight">\(Tia = \langle \Psi_{ex} | i a^\dagger | \Psi_0 \rangle\)</span> can
+be transformed to diagonal form through SVD
+<span class="math notranslate nohighlight">\(T = O \sqrt{\lambda} V^\dagger\)</span>. O and V are occupied and virtual
+natural transition orbitals. The diagonal elements <span class="math notranslate nohighlight">\(\lambda\)</span> are the
+weights of the occupied-virtual orbital pair in the excitation.</p>
+<p>Ref: Martin, R. L., JCP, 118, 4775-4777</p>
+<p>Note in the TDHF/TDDFT calculations, the excitation part (X) is
+interpreted as the CIS coefficients and normalized to 1. The de-excitation
+part (Y) is ignored.</p>
+<dl>
+<dt>Args:</dt><dd><p>tdobj : TDA, or TDHF, or TDDFT object</p>
+<dl class="simple">
+<dt>state<span class="classifier">int</span></dt><dd><p>Excited state ID.  state = 1 means the first excited state.
+If state &lt; 0, state ID is counted from the last excited state.</p>
+</dd>
+</dl>
+</dd>
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>threshold<span class="classifier">float</span></dt><dd><p>Above which the NTO coefficients will be printed in the output.</p>
+</dd>
+</dl>
+</dd>
+<dt>Returns:</dt><dd><p>A list (weights, NTOs).  NTOs are natural orbitals represented in AO
+basis. The first N_occ NTOs are occupied NTOs and the rest are virtual
+NTOs.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.nuc_grad_method">
+<span class="sig-name descname"><span class="pre">nuc_grad_method</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDBase.nuc_grad_method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.nuc_grad_method" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.oscillator_strength">
+<span class="sig-name descname"><span class="pre">oscillator_strength</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.oscillator_strength" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_dipole">
+<span class="sig-name descname"><span class="pre">transition_dipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_dipole" title="Link to this definition">#</a></dt>
+<dd><p>Transition dipole moments in the length gauge</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_dipole">
+<span class="sig-name descname"><span class="pre">transition_magnetic_dipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_dipole" title="Link to this definition">#</a></dt>
+<dd><p>Transition magnetic dipole moments (imaginary part only)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_quadrupole">
+<span class="sig-name descname"><span class="pre">transition_magnetic_quadrupole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_quadrupole" title="Link to this definition">#</a></dt>
+<dd><p>Transition magnetic quadrupole moments (imaginary part only)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_octupole">
+<span class="sig-name descname"><span class="pre">transition_octupole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_octupole" title="Link to this definition">#</a></dt>
+<dd><p>Transition octupole moments in the length gauge</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_quadrupole">
+<span class="sig-name descname"><span class="pre">transition_quadrupole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_quadrupole" title="Link to this definition">#</a></dt>
+<dd><p>Transition quadrupole moments in the length gauge</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_dipole">
+<span class="sig-name descname"><span class="pre">transition_velocity_dipole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_dipole" title="Link to this definition">#</a></dt>
+<dd><p>Transition dipole moments in the velocity gauge (imaginary part only)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_octupole">
+<span class="sig-name descname"><span class="pre">transition_velocity_octupole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_octupole" title="Link to this definition">#</a></dt>
+<dd><p>Transition octupole moments in the velocity gauge (imaginary part only)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_quadrupole">
+<span class="sig-name descname"><span class="pre">transition_velocity_quadrupole</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_quadrupole" title="Link to this definition">#</a></dt>
+<dd><p>Transition quadrupole moments in the velocity gauge (imaginary part only)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDHF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">TDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDHF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDBase" title="pyscf.pbc.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDHF.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDHF.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDHF.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/rhf.html#TDHF.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDHF.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDHF.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/rhf.html#TDHF.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDHF.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.TDRHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">TDRHF</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.TDRHF" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDHF" title="pyscf.pbc.tdscf.rhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rhf.get_ab">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rhf.</span></span><span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rhf.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.rks">
+<span id="pyscf-pbc-tdscf-rks-module"></span><h2>pyscf.pbc.tdscf.rks module<a class="headerlink" href="#module-pyscf.pbc.tdscf.rks" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.CasidaTDDFT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rks.</span></span><span class="sig-name descname"><span class="pre">CasidaTDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rks.html#CasidaTDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDHF" title="pyscf.pbc.tdscf.rhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.CasidaTDDFT.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.CasidaTDDFT.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.get_init_guess" title="Link to this definition">#</a></dt>
+<dd><p>Generate initial guess for TDA</p>
+<dl class="simple">
+<dt>Kwargs:</dt><dd><dl class="simple">
+<dt>nstates<span class="classifier">int</span></dt><dd><p>The number of initial guess vectors.</p>
+</dd>
+<dt>wfnsym<span class="classifier">int or str</span></dt><dd><p>The irrep label or ID of the wavefunction.</p>
+</dd>
+<dt>return_symmetry<span class="classifier">bool</span></dt><dd><p>Whether to return symmetry labels for initial guess vectors.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.CasidaTDDFT.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/rks.html#CasidaTDDFT.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDDFT diagonalization solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.TDDFTNoHybrid">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rks.</span></span><span class="sig-name descname"><span class="pre">TDDFTNoHybrid</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.rks.TDDFTNoHybrid" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT" title="pyscf.pbc.tdscf.rks.CasidaTDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">CasidaTDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.rks.tddft">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.rks.</span></span><span class="sig-name descname"><span class="pre">tddft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rks.html#tddft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.rks.tddft" title="Link to this definition">#</a></dt>
+<dd><p>Driver to create TDDFT or CasidaTDDFT object</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.uhf">
+<span id="pyscf-pbc-tdscf-uhf-module"></span><h2>pyscf.pbc.tdscf.uhf module<a class="headerlink" href="#module-pyscf.pbc.tdscf.uhf" title="Link to this heading">#</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.CIS">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">CIS</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.CIS" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.uhf.TDA" title="pyscf.pbc.tdscf.uhf.TDA"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDA</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.RPA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">RPA</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.RPA" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.uhf.TDHF" title="pyscf.pbc.tdscf.uhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uhf.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDBase" title="pyscf.pbc.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/rhf.html#TDA.gen_vind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uhf.html#TDA.get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Get boolean mask for the unrestricted reference orbitals.</p>
+<p>In the returned boolean (mask) array of frozen orbital indices, the
+element is False if it corresponds to the frozen orbital.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/uhf.html#TDA.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/uhf.html#TDA.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDA diagonalization solver</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDA.singlet">
+<span class="sig-name descname"><span class="pre">singlet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDA.singlet" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">TDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uhf.html#TDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.rhf.TDBase" title="pyscf.pbc.tdscf.rhf.TDBase"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDBase</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.get_ab">
+<span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Ref: Chem Phys Lett, 256, 454</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.get_frozen_mask">
+<span class="sig-name descname"><span class="pre">get_frozen_mask</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.get_frozen_mask" title="Link to this definition">#</a></dt>
+<dd><p>Get boolean mask for the unrestricted reference orbitals.</p>
+<p>In the returned boolean (mask) array of frozen orbital indices, the
+element is False if it corresponds to the frozen orbital.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/uhf.html#TDHF.get_init_guess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/uhf.html#TDHF.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDHF diagonalization with non-Hermitian eigenvalue solver</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDHF.singlet">
+<span class="sig-name descname"><span class="pre">singlet</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDHF.singlet" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.TDUHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">TDUHF</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.TDUHF" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.uhf.TDHF" title="pyscf.pbc.tdscf.uhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uhf.get_ab">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uhf.</span></span><span class="sig-name descname"><span class="pre">get_ab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uhf.html#get_ab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uhf.get_ab" title="Link to this definition">#</a></dt>
+<dd><p>A and B matrices for TDDFT response function.</p>
+<p>A[i,a,j,b] = delta_{ab}delta_{ij}(E_a - E_i) + (ai||jb)
+B[i,a,j,b] = (ai||bj)</p>
+<p>Spin symmetry is considered in the returned A, B lists.  List A has three
+items: (A_aaaa, A_aabb, A_bbbb). A_bbaa = A_aabb.transpose(2,3,0,1).
+B has three items: (B_aaaa, B_aabb, B_bbbb).
+B_bbaa = B_aabb.transpose(2,3,0,1).</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf.uks">
+<span id="pyscf-pbc-tdscf-uks-module"></span><h2>pyscf.pbc.tdscf.uks module<a class="headerlink" href="#module-pyscf.pbc.tdscf.uks" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.CasidaTDDFT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uks.</span></span><span class="sig-name descname"><span class="pre">CasidaTDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uks.html#CasidaTDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pyscf.pbc.tdscf.uhf.TDHF" title="pyscf.pbc.tdscf.uhf.TDHF"><code class="xref py py-class docutils literal notranslate"><span class="pre">TDHF</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.CasidaTDDFT.gen_vind">
+<span class="sig-name descname"><span class="pre">gen_vind</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.gen_vind" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.CasidaTDDFT.get_init_guess">
+<span class="sig-name descname"><span class="pre">get_init_guess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wfnsym</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_symmetry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.get_init_guess" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.CasidaTDDFT.kernel">
+<span class="sig-name descname"><span class="pre">kernel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nstates</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/tdscf/uks.html#CasidaTDDFT.kernel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.kernel" title="Link to this definition">#</a></dt>
+<dd><p>TDDFT diagonalization solver</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.TDDFTNoHybrid">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uks.</span></span><span class="sig-name descname"><span class="pre">TDDFTNoHybrid</span></span><a class="headerlink" href="#pyscf.pbc.tdscf.uks.TDDFTNoHybrid" title="Link to this definition">#</a></dt>
+<dd><p>alias of <a class="reference internal" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT" title="pyscf.pbc.tdscf.uks.CasidaTDDFT"><code class="xref py py-class docutils literal notranslate"><span class="pre">CasidaTDDFT</span></code></a></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.uks.tddft">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.uks.</span></span><span class="sig-name descname"><span class="pre">tddft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frozen</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf/uks.html#tddft"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.uks.tddft" title="Link to this definition">#</a></dt>
+<dd><p>Driver to create TDDFT or CasidaTDDFT object</p>
+</dd></dl>
+
+</section>
+<section id="module-pyscf.pbc.tdscf">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pyscf.pbc.tdscf" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.KTD">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">KTD</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyscf.pbc.tdscf.KTD" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.KTDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">KTDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#KTDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.KTDA" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.KTDDFT">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">KTDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#KTDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.KTDDFT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.KTDHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">KTDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#KTDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.KTDHF" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.TDA">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">TDA</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#TDA"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.TDA" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.TDDFT">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">TDDFT</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#TDDFT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.TDDFT" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyscf.pbc.tdscf.TDHF">
+<span class="sig-prename descclassname"><span class="pre">pyscf.pbc.tdscf.</span></span><span class="sig-name descname"><span class="pre">TDHF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mf</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyscf/pbc/tdscf.html#TDHF"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyscf.pbc.tdscf.TDHF" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.krhf">pyscf.pbc.tdscf.krhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.CIS"><code class="docutils literal notranslate"><span class="pre">CIS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDA"><code class="docutils literal notranslate"><span class="pre">KTDA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDBase"><code class="docutils literal notranslate"><span class="pre">KTDBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDBase.check_sanity"><code class="docutils literal notranslate"><span class="pre">KTDBase.check_sanity()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDBase.conv_tol"><code class="docutils literal notranslate"><span class="pre">KTDBase.conv_tol</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDBase.dump_flags"><code class="docutils literal notranslate"><span class="pre">KTDBase.dump_flags()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDBase.get_nto"><code class="docutils literal notranslate"><span class="pre">KTDBase.get_nto()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.KTDHF"><code class="docutils literal notranslate"><span class="pre">KTDHF</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDA.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDA.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDA.get_ab"><code class="docutils literal notranslate"><span class="pre">TDA.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDA.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDA.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF"><code class="docutils literal notranslate"><span class="pre">TDHF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDHF.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF.get_ab"><code class="docutils literal notranslate"><span class="pre">TDHF.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDHF.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF.get_precond"><code class="docutils literal notranslate"><span class="pre">TDHF.get_precond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.TDHF.kernel"><code class="docutils literal notranslate"><span class="pre">TDHF.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krhf.get_ab"><code class="docutils literal notranslate"><span class="pre">get_ab()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.krks">pyscf.pbc.tdscf.krks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.KTDA"><code class="docutils literal notranslate"><span class="pre">KTDA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.KTDDFT"><code class="docutils literal notranslate"><span class="pre">KTDDFT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.TDDFT"><code class="docutils literal notranslate"><span class="pre">TDDFT</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.krks.TDDFT.kernel"><code class="docutils literal notranslate"><span class="pre">TDDFT.kernel()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.kuhf">pyscf.pbc.tdscf.kuhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.CIS"><code class="docutils literal notranslate"><span class="pre">CIS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.KTDA"><code class="docutils literal notranslate"><span class="pre">KTDA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.KTDHF"><code class="docutils literal notranslate"><span class="pre">KTDHF</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDA.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDA.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDA.get_ab"><code class="docutils literal notranslate"><span class="pre">TDA.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDA.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDA.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF"><code class="docutils literal notranslate"><span class="pre">TDHF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDHF.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_ab"><code class="docutils literal notranslate"><span class="pre">TDHF.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDHF.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF.get_precond"><code class="docutils literal notranslate"><span class="pre">TDHF.get_precond()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.TDHF.kernel"><code class="docutils literal notranslate"><span class="pre">TDHF.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuhf.get_ab"><code class="docutils literal notranslate"><span class="pre">get_ab()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.kuks">pyscf.pbc.tdscf.kuks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.KTDA"><code class="docutils literal notranslate"><span class="pre">KTDA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.KTDDFT"><code class="docutils literal notranslate"><span class="pre">KTDDFT</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.TDDFT"><code class="docutils literal notranslate"><span class="pre">TDDFT</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.kuks.TDDFT.kernel"><code class="docutils literal notranslate"><span class="pre">TDDFT.kernel()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.rhf">pyscf.pbc.tdscf.rhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.CIS"><code class="docutils literal notranslate"><span class="pre">CIS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDA.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDA.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDA.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDA.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase"><code class="docutils literal notranslate"><span class="pre">TDBase</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.analyze"><code class="docutils literal notranslate"><span class="pre">TDBase.analyze()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.get_ab"><code class="docutils literal notranslate"><span class="pre">TDBase.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.get_nto"><code class="docutils literal notranslate"><span class="pre">TDBase.get_nto()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.nuc_grad_method"><code class="docutils literal notranslate"><span class="pre">TDBase.nuc_grad_method()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.oscillator_strength"><code class="docutils literal notranslate"><span class="pre">TDBase.oscillator_strength()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_dipole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_dipole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_dipole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_magnetic_dipole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_magnetic_quadrupole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_magnetic_quadrupole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_octupole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_octupole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_quadrupole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_quadrupole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_dipole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_velocity_dipole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_octupole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_velocity_octupole()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDBase.transition_velocity_quadrupole"><code class="docutils literal notranslate"><span class="pre">TDBase.transition_velocity_quadrupole()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDHF"><code class="docutils literal notranslate"><span class="pre">TDHF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDHF.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDHF.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDHF.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDHF.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDHF.kernel"><code class="docutils literal notranslate"><span class="pre">TDHF.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.TDRHF"><code class="docutils literal notranslate"><span class="pre">TDRHF</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rhf.get_ab"><code class="docutils literal notranslate"><span class="pre">get_ab()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.rks">pyscf.pbc.tdscf.rks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.gen_vind"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.get_init_guess"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.CasidaTDDFT.kernel"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.TDDFTNoHybrid"><code class="docutils literal notranslate"><span class="pre">TDDFTNoHybrid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.rks.tddft"><code class="docutils literal notranslate"><span class="pre">tddft()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.uhf">pyscf.pbc.tdscf.uhf module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.CIS"><code class="docutils literal notranslate"><span class="pre">CIS</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.RPA"><code class="docutils literal notranslate"><span class="pre">RPA</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA"><code class="docutils literal notranslate"><span class="pre">TDA</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDA.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.get_ab"><code class="docutils literal notranslate"><span class="pre">TDA.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">TDA.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDA.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.kernel"><code class="docutils literal notranslate"><span class="pre">TDA.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDA.singlet"><code class="docutils literal notranslate"><span class="pre">TDA.singlet</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF"><code class="docutils literal notranslate"><span class="pre">TDHF</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.gen_vind"><code class="docutils literal notranslate"><span class="pre">TDHF.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.get_ab"><code class="docutils literal notranslate"><span class="pre">TDHF.get_ab()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.get_frozen_mask"><code class="docutils literal notranslate"><span class="pre">TDHF.get_frozen_mask()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.get_init_guess"><code class="docutils literal notranslate"><span class="pre">TDHF.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.kernel"><code class="docutils literal notranslate"><span class="pre">TDHF.kernel()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDHF.singlet"><code class="docutils literal notranslate"><span class="pre">TDHF.singlet</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.TDUHF"><code class="docutils literal notranslate"><span class="pre">TDUHF</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uhf.get_ab"><code class="docutils literal notranslate"><span class="pre">get_ab()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf.uks">pyscf.pbc.tdscf.uks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.gen_vind"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.gen_vind()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.get_init_guess"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.get_init_guess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.CasidaTDDFT.kernel"><code class="docutils literal notranslate"><span class="pre">CasidaTDDFT.kernel()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.TDDFTNoHybrid"><code class="docutils literal notranslate"><span class="pre">TDDFTNoHybrid</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.uks.tddft"><code class="docutils literal notranslate"><span class="pre">tddft()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-pyscf.pbc.tdscf">Module contents</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.KTD"><code class="docutils literal notranslate"><span class="pre">KTD()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.KTDA"><code class="docutils literal notranslate"><span class="pre">KTDA()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.KTDDFT"><code class="docutils literal notranslate"><span class="pre">KTDDFT()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.KTDHF"><code class="docutils literal notranslate"><span class="pre">KTDHF()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.TDA"><code class="docutils literal notranslate"><span class="pre">TDA()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.TDDFT"><code class="docutils literal notranslate"><span class="pre">TDDFT()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyscf.pbc.tdscf.TDHF"><code class="docutils literal notranslate"><span class="pre">TDHF()</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/pyscf_api_docs/pyscf.pbc.tdscf.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

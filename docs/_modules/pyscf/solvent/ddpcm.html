@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.solvent.ddpcm &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/solvent/ddpcm';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../solvent.html" class="nav-link">pyscf.solvent</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.solvent.ddpcm</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.solvent.ddpcm</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2014-2020 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Qiming Sun &lt;osirpt.sun@gmail.com&gt;</span>
+<span class="c1">#</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">domain decomposition PCM (In testing)</span>
+
+<span class="sd">See also</span>
+<span class="sd">JCP, 144, 054101</span>
+<span class="sd">JCP, 144, 160901</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf.lib</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">gto</span>
+<span class="kn">from</span> <span class="nn">pyscf.dft</span> <span class="kn">import</span> <span class="n">gen_grid</span>
+<span class="kn">from</span> <span class="nn">pyscf.data</span> <span class="kn">import</span> <span class="n">radii</span>
+<span class="kn">from</span> <span class="nn">pyscf.solvent</span> <span class="kn">import</span> <span class="n">ddcosmo</span>
+<span class="kn">from</span> <span class="nn">pyscf.symm</span> <span class="kn">import</span> <span class="n">sph</span>
+<span class="kn">from</span> <span class="nn">pyscf.solvent</span> <span class="kn">import</span> <span class="n">_attach_solvent</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Module ddPCM is under testing&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ddpcm_for_scf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddpcm_for_scf">[docs]</a>
+<span class="nd">@lib</span><span class="o">.</span><span class="n">with_doc</span><span class="p">(</span><span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_scf</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ddpcm_for_scf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">solvent_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_scf</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ddpcm_for_casscf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddpcm_for_casscf">[docs]</a>
+<span class="nd">@lib</span><span class="o">.</span><span class="n">with_doc</span><span class="p">(</span><span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_casscf</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ddpcm_for_casscf</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">solvent_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="s1">&#39;with_solvent&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">DDPCM</span><span class="p">):</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">_scf</span><span class="o">.</span><span class="n">with_solvent</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_casscf</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ddpcm_for_casci">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddpcm_for_casci">[docs]</a>
+<span class="nd">@lib</span><span class="o">.</span><span class="n">with_doc</span><span class="p">(</span><span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_casci</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ddpcm_for_casci</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">solvent_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="s1">&#39;with_solvent&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">DDPCM</span><span class="p">):</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">_scf</span><span class="o">.</span><span class="n">with_solvent</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">mc</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_casci</span><span class="p">(</span><span class="n">mc</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ddpcm_for_post_scf">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddpcm_for_post_scf">[docs]</a>
+<span class="nd">@lib</span><span class="o">.</span><span class="n">with_doc</span><span class="p">(</span><span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_post_scf</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">ddpcm_for_post_scf</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">solvent_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">_scf</span><span class="p">,</span> <span class="s1">&#39;with_solvent&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="n">DDPCM</span><span class="p">):</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">_scf</span><span class="o">.</span><span class="n">with_solvent</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">solvent_obj</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_post_scf</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">solvent_obj</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span></div>
+
+
+<span class="n">ddpcm_for_tdscf</span> <span class="o">=</span> <span class="n">_attach_solvent</span><span class="o">.</span><span class="n">_for_tdscf</span>
+
+
+<span class="c1"># Inject ddPCM to other methods</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">scf</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">mcscf</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">mp</span><span class="p">,</span> <span class="n">ci</span><span class="p">,</span> <span class="n">cc</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">tdscf</span>
+<span class="n">scf</span><span class="o">.</span><span class="n">hf</span><span class="o">.</span><span class="n">SCF</span><span class="o">.</span><span class="n">ddPCM</span>    <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">hf</span><span class="o">.</span><span class="n">SCF</span><span class="o">.</span><span class="n">DDPCM</span>    <span class="o">=</span> <span class="n">ddpcm_for_scf</span>
+<span class="n">mp</span><span class="o">.</span><span class="n">mp2</span><span class="o">.</span><span class="n">MP2</span><span class="o">.</span><span class="n">ddPCM</span>    <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">mp2</span><span class="o">.</span><span class="n">MP2</span><span class="o">.</span><span class="n">DDPCM</span>    <span class="o">=</span> <span class="n">ddpcm_for_post_scf</span>
+<span class="n">ci</span><span class="o">.</span><span class="n">cisd</span><span class="o">.</span><span class="n">CISD</span><span class="o">.</span><span class="n">ddPCM</span>  <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">cisd</span><span class="o">.</span><span class="n">CISD</span><span class="o">.</span><span class="n">DDPCM</span>  <span class="o">=</span> <span class="n">ddpcm_for_post_scf</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">ccsd</span><span class="o">.</span><span class="n">CCSDBase</span><span class="o">.</span><span class="n">ddPCM</span>  <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">ccsd</span><span class="o">.</span><span class="n">CCSDBase</span><span class="o">.</span><span class="n">DDPCM</span>  <span class="o">=</span> <span class="n">ddpcm_for_post_scf</span>
+<span class="n">tdscf</span><span class="o">.</span><span class="n">rhf</span><span class="o">.</span><span class="n">TDBase</span><span class="o">.</span><span class="n">ddPCM</span> <span class="o">=</span> <span class="n">tdscf</span><span class="o">.</span><span class="n">rhf</span><span class="o">.</span><span class="n">TDBase</span><span class="o">.</span><span class="n">DDPCM</span> <span class="o">=</span> <span class="n">ddpcm_for_tdscf</span>
+<span class="n">mcscf</span><span class="o">.</span><span class="n">casci</span><span class="o">.</span><span class="n">CASCI</span><span class="o">.</span><span class="n">ddPCM</span> <span class="o">=</span> <span class="n">mcscf</span><span class="o">.</span><span class="n">casci</span><span class="o">.</span><span class="n">CASCI</span><span class="o">.</span><span class="n">DDPCM</span> <span class="o">=</span> <span class="n">ddpcm_for_casci</span>
+<span class="n">mcscf</span><span class="o">.</span><span class="n">mc1step</span><span class="o">.</span><span class="n">CASSCF</span><span class="o">.</span><span class="n">ddPCM</span> <span class="o">=</span> <span class="n">mcscf</span><span class="o">.</span><span class="n">mc1step</span><span class="o">.</span><span class="n">CASSCF</span><span class="o">.</span><span class="n">DDPCM</span> <span class="o">=</span> <span class="n">ddpcm_for_casscf</span>
+
+<div class="viewcode-block" id="gen_ddpcm_solver">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.gen_ddpcm_solver">[docs]</a>
+<span class="k">def</span> <span class="nf">gen_ddpcm_solver</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">mol</span>
+    <span class="k">if</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pcmobj</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">with_non0tab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">natm</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">natm</span>
+    <span class="n">lmax</span> <span class="o">=</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">lmax</span>
+
+    <span class="n">r_vdw</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">get_atomic_radii</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">)</span>
+    <span class="n">coords_1sph</span><span class="p">,</span> <span class="n">weights_1sph</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_grids_one_sphere</span><span class="p">(</span><span class="n">pcmobj</span><span class="o">.</span><span class="n">lebedev_order</span><span class="p">)</span>
+    <span class="n">ylm_1sph</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">sph</span><span class="o">.</span><span class="n">real_sph_vec</span><span class="p">(</span><span class="n">coords_1sph</span><span class="p">,</span> <span class="n">lmax</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+    <span class="n">fi</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_fi</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">)</span>
+    <span class="n">ui</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">fi</span>
+    <span class="n">ui</span><span class="p">[</span><span class="n">ui</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">nexposed</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">nbury</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">on_shell</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">nexposed</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="s1">&#39;Num points exposed </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">nexposed</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="s1">&#39;Num points buried </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">nbury</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="s1">&#39;Num points on shell </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_shell</span><span class="p">)</span>
+
+    <span class="n">nlm</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">Lmat</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_L</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">fi</span><span class="p">)</span>
+    <span class="n">Lmat</span> <span class="o">=</span> <span class="n">Lmat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">Amat</span> <span class="o">=</span> <span class="n">make_A</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">ui</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fac</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="n">pcmobj</span><span class="o">.</span><span class="n">eps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">pcmobj</span><span class="o">.</span><span class="n">eps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">A_diele</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">+</span> <span class="n">fac</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">)</span>
+    <span class="n">A_inf</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">)</span>
+
+    <span class="n">cached_pol</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">cache_fake_multipoles</span><span class="p">(</span><span class="n">pcmobj</span><span class="o">.</span><span class="n">grids</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">lmax</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">gen_vind</span><span class="p">(</span><span class="n">dm</span><span class="p">):</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_phi</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_diele</span><span class="p">,</span> <span class="n">A_inf</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+
+        <span class="n">Xvec</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">phi</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">psi</span><span class="p">,</span> <span class="n">vmat</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_psi_vmat</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">grids</span><span class="p">,</span>
+                                          <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">cached_pol</span><span class="p">,</span> <span class="n">Xvec</span><span class="p">,</span> <span class="n">Lmat</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">dielectric</span> <span class="o">=</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">eps</span>
+        <span class="n">f_epsilon</span> <span class="o">=</span> <span class="p">(</span><span class="n">dielectric</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span><span class="o">/</span><span class="n">dielectric</span>
+        <span class="n">epcm</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">f_epsilon</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;jx,jx&#39;</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">Xvec</span><span class="p">)</span>
+        <span class="n">vpcm</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">f_epsilon</span> <span class="o">*</span> <span class="n">vmat</span>
+        <span class="k">return</span> <span class="n">epcm</span><span class="p">,</span> <span class="n">vpcm</span>
+    <span class="k">return</span> <span class="n">gen_vind</span></div>
+
+
+<div class="viewcode-block" id="energy">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.energy">[docs]</a>
+<span class="k">def</span> <span class="nf">energy</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">dm</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    ddPCM energy</span>
+<span class="sd">    Es = 1/2 f(eps) \int rho(r) W(r) dr</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">epcm</span> <span class="o">=</span> <span class="n">gen_ddpcm_solver</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">verbose</span><span class="p">)(</span><span class="n">dm</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">epcm</span></div>
+
+
+<div class="viewcode-block" id="regularize_xt">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.regularize_xt">[docs]</a>
+<span class="k">def</span> <span class="nf">regularize_xt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">eta</span><span class="p">):</span>
+    <span class="n">xt</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">inner</span> <span class="o">=</span> <span class="n">t</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="o">-</span><span class="n">eta</span>
+    <span class="n">on_shell</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">eta</span> <span class="o">&lt;</span> <span class="n">t</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">t</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">xt</span><span class="p">[</span><span class="n">inner</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">ti</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">on_shell</span><span class="p">]</span> <span class="o">-</span> <span class="n">eta</span><span class="o">*</span><span class="mf">.5</span>
+    <span class="c1"># JCP, 144, 054101</span>
+    <span class="n">xt</span><span class="p">[</span><span class="n">on_shell</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="n">eta</span><span class="o">**</span><span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">ti</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">ti</span><span class="o">-</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">eta</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">xt</span></div>
+
+
+<div class="viewcode-block" id="make_A">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.make_A">[docs]</a>
+<span class="k">def</span> <span class="nf">make_A</span><span class="p">(</span><span class="n">pcmobj</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">ui</span><span class="p">):</span>
+    <span class="c1"># Part of A matrix defined in JCP, 144, 054101, Eq (43), (44)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">mol</span>
+    <span class="n">natm</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">natm</span>
+    <span class="n">lmax</span> <span class="o">=</span> <span class="n">pcmobj</span><span class="o">.</span><span class="n">lmax</span>
+    <span class="c1"># eta = pcmobj.eta</span>
+    <span class="n">nlm</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">coords_1sph</span><span class="p">,</span> <span class="n">weights_1sph</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_grids_one_sphere</span><span class="p">(</span><span class="n">pcmobj</span><span class="o">.</span><span class="n">lebedev_order</span><span class="p">)</span>
+    <span class="n">ngrid_1sph</span> <span class="o">=</span> <span class="n">weights_1sph</span><span class="o">.</span><span class="n">size</span>
+    <span class="n">atom_coords</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">atom_coords</span><span class="p">()</span>
+    <span class="n">ylm_1sph</span> <span class="o">=</span> <span class="n">ylm_1sph</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nlm</span><span class="p">,</span><span class="n">ngrid_1sph</span><span class="p">)</span>
+    <span class="n">Amat</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">natm</span><span class="p">,</span><span class="n">nlm</span><span class="p">,</span><span class="n">natm</span><span class="p">,</span><span class="n">nlm</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">ja</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">natm</span><span class="p">):</span>
+        <span class="c1"># w_u = precontract w_n U_j</span>
+        <span class="n">w_u</span> <span class="o">=</span> <span class="n">weights_1sph</span> <span class="o">*</span> <span class="n">ui</span><span class="p">[</span><span class="n">ja</span><span class="p">]</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">fac</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xn,n,mn-&gt;xm&#39;</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">w_u</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">])</span>
+            <span class="n">Amat</span><span class="p">[</span><span class="n">ja</span><span class="p">,:,</span><span class="n">ja</span><span class="p">,</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">fac</span> <span class="o">*</span> <span class="n">a</span>
+
+        <span class="k">for</span> <span class="n">ka</span> <span class="ow">in</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">atoms_with_vdw_overlap</span><span class="p">(</span><span class="n">ja</span><span class="p">,</span> <span class="n">atom_coords</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">):</span>
+            <span class="n">vjk</span> <span class="o">=</span> <span class="n">r_vdw</span><span class="p">[</span><span class="n">ja</span><span class="p">]</span> <span class="o">*</span> <span class="n">coords_1sph</span> <span class="o">+</span> <span class="n">atom_coords</span><span class="p">[</span><span class="n">ja</span><span class="p">]</span> <span class="o">-</span> <span class="n">atom_coords</span><span class="p">[</span><span class="n">ka</span><span class="p">]</span>
+            <span class="n">rjk</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">vjk</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">pol</span> <span class="o">=</span> <span class="n">sph</span><span class="o">.</span><span class="n">multipoles</span><span class="p">(</span><span class="n">vjk</span><span class="p">,</span> <span class="n">lmax</span><span class="p">)</span>
+            <span class="n">p1</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">weights</span> <span class="o">=</span> <span class="n">w_u</span> <span class="o">/</span> <span class="n">rjk</span><span class="o">**</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">fac</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">l</span><span class="o">/</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">r_vdw</span><span class="p">[</span><span class="n">ka</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="n">l</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p1</span> <span class="o">+</span> <span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;xn,n,mn-&gt;xm&#39;</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">pol</span><span class="p">[</span><span class="n">l</span><span class="p">])</span>
+                <span class="n">Amat</span><span class="p">[</span><span class="n">ja</span><span class="p">,:,</span><span class="n">ka</span><span class="p">,</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">+=</span> <span class="o">-</span><span class="n">fac</span> <span class="o">*</span> <span class="n">a</span>
+    <span class="k">return</span> <span class="n">Amat</span></div>
+
+
+<div class="viewcode-block" id="ddPCM">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddPCM">[docs]</a>
+<span class="k">class</span> <span class="nc">ddPCM</span><span class="p">(</span><span class="n">ddcosmo</span><span class="o">.</span><span class="n">DDCOSMO</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
+        <span class="n">ddcosmo</span><span class="o">.</span><span class="n">DDCOSMO</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;ddPCM&#39;</span>
+
+<div class="viewcode-block" id="ddPCM.dump_flags">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddPCM.dump_flags">[docs]</a>
+    <span class="k">def</span> <span class="nf">dump_flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;******** </span><span class="si">%s</span><span class="s1"> (In testing) ********&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;ddPCM is an experimental feature. It is &#39;</span>
+                    <span class="s1">&#39;still in testing.</span><span class="se">\n</span><span class="s1">Features and APIs may be changed &#39;</span>
+                    <span class="s1">&#39;in the future.&#39;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;lebedev_order = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1"> grids per sphere)&#39;</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">lebedev_order</span><span class="p">,</span> <span class="n">gen_grid</span><span class="o">.</span><span class="n">LEBEDEV_ORDER</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lebedev_order</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;lmax = </span><span class="si">%s</span><span class="s1">&#39;</span>         <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lmax</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;eta = </span><span class="si">%s</span><span class="s1">&#39;</span>          <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eta</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;eps = </span><span class="si">%s</span><span class="s1">&#39;</span>          <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;frozen = </span><span class="si">%s</span><span class="s1">&#39;</span>       <span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">frozen</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;equilibrium_solvation = </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">equilibrium_solvation</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;radii_table </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radii_table</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">atom_radii</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;User specified atomic radii </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">atom_radii</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">dump_flags</span><span class="p">(</span><span class="n">verbose</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="ddPCM.build">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddPCM.build">[docs]</a>
+    <span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="n">with_non0tab</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">natm</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">natm</span>
+        <span class="n">lmax</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lmax</span>
+
+        <span class="n">r_vdw</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">get_atomic_radii</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">coords_1sph</span><span class="p">,</span> <span class="n">weights_1sph</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_grids_one_sphere</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lebedev_order</span><span class="p">)</span>
+        <span class="n">ylm_1sph</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">sph</span><span class="o">.</span><span class="n">real_sph_vec</span><span class="p">(</span><span class="n">coords_1sph</span><span class="p">,</span> <span class="n">lmax</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
+
+        <span class="n">fi</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_fi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">)</span>
+        <span class="n">ui</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">fi</span>
+        <span class="n">ui</span><span class="p">[</span><span class="n">ui</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">nexposed</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">nbury</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">on_shell</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ui</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">nexposed</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;Num points exposed </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">nexposed</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;Num points buried </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">nbury</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;Num points on shell </span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_shell</span><span class="p">)</span>
+
+        <span class="n">nlm</span> <span class="o">=</span> <span class="p">(</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">Lmat</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_L</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">fi</span><span class="p">)</span>
+        <span class="n">Lmat</span> <span class="o">=</span> <span class="n">Lmat</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">Amat</span> <span class="o">=</span> <span class="n">make_A</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">ui</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">fac</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">eps</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">A_diele</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">+</span> <span class="n">fac</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">)</span>
+        <span class="n">A_inf</span> <span class="o">=</span> <span class="n">Amat</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">numpy</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">)</span>
+
+        <span class="n">cached_pol</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">cache_fake_multipoles</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">lmax</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;r_vdw&#39;</span><span class="p">:</span> <span class="n">r_vdw</span><span class="p">,</span>
+            <span class="s1">&#39;ylm_1sph&#39;</span><span class="p">:</span> <span class="n">ylm_1sph</span><span class="p">,</span>
+            <span class="s1">&#39;ui&#39;</span><span class="p">:</span> <span class="n">ui</span><span class="p">,</span>
+            <span class="s1">&#39;Lmat&#39;</span><span class="p">:</span> <span class="n">Lmat</span><span class="p">,</span>
+            <span class="s1">&#39;A_diele&#39;</span><span class="p">:</span> <span class="n">A_diele</span><span class="p">,</span>
+            <span class="s1">&#39;A_inf&#39;</span><span class="p">:</span> <span class="n">A_inf</span><span class="p">,</span>
+            <span class="s1">&#39;cached_pol&#39;</span><span class="p">:</span> <span class="n">cached_pol</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get_vind</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;A single shot solvent effects for given density matrix.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">r_vdw</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;r_vdw&#39;</span>     <span class="p">]</span>
+        <span class="n">ylm_1sph</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;ylm_1sph&#39;</span>  <span class="p">]</span>
+        <span class="n">ui</span>         <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;ui&#39;</span>        <span class="p">]</span>
+        <span class="n">Lmat</span>       <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;Lmat&#39;</span>      <span class="p">]</span>
+        <span class="n">A_diele</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;A_diele&#39;</span>   <span class="p">]</span>
+        <span class="n">A_inf</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;A_inf&#39;</span>     <span class="p">]</span>
+        <span class="n">cached_pol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;cached_pol&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dm</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="c1"># spin-traced DM for UHF or ROHF</span>
+            <span class="n">dm</span> <span class="o">=</span> <span class="n">dm</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dm</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_phi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_diele</span><span class="p">,</span> <span class="n">A_inf</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+
+        <span class="n">Xvec</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">phi</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">natm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">psi</span><span class="p">,</span> <span class="n">vmat</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_psi_vmat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span>
+                                          <span class="n">cached_pol</span><span class="p">,</span> <span class="n">Xvec</span><span class="p">,</span> <span class="n">Lmat</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">dielectric</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span>
+        <span class="n">f_epsilon</span> <span class="o">=</span> <span class="p">(</span><span class="n">dielectric</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span><span class="o">/</span><span class="n">dielectric</span>
+        <span class="n">epcm</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">f_epsilon</span> <span class="o">*</span> <span class="n">numpy</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;jx,jx&#39;</span><span class="p">,</span> <span class="n">psi</span><span class="p">,</span> <span class="n">Xvec</span><span class="p">)</span>
+        <span class="n">vpcm</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">f_epsilon</span> <span class="o">*</span> <span class="n">vmat</span>
+        <span class="k">return</span> <span class="n">epcm</span><span class="p">,</span> <span class="n">vpcm</span>
+
+    <span class="k">def</span> <span class="nf">_B_dot_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Compute the matrix-vector product B * x. The B matrix, as defined in</span>
+<span class="sd">        the paper R. Cammi, JPCA, 104, 5631 (2000), is the second order</span>
+<span class="sd">        derivatives of E_solvation wrt density matrices.</span>
+
+<span class="sd">        Note: In ddCOSMO, strictly, B is not symmetric. To make it compatible</span>
+<span class="sd">        with the CIS framework, it is symmetrized in current implementation.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">grids</span><span class="o">.</span><span class="n">coords</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+
+        <span class="n">mol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol</span>
+        <span class="n">r_vdw</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;r_vdw&#39;</span>     <span class="p">]</span>
+        <span class="n">ylm_1sph</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;ylm_1sph&#39;</span>  <span class="p">]</span>
+        <span class="n">ui</span>         <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;ui&#39;</span>        <span class="p">]</span>
+        <span class="n">Lmat</span>       <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;Lmat&#39;</span>      <span class="p">]</span>
+        <span class="n">A_diele</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;A_diele&#39;</span>   <span class="p">]</span>
+        <span class="n">A_inf</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;A_inf&#39;</span>     <span class="p">]</span>
+        <span class="n">cached_pol</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_intermediates</span><span class="p">[</span><span class="s1">&#39;cached_pol&#39;</span><span class="p">]</span>
+        <span class="n">natm</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">natm</span>
+        <span class="n">nlm</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lmax</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_phi</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span> <span class="n">with_nuc</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">phi</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">A_diele</span><span class="p">,</span> <span class="n">A_inf</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">phi</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">natm</span><span class="o">*</span><span class="n">nlm</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
+
+        <span class="n">Xvec</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">Lmat</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+        <span class="n">Xvec</span> <span class="o">=</span> <span class="n">Xvec</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">natm</span><span class="p">,</span><span class="n">nlm</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">vmat</span> <span class="o">=</span> <span class="n">ddcosmo</span><span class="o">.</span><span class="n">make_psi_vmat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">r_vdw</span><span class="p">,</span> <span class="n">ui</span><span class="p">,</span> <span class="n">ylm_1sph</span><span class="p">,</span>
+                                     <span class="n">cached_pol</span><span class="p">,</span> <span class="n">Xvec</span><span class="p">,</span> <span class="n">Lmat</span><span class="p">,</span> <span class="n">with_nuc</span><span class="o">=</span><span class="kc">False</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">dielectric</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eps</span>
+        <span class="n">f_epsilon</span> <span class="o">=</span> <span class="p">(</span><span class="n">dielectric</span><span class="o">-</span><span class="mf">1.</span><span class="p">)</span><span class="o">/</span><span class="n">dielectric</span>
+        <span class="k">return</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">f_epsilon</span> <span class="o">*</span> <span class="n">vmat</span>
+
+    <span class="n">gen_solver</span> <span class="o">=</span> <span class="n">as_solver</span> <span class="o">=</span> <span class="n">gen_ddpcm_solver</span>
+
+<div class="viewcode-block" id="ddPCM.regularize_xt">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddPCM.regularize_xt">[docs]</a>
+    <span class="k">def</span> <span class="nf">regularize_xt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">regularize_xt</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">eta</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ddPCM.nuc_grad_method">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.solvent.html#pyscf.solvent.ddpcm.ddPCM.nuc_grad_method">[docs]</a>
+    <span class="k">def</span> <span class="nf">nuc_grad_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grad_method</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
+
+
+<span class="n">DDPCM</span> <span class="o">=</span> <span class="n">ddPCM</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">scf</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;H 0 0 0; H 0 1 1.2; H 1. .1 0; H .5 .5 1&#39;</span><span class="p">)</span>
+    <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">nao</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">nao_nr</span><span class="p">()</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">nao</span><span class="p">,</span><span class="n">nao</span><span class="p">))</span>
+    <span class="n">dm</span> <span class="o">=</span> <span class="n">dm</span> <span class="o">+</span> <span class="n">dm</span><span class="o">.</span><span class="n">T</span>
+    <span class="c1">#dm = scf.RHF(mol).run().make_rdm1()</span>
+    <span class="n">e</span><span class="p">,</span> <span class="n">vmat</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="o">.</span><span class="n">kernel</span><span class="p">(</span><span class="n">dm</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span> <span class="o">+</span> <span class="mf">1.2446306643473923</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">fp</span><span class="p">(</span><span class="n">vmat</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.77873361914445294</span><span class="p">)</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">Mole</span><span class="p">()</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">atom</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39; O                  0.00000000    0.00000000   -0.11081188</span>
+<span class="s1">                   H                 -0.00000000   -0.84695236    0.59109389</span>
+<span class="s1">                   H                 -0.00000000    0.89830571    0.52404783 &#39;&#39;&#39;</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">basis</span> <span class="o">=</span> <span class="s1">&#39;3-21g&#39;</span> <span class="c1">#cc-pvdz&#39;</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+    <span class="n">cm</span> <span class="o">=</span> <span class="n">DDPCM</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">cm</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">mf</span> <span class="o">=</span> <span class="n">ddpcm_for_scf</span><span class="p">(</span><span class="n">scf</span><span class="o">.</span><span class="n">RHF</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">cm</span><span class="p">)</span><span class="c1">#.newton()</span>
+    <span class="n">mf</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">mf</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>  <span class="c1"># -75.5697645601958</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

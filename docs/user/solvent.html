@@ -1,0 +1,772 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Solvation models &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user/solvent';</script>
+    <link rel="icon" href="../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="QM/MM methods" href="qmmm.html" />
+    <link rel="prev" title="Time-dependent Hartree-Fock and density functional theory" href="tddft.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="install.html">How to install PySCF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using.html">How to use PySCF</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Building molecules and crystals</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="gto.html">Molecular structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pbcgto.html">Crystal structure</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Electronic structure methods</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="scf.html">Self-consistent field (SCF) methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dft.html">Density functional theory (DFT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mp.html">Second-order Møller–Plesset perturbation theory (MP2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gw.html">GW approximation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ci.html">Configuration interaction (CISD and FCI)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cc.html">Coupled-cluster theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adc.html">Algebraic diagrammatic construction (ADC)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agf2.html">Auxiliary second-order Green’s function perturbation theory (AGF2)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcscf.html">Multi-configuration self-consistent field (MCSCF)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mcpdft.html">Multi-configuration pair-density functional theory (MC-PDFT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mrpt.html">Multi-reference perturbation theory (MRPT)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tddft.html">Time-dependent Hartree-Fock and density functional theory</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Other functionalities</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solvation models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qmmm.html">QM/MM methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="md.html">Molecular Dynamics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="df.html">Density fitting (DF)</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="pbc.html">Periodic boundary conditions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pbc/scf.html">SCF and DFT methods</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbc/df.html">Density fitting for crystalline calculations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pbc/mix_mol.html">Mixing PBC and molecular modules</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="eph.html">Electron-phonon coupling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lo.html">Localized orbitals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sgx.html">Seminumerical exchange (SGX)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geomopt.html">Geometry optimization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gpu.html">GPU Acceleration (GPU4PySCF)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PySCF-forge</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="pyscf-forge.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pprpa.html">particle-particle Random Phase Approximation (ppRPA)</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Extensions</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="extensions.html">Extensions</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Solvation models</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="solvation-models">
+<span id="user-solvent"></span><h1>Solvation models<a class="headerlink" href="#solvation-models" title="Link to this heading">#</a></h1>
+<p><em>Modules</em>: <a class="reference internal" href="../pyscf_api_docs/pyscf.solvent.html#module-pyscf.solvent" title="pyscf.solvent"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyscf.solvent</span></code></a></p>
+<section id="introduction">
+<span id="module-solvent"></span><h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Solvation model allows the quantum chemistry calculations to include the
+interactions between solvents and the quantum solute. Solvents can be treated
+implicitly, known as continuum solvents, and explicitly. For continuum solvents,
+we implemented the PCM (polarizable continuum model), ddCOSMO (domain-decomposition COSMO solvation model),
+ddPCM (domain-decomposition polarizable continuum model),
+and SMD (Solvation Model Density). For the explicit solvent environment,
+we provided the interface to call the polarizable embedding library CPPE.</p>
+</section>
+<section id="pcm-model">
+<h2>PCM model<a class="headerlink" href="#pcm-model" title="Link to this heading">#</a></h2>
+<p>PySCF support four types of PCM solvent models, i.e. C-PCM, IEF-PCM, SS(V)PE, and COSMO
+(See <a class="reference external" href="https://manual.q-chem.com/5.2/Ch12.S2.SS2.html">https://manual.q-chem.com/5.2/Ch12.S2.SS2.html</a> for more detailed descriptions of these methods).
+The analytical gradient and semi-analytical Hessian are also supported.</p>
+<p>PCM solvent models can be applied on to an SCF object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;b3lyp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;IEF-PCM&#39;</span> <span class="c1"># C-PCM, SS(V)PE, COSMO</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">78.3553</span> <span class="c1"># for water</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In regular MCSCF (CASCI or CASSCF), and post-SCF calculations, the setup for
+self-consistent solvent is similar:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">CASCI</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<span class="n">mp2_model</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">MP2</span><span class="p">()</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="solvent-for-excited-states">
+<h3>Solvent for excited states<a class="headerlink" href="#solvent-for-excited-states" title="Link to this heading">#</a></h3>
+<p>When combining to TDDFT or other methods of excited states, solvent can be
+modelled in the manner of self-consistency (fast solvent) or single shot (slow
+solvent). Below we use TDDFT to demonstrate the treatments of fast solvent
+and slow solvent.</p>
+<p>In vertical excitations, the solvent almost does not respond to the change of
+electronic structure. It should be viewed as slow solvent. The calculation
+can be started with an SCF with fully relaxed solvent and followed by a regular
+TDDFT method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RHF</span><span class="p">()</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">TDA</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In the diabatic excitations, we would like to let the solvent rapidly responds
+to the electronic structure of excited states. The entire solvation system
+should converge to an equilibrium state between solvent and the excited state of
+the solute. In this scenario, solvent model should be applied on to the excited
+state methods:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RHF</span><span class="p">()</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">td</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">TDA</span><span class="p">()</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span>
+<span class="n">td</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">equilibrium_solvation</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">td</span><span class="o">.</span><span class="n">kernel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Please note that the flag <code class="docutils literal notranslate"><span class="pre">equilibrium_solvation</span></code> needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>
+in this case. PySCF by default assumes the slow solvent model for TDDFT.</p>
+<p>In the complicated procedure which involves for example electronic states from
+different states (typically in the MCSCF calculations with state-average or
+state-specific approximations), PySCF PCM implementation allows to input a
+density matrix and freeze the solvent equilibrated against the input density
+matrix:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">CASCI</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">fcisolver</span><span class="o">.</span><span class="n">nstates</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">state_id</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Slow solvent wrt the first excited state</span>
+<span class="n">mc</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The slow solvent does not have to be corresponding to a particular state. It can
+be even the solvent from a different geometry or an artificial quantum state of
+solute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">scf_dm</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RHF</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span><span class="o">.</span><span class="n">make_rdm1</span><span class="p">()</span>
+
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    1.035   -1.082</span>
+<span class="s1">     H  0.   -1.035   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mc</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">CASCI</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">PCM</span><span class="p">(</span><span class="n">dm</span><span class="o">=</span><span class="n">scf_dm</span><span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="solvent-parameters">
+<h3>Solvent parameters<a class="headerlink" href="#solvent-parameters" title="Link to this heading">#</a></h3>
+<p>The default solvent in the PCM module is water. When studying other types of
+solvents, you can consider to modify the dielectric parameter <code class="docutils literal notranslate"><span class="pre">eps</span></code> using the
+constants listed below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RHF</span><span class="p">()</span><span class="o">.</span><span class="n">PCM</span><span class="p">()</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">eps</span> <span class="o">=</span> <span class="mf">32.613</span>   <span class="c1"># methanol</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>These dielectric constants are obtained from <a class="reference external" href="https://gaussian.com/scrf/">https://gaussian.com/scrf/</a>.
+More dataset can be found in Minnesota Solvent Descriptor Database
+(<a class="reference external" href="https://comp.chem.umn.edu/solvation">https://comp.chem.umn.edu/solvation</a>)</p>
+</section>
+</section>
+<section id="ddcosmo">
+<h2>ddCOSMO<a class="headerlink" href="#ddcosmo" title="Link to this heading">#</a></h2>
+<section id="self-consistent-solvents-for-ground-state">
+<h3>Self-consistent solvents for ground state<a class="headerlink" href="#self-consistent-solvents-for-ground-state" title="Link to this heading">#</a></h3>
+<p>Solvent model can be applied on to an SCF object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;b3lyp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">DDCOSMO</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="smd-model">
+<h2>SMD model<a class="headerlink" href="#smd-model" title="Link to this heading">#</a></h2>
+<p>SMD model is recommended for computing solvation free energy. The implementation of SMD model
+in PySCF is based on IEF-PCM. Other SMx models are not supported yet
+(See <a class="reference external" href="https://manual.q-chem.com/5.2/Ch12.S2.SS8.html">https://manual.q-chem.com/5.2/Ch12.S2.SS8.html</a>). The source code for CDS contribution
+is taken from NWChem (<a class="github reference external" href="https://github.com/nwchemgit/nwchem/blob/master/src/solvation/mnsol.F">nwchemgit/nwchem</a>)
+SMD solvent solvent models can be applied on to an SCF object:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;b3lyp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">SMD</span><span class="p">()</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">solvent</span> <span class="o">=</span> <span class="s1">&#39;water&#39;</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The solvent descriptor can be assigned to the <code class="docutils literal notranslate"><span class="pre">with_solvent</span></code> directly:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;b3lyp&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">SMD</span><span class="p">()</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">with_solvent</span><span class="o">.</span><span class="n">solvent_descriptors</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.3843</span><span class="p">,</span> <span class="mf">1.3766</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">35.06</span><span class="p">,</span> <span class="mf">13.45</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">]</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The format of solvant names are the same as Minnesota Solvent Descriptor Database
+(<a class="reference external" href="https://comp.chem.umn.edu/solvation/mnsddb.pdf">https://comp.chem.umn.edu/solvation/mnsddb.pdf</a>). One can assign solvent descriptors in the format
+<code class="docutils literal notranslate"><span class="pre">mf.with_solvent.solvent_descriptors</span> <span class="pre">=</span> <span class="pre">[n,</span> <span class="pre">n25,</span> <span class="pre">alpha,</span> <span class="pre">beta,</span> <span class="pre">gamma,</span> <span class="pre">epsilon,</span> <span class="pre">phi,</span> <span class="pre">psi]</span></code></p>
+</section>
+<section id="polarizable-embedding">
+<h2>Polarizable embedding<a class="headerlink" href="#polarizable-embedding" title="Link to this heading">#</a></h2>
+<p>To use polarizable embedding model for mean-field calculations, one would need
+to first generate potential data for the input of CPPE library. The best way to
+generate potential files is with <a class="reference external" href="https://gitlab.com/FraME-projects/PyFraME">PyFraME</a>.
+You can directly throw in a pdb file, select the QM region and how to parametrize
+different parts of the environment (with either pre-defined potentials, or with LoProp).
+Some guidance is also provided in the Tutorial Review paper about PE, section 4:
+<a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/qua.25717">https://onlinelibrary.wiley.com/doi/full/10.1002/qua.25717</a>
+Therein, the format of the potential file is also explained (it’s the same
+format as used in the original Dalton pelib implementation).</p>
+<p>With the generated potential file, one can carry out the polarizable embedding
+calculations:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyscf</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">     C  0.    0.      -0.542</span>
+<span class="s1">     O  0.    0.       0.677</span>
+<span class="s1">     H  0.    0.935   -1.082</span>
+<span class="s1">     H  0.   -0.935   -1.082&#39;&#39;&#39;</span><span class="p">,</span>
+              <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;6-31g*&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">RKS</span><span class="p">(</span><span class="n">xc</span><span class="o">=</span><span class="s1">&#39;b3lyp&#39;</span><span class="p">)</span>
+<span class="n">mf</span> <span class="o">=</span> <span class="n">pyscf</span><span class="o">.</span><span class="n">solvent</span><span class="o">.</span><span class="n">PE</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="s1">&#39;potfile&#39;</span><span class="p">)</span>
+<span class="n">mf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pcm-model">PCM model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solvent-for-excited-states">Solvent for excited states</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solvent-parameters">Solvent parameters</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddcosmo">ddCOSMO</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#self-consistent-solvents-for-ground-state">Self-consistent solvents for ground state</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smd-model">SMD model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polarizable-embedding">Polarizable embedding</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  
+  <div class="tocsection editthispage">
+    <a href="https://github.com/pyscf/pyscf.github.io/edit/master/source/user/solvent.rst">
+      <i class="fa-solid fa-pencil"></i>
+      
+      
+        
+          Edit on GitHub
+        
+      
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

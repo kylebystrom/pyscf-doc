@@ -1,0 +1,847 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.agf2.dfuagf2 &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/agf2/dfuagf2';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../agf2.html" class="nav-link">pyscf.agf2</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.agf2.dfuagf2</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.agf2.dfuagf2</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2014-2020 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Author: Oliver J. Backhouse &lt;olbackhouse@gmail.com&gt;</span>
+<span class="c1">#         George H. Booth &lt;george.booth@kcl.ac.uk&gt;</span>
+<span class="c1">#</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Auxiliary second-order Green&#39;s function perturbation theory for</span>
+<span class="sd">unrestricted references with density fitting</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf.lib</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">__config__</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">ao2mo</span><span class="p">,</span> <span class="n">df</span>
+<span class="kn">from</span> <span class="nn">pyscf.agf2</span> <span class="kn">import</span> <span class="n">uagf2</span><span class="p">,</span> <span class="n">dfragf2</span><span class="p">,</span> <span class="n">mpi_helper</span><span class="p">,</span> <span class="n">_agf2</span>
+<span class="kn">from</span> <span class="nn">pyscf.agf2</span> <span class="kn">import</span> <span class="n">aux_space</span> <span class="k">as</span> <span class="n">aux</span>
+
+<span class="n">BLKMIN</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;agf2_blkmin&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="build_se_part">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.agf2.html#pyscf.agf2.dfuagf2.build_se_part">[docs]</a>
+<span class="k">def</span> <span class="nf">build_se_part</span><span class="p">(</span><span class="n">agf2</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="n">gf_occ</span><span class="p">,</span> <span class="n">gf_vir</span><span class="p">,</span> <span class="n">os_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ss_factor</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Builds either the auxiliaries of the occupied self-energy,</span>
+<span class="sd">        or virtual if :attr:`gf_occ` and :attr:`gf_vir` are swapped.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        eri : _ChemistsERIs</span>
+<span class="sd">            Electronic repulsion integrals</span>
+<span class="sd">        gf_occ : GreensFunction</span>
+<span class="sd">            Occupied Green&#39;s function</span>
+<span class="sd">        gf_vir : GreensFunction</span>
+<span class="sd">            Virtual Green&#39;s function</span>
+
+<span class="sd">    Kwargs:</span>
+<span class="sd">        os_factor : float</span>
+<span class="sd">            Opposite-spin factor for spin-component-scaled (SCS)</span>
+<span class="sd">            calculations. Default 1.0</span>
+<span class="sd">        ss_factor : float</span>
+<span class="sd">            Same-spin factor for spin-component-scaled (SCS)</span>
+<span class="sd">            calculations. Default 1.0</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        :class:`SelfEnergy`</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">cput0</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">agf2</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">gf_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">aux</span><span class="o">.</span><span class="n">GreensFunction</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">gf_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">is</span> <span class="n">aux</span><span class="o">.</span><span class="n">GreensFunction</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">gf_vir</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">is</span> <span class="n">aux</span><span class="o">.</span><span class="n">GreensFunction</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">gf_vir</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="ow">is</span> <span class="n">aux</span><span class="o">.</span><span class="n">GreensFunction</span>
+
+    <span class="n">nmoa</span><span class="p">,</span> <span class="n">nmob</span> <span class="o">=</span> <span class="n">eri</span><span class="o">.</span><span class="n">nmo</span>
+    <span class="n">nocca</span><span class="p">,</span> <span class="n">nvira</span> <span class="o">=</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">naux</span><span class="p">,</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">naux</span>
+    <span class="n">noccb</span><span class="p">,</span> <span class="n">nvirb</span> <span class="o">=</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">naux</span><span class="p">,</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">naux</span>
+    <span class="n">naux</span> <span class="o">=</span> <span class="n">agf2</span><span class="o">.</span><span class="n">with_df</span><span class="o">.</span><span class="n">get_naoaux</span><span class="p">()</span>
+    <span class="n">tol</span> <span class="o">=</span> <span class="n">agf2</span><span class="o">.</span><span class="n">weight_tol</span>
+    <span class="n">facs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;os_factor&#39;</span><span class="p">:</span> <span class="n">os_factor</span><span class="p">,</span> <span class="s1">&#39;ss_factor&#39;</span><span class="p">:</span> <span class="n">ss_factor</span><span class="p">}</span>
+
+    <span class="n">ci_a</span><span class="p">,</span> <span class="n">ei_a</span> <span class="o">=</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coupling</span><span class="p">,</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">ci_b</span><span class="p">,</span> <span class="n">ei_b</span> <span class="o">=</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">coupling</span><span class="p">,</span> <span class="n">gf_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">ca_a</span><span class="p">,</span> <span class="n">ea_a</span> <span class="o">=</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coupling</span><span class="p">,</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">ca_b</span><span class="p">,</span> <span class="n">ea_b</span> <span class="o">=</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">coupling</span><span class="p">,</span> <span class="n">gf_vir</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">energy</span>
+
+    <span class="n">qeri</span> <span class="o">=</span> <span class="n">_make_qmo_eris_incore</span><span class="p">(</span><span class="n">agf2</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="p">(</span><span class="n">ci_a</span><span class="p">,</span> <span class="n">ci_a</span><span class="p">,</span> <span class="n">ca_a</span><span class="p">),</span> <span class="p">(</span><span class="n">ci_b</span><span class="p">,</span> <span class="n">ci_b</span><span class="p">,</span> <span class="n">ca_b</span><span class="p">))</span>
+    <span class="p">(</span><span class="n">qxi_a</span><span class="p">,</span> <span class="n">qja_a</span><span class="p">),</span> <span class="p">(</span><span class="n">qxi_b</span><span class="p">,</span> <span class="n">qja_b</span><span class="p">)</span> <span class="o">=</span> <span class="n">qeri</span>
+    <span class="n">qxi</span> <span class="o">=</span> <span class="p">(</span><span class="n">qxi_a</span><span class="p">,</span> <span class="n">qxi_b</span><span class="p">)</span>
+    <span class="n">qja</span> <span class="o">=</span> <span class="p">(</span><span class="n">qja_a</span><span class="p">,</span> <span class="n">qja_b</span><span class="p">)</span>
+
+    <span class="n">himem_required</span> <span class="o">=</span> <span class="n">naux</span><span class="o">*</span><span class="p">(</span><span class="n">nvira</span><span class="o">+</span><span class="n">nmoa</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">nocca</span><span class="o">*</span><span class="n">nvira</span><span class="o">+</span><span class="n">noccb</span><span class="o">*</span><span class="n">nvirb</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nmoa</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">nmoa</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">himem_required</span> <span class="o">*=</span> <span class="mf">8e-6</span>
+    <span class="n">himem_required</span> <span class="o">*=</span> <span class="n">lib</span><span class="o">.</span><span class="n">num_threads</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">himem_required</span><span class="o">*</span><span class="mf">1.05</span> <span class="o">+</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">agf2</span><span class="o">.</span><span class="n">max_memory</span>
+            <span class="ow">and</span> <span class="n">agf2</span><span class="o">.</span><span class="n">allow_lowmem_build</span><span class="p">)</span> <span class="ow">or</span> <span class="n">agf2</span><span class="o">.</span><span class="n">allow_lowmem_build</span> <span class="o">==</span> <span class="s1">&#39;force&#39;</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Thread-private memory overhead </span><span class="si">%.3f</span><span class="s1"> exceeds max_memory, using &#39;</span>
+                  <span class="s1">&#39;low-memory version.&#39;</span><span class="p">,</span> <span class="n">himem_required</span><span class="p">)</span>
+        <span class="n">build_mats_dfuagf2</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">build_mats_dfuagf2_lowmem</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">build_mats_dfuagf2</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">build_mats_dfuagf2_incore</span>
+
+    <span class="n">vv</span><span class="p">,</span> <span class="n">vev</span> <span class="o">=</span> <span class="n">build_mats_dfuagf2</span><span class="p">(</span><span class="n">qxi</span><span class="p">,</span> <span class="n">qja</span><span class="p">,</span> <span class="p">(</span><span class="n">ei_a</span><span class="p">,</span> <span class="n">ei_b</span><span class="p">),</span> <span class="p">(</span><span class="n">ea_a</span><span class="p">,</span> <span class="n">ea_b</span><span class="p">),</span> <span class="o">**</span><span class="n">facs</span><span class="p">)</span>
+    <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">cholesky_build</span><span class="p">(</span><span class="n">vv</span><span class="p">,</span> <span class="n">vev</span><span class="p">)</span>
+    <span class="n">se_a</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">SelfEnergy</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">chempot</span><span class="o">=</span><span class="n">gf_occ</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">chempot</span><span class="p">)</span>
+    <span class="n">se_a</span><span class="o">.</span><span class="n">remove_uncoupled</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">uagf2</span><span class="o">.</span><span class="n">get_frozen_mask</span><span class="p">(</span><span class="n">agf2</span><span class="p">)</span>
+        <span class="n">coupling</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nmoa</span><span class="p">,</span> <span class="n">se_a</span><span class="o">.</span><span class="n">naux</span><span class="p">))</span>
+        <span class="n">coupling</span><span class="p">[</span><span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">se_a</span><span class="o">.</span><span class="n">coupling</span>
+        <span class="n">se_a</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">SelfEnergy</span><span class="p">(</span><span class="n">se_a</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">chempot</span><span class="o">=</span><span class="n">se_a</span><span class="o">.</span><span class="n">chempot</span><span class="p">)</span>
+
+    <span class="n">cput0</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;se part (alpha)&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput0</span><span class="p">)</span>
+
+    <span class="n">himem_required</span> <span class="o">=</span> <span class="n">naux</span><span class="o">*</span><span class="p">(</span><span class="n">nvirb</span><span class="o">+</span><span class="n">nmob</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">noccb</span><span class="o">*</span><span class="n">nvirb</span><span class="o">+</span><span class="n">nocca</span><span class="o">*</span><span class="n">nvira</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">nmob</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">nmob</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">himem_required</span> <span class="o">*=</span> <span class="mf">8e-6</span>
+    <span class="n">himem_required</span> <span class="o">*=</span> <span class="n">lib</span><span class="o">.</span><span class="n">num_threads</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="p">((</span><span class="n">himem_required</span><span class="o">*</span><span class="mf">1.05</span> <span class="o">+</span> <span class="n">lib</span><span class="o">.</span><span class="n">current_memory</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">agf2</span><span class="o">.</span><span class="n">max_memory</span>
+            <span class="ow">and</span> <span class="n">agf2</span><span class="o">.</span><span class="n">allow_lowmem_build</span><span class="p">)</span> <span class="ow">or</span> <span class="n">agf2</span><span class="o">.</span><span class="n">allow_lowmem_build</span> <span class="o">==</span> <span class="s1">&#39;force&#39;</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Thread-private memory overhead </span><span class="si">%.3f</span><span class="s1"> exceeds max_memory, using &#39;</span>
+                  <span class="s1">&#39;low-memory version.&#39;</span><span class="p">,</span> <span class="n">himem_required</span><span class="p">)</span>
+        <span class="n">build_mats_dfuagf2</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">build_mats_dfuagf2_lowmem</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">build_mats_dfuagf2</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">build_mats_dfuagf2_incore</span>
+
+    <span class="n">rv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">vv</span><span class="p">,</span> <span class="n">vev</span> <span class="o">=</span> <span class="n">build_mats_dfuagf2</span><span class="p">(</span><span class="n">qxi</span><span class="p">[</span><span class="n">rv</span><span class="p">],</span> <span class="n">qja</span><span class="p">[</span><span class="n">rv</span><span class="p">],</span> <span class="p">(</span><span class="n">ei_b</span><span class="p">,</span> <span class="n">ei_a</span><span class="p">),</span> <span class="p">(</span><span class="n">ea_b</span><span class="p">,</span> <span class="n">ea_a</span><span class="p">),</span> <span class="o">**</span><span class="n">facs</span><span class="p">)</span>
+    <span class="n">e</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">_agf2</span><span class="o">.</span><span class="n">cholesky_build</span><span class="p">(</span><span class="n">vv</span><span class="p">,</span> <span class="n">vev</span><span class="p">)</span>
+    <span class="n">se_b</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">SelfEnergy</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">chempot</span><span class="o">=</span><span class="n">gf_occ</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">chempot</span><span class="p">)</span>
+    <span class="n">se_b</span><span class="o">.</span><span class="n">remove_uncoupled</span><span class="p">(</span><span class="n">tol</span><span class="o">=</span><span class="n">tol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">uagf2</span><span class="o">.</span><span class="n">get_frozen_mask</span><span class="p">(</span><span class="n">agf2</span><span class="p">)</span>
+        <span class="n">coupling</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nmoa</span><span class="p">,</span> <span class="n">se_b</span><span class="o">.</span><span class="n">naux</span><span class="p">))</span>
+        <span class="n">coupling</span><span class="p">[</span><span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">se_b</span><span class="o">.</span><span class="n">coupling</span>
+        <span class="n">se_b</span> <span class="o">=</span> <span class="n">aux</span><span class="o">.</span><span class="n">SelfEnergy</span><span class="p">(</span><span class="n">se_b</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">coupling</span><span class="p">,</span> <span class="n">chempot</span><span class="o">=</span><span class="n">se_b</span><span class="o">.</span><span class="n">chempot</span><span class="p">)</span>
+
+    <span class="n">cput0</span> <span class="o">=</span> <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;se part (beta)&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">se_a</span><span class="p">,</span> <span class="n">se_b</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DFUAGF2">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.agf2.html#pyscf.agf2.dfuagf2.DFUAGF2">[docs]</a>
+<span class="k">class</span> <span class="nc">DFUAGF2</span><span class="p">(</span><span class="n">uagf2</span><span class="o">.</span><span class="n">UAGF2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Unrestricted AGF2 with canonical HF reference with density fitting</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        verbose : int</span>
+<span class="sd">            Print level. Default value equals to :class:`Mole.verbose`</span>
+<span class="sd">        max_memory : float or int</span>
+<span class="sd">            Allowed memory in MB. Default value equals to :class:`Mole.max_memory`</span>
+<span class="sd">        incore_complete : bool</span>
+<span class="sd">            Avoid all I/O. Default is False.</span>
+<span class="sd">        allow_lowmem_build : bool</span>
+<span class="sd">            Allow the self-energy build to switch to a serially slower</span>
+<span class="sd">            code with lower thread-private memory overhead if needed. One</span>
+<span class="sd">            of True, False or &#39;force&#39;. Default value is True.</span>
+<span class="sd">        conv_tol : float</span>
+<span class="sd">            Convergence threshold for AGF2 energy. Default value is 1e-7</span>
+<span class="sd">        conv_tol_rdm1 : float</span>
+<span class="sd">            Convergence threshold for first-order reduced density matrix.</span>
+<span class="sd">            Default value is 1e-8.</span>
+<span class="sd">        conv_tol_nelec : float</span>
+<span class="sd">            Convergence threshold for the number of electrons. Default</span>
+<span class="sd">            value is 1e-6.</span>
+<span class="sd">        max_cycle : int</span>
+<span class="sd">            Maximum number of AGF2 iterations. Default value is 50.</span>
+<span class="sd">        max_cycle_outer : int</span>
+<span class="sd">            Maximum number of outer Fock loop iterations. Default</span>
+<span class="sd">            value is 20.</span>
+<span class="sd">        max_cycle_inner : int</span>
+<span class="sd">            Maximum number of inner Fock loop iterations. Default</span>
+<span class="sd">            value is 50.</span>
+<span class="sd">        weight_tol : float</span>
+<span class="sd">            Threshold in spectral weight of auxiliaries to be considered</span>
+<span class="sd">            zero. Default 1e-11.</span>
+<span class="sd">        diis : bool or lib.diis.DIIS</span>
+<span class="sd">            Whether to use DIIS, can also be a lib.diis.DIIS object. Default</span>
+<span class="sd">            value is True.</span>
+<span class="sd">        diis_space : int</span>
+<span class="sd">            DIIS space size. Default value is 8.</span>
+<span class="sd">        diis_min_space : int</span>
+<span class="sd">            Minimum space of DIIS. Default value is 1.</span>
+<span class="sd">        fock_diis_space : int</span>
+<span class="sd">            DIIS space size for Fock loop iterations. Default value is 6.</span>
+<span class="sd">        fock_diis_min_space :</span>
+<span class="sd">            Minimum space of DIIS. Default value is 1.</span>
+<span class="sd">        os_factor : float</span>
+<span class="sd">            Opposite-spin factor for spin-component-scaled (SCS)</span>
+<span class="sd">            calculations. Default 1.0</span>
+<span class="sd">        ss_factor : float</span>
+<span class="sd">            Same-spin factor for spin-component-scaled (SCS)</span>
+<span class="sd">            calculations. Default 1.0</span>
+<span class="sd">        damping : float</span>
+<span class="sd">            Damping factor for the self-energy. Default value is 0.0</span>
+
+<span class="sd">    Saved results</span>
+
+<span class="sd">        e_corr : float</span>
+<span class="sd">            AGF2 correlation energy</span>
+<span class="sd">        e_tot : float</span>
+<span class="sd">            Total energy (HF + correlation)</span>
+<span class="sd">        e_1b : float</span>
+<span class="sd">            One-body part of :attr:`e_tot`</span>
+<span class="sd">        e_2b : float</span>
+<span class="sd">            Two-body part of :attr:`e_tot`</span>
+<span class="sd">        e_init : float</span>
+<span class="sd">            Initial correlation energy (truncated MP2)</span>
+<span class="sd">        converged : bool</span>
+<span class="sd">            Whether convergence was successful</span>
+<span class="sd">        se : tuple of SelfEnergy</span>
+<span class="sd">            Auxiliaries of the self-energy for each spin</span>
+<span class="sd">        gf : tuple of GreensFunction</span>
+<span class="sd">            Auxiliaries of the Green&#39;s function for each spin</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;_with_df&#39;</span><span class="p">,</span> <span class="s1">&#39;allow_lowmem_build&#39;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mo_energy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mo_occ</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">uagf2</span><span class="o">.</span><span class="n">UAGF2</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="n">frozen</span><span class="p">,</span> <span class="n">mo_energy</span><span class="o">=</span><span class="n">mo_energy</span><span class="p">,</span>
+                             <span class="n">mo_coeff</span><span class="o">=</span><span class="n">mo_coeff</span><span class="p">,</span> <span class="n">mo_occ</span><span class="o">=</span><span class="n">mo_occ</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">mf</span><span class="p">,</span> <span class="s1">&#39;with_df&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">with_df</span> <span class="o">=</span> <span class="n">mf</span><span class="o">.</span><span class="n">with_df</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">with_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">DF</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">with_df</span><span class="o">.</span><span class="n">auxbasis</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">make_auxbasis</span><span class="p">(</span><span class="n">mf</span><span class="o">.</span><span class="n">mol</span><span class="p">,</span> <span class="n">mp2fit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">allow_lowmem_build</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="n">build_se_part</span> <span class="o">=</span> <span class="n">build_se_part</span>
+    <span class="n">get_jk</span> <span class="o">=</span> <span class="n">dfragf2</span><span class="o">.</span><span class="n">get_jk</span>
+
+<div class="viewcode-block" id="DFUAGF2.ao2mo">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.agf2.html#pyscf.agf2.dfuagf2.DFUAGF2.ao2mo">[docs]</a>
+    <span class="k">def</span> <span class="nf">ao2mo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Get the density-fitted electronic repulsion integrals in</span>
+<span class="sd">            MO basis.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">eri</span> <span class="o">=</span> <span class="n">_make_mo_eris_incore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">eri</span></div>
+
+
+<div class="viewcode-block" id="DFUAGF2.reset">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.agf2.html#pyscf.agf2.dfuagf2.DFUAGF2.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">with_df</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">uagf2</span><span class="o">.</span><span class="n">UAGF2</span><span class="o">.</span><span class="n">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">with_df</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_with_df</span>
+    <span class="nd">@with_df</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">with_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_with_df</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_with_df</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">dfragf2</span><span class="o">.</span><span class="n">DF</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">_ChemistsERIs</span><span class="p">(</span><span class="n">uagf2</span><span class="o">.</span><span class="n">_ChemistsERIs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; (pq|rs) as (pq|J)(J|rs)</span>
+
+<span class="sd">    MO tensors are stored in tril from, we only need QMO tensors</span>
+<span class="sd">    in low-symmetry</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">_make_mo_eris_incore</span><span class="p">(</span><span class="n">agf2</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Returns _ChemistsERIs</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">cput0</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">agf2</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="n">eris</span> <span class="o">=</span> <span class="n">_ChemistsERIs</span><span class="p">()</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">_common_init_</span><span class="p">(</span><span class="n">agf2</span><span class="p">,</span> <span class="n">mo_coeff</span><span class="p">)</span>
+    <span class="n">with_df</span> <span class="o">=</span> <span class="n">agf2</span><span class="o">.</span><span class="n">with_df</span>
+    <span class="n">moa</span><span class="p">,</span> <span class="n">mob</span> <span class="o">=</span> <span class="n">eris</span><span class="o">.</span><span class="n">mo_coeff</span>
+    <span class="n">nmoa</span><span class="p">,</span> <span class="n">nmob</span> <span class="o">=</span> <span class="n">moa</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mob</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">npaira</span><span class="p">,</span> <span class="n">npairb</span> <span class="o">=</span> <span class="n">nmoa</span><span class="o">*</span><span class="p">(</span><span class="n">nmoa</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">nmob</span><span class="o">*</span><span class="p">(</span><span class="n">nmob</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+    <span class="n">naux</span> <span class="o">=</span> <span class="n">with_df</span><span class="o">.</span><span class="n">get_naoaux</span><span class="p">()</span>
+
+    <span class="n">qxy_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">npaira</span><span class="p">))</span>
+    <span class="n">qxy_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">npairb</span><span class="p">))</span>
+    <span class="n">moa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">moa</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+    <span class="n">mob</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mob</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span><span class="p">)</span>
+    <span class="n">sija</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nmoa</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nmoa</span><span class="p">)</span>
+    <span class="n">sijb</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nmob</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nmob</span><span class="p">)</span>
+    <span class="n">sym</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;aosym&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;mosym&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span><span class="p">}</span>
+
+    <span class="k">for</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">with_df</span><span class="o">.</span><span class="n">prange</span><span class="p">():</span>
+        <span class="n">eri0</span> <span class="o">=</span> <span class="n">with_df</span><span class="o">.</span><span class="n">_cderi</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span>
+        <span class="n">qxy_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">eri0</span><span class="p">,</span> <span class="n">moa</span><span class="p">,</span> <span class="n">sija</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qxy_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+        <span class="n">qxy_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">eri0</span><span class="p">,</span> <span class="n">mob</span><span class="p">,</span> <span class="n">sijb</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qxy_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qxy_a</span><span class="p">)</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qxy_b</span><span class="p">)</span>
+
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span> <span class="o">=</span> <span class="n">qxy_a</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span> <span class="o">=</span> <span class="n">qxy_b</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_aa</span> <span class="o">=</span> <span class="p">(</span><span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span><span class="p">,</span> <span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span><span class="p">)</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_ab</span> <span class="o">=</span> <span class="p">(</span><span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span><span class="p">,</span> <span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span><span class="p">)</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_ba</span> <span class="o">=</span> <span class="p">(</span><span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span><span class="p">,</span> <span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span><span class="p">)</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri_bb</span> <span class="o">=</span> <span class="p">(</span><span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span><span class="p">,</span> <span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span><span class="p">)</span>
+    <span class="n">eris</span><span class="o">.</span><span class="n">eri</span> <span class="o">=</span> <span class="p">(</span><span class="n">eris</span><span class="o">.</span><span class="n">eri_a</span><span class="p">,</span> <span class="n">eris</span><span class="o">.</span><span class="n">eri_b</span><span class="p">)</span>
+
+    <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;MO integral transformation&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">eris</span>
+
+<span class="k">def</span> <span class="nf">_make_qmo_eris_incore</span><span class="p">(</span><span class="n">agf2</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="n">coeffs_a</span><span class="p">,</span> <span class="n">coeffs_b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39; Returns nested tuple of ndarray</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">cput0</span> <span class="o">=</span> <span class="p">(</span><span class="n">logger</span><span class="o">.</span><span class="n">process_clock</span><span class="p">(),</span> <span class="n">logger</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">())</span>
+    <span class="n">log</span> <span class="o">=</span> <span class="n">logger</span><span class="o">.</span><span class="n">Logger</span><span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">agf2</span><span class="o">.</span><span class="n">verbose</span><span class="p">)</span>
+
+    <span class="n">cxa</span><span class="p">,</span> <span class="n">cxb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">nmo</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">nmo</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">agf2</span><span class="o">.</span><span class="n">frozen</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">uagf2</span><span class="o">.</span><span class="n">get_frozen_mask</span><span class="p">(</span><span class="n">agf2</span><span class="p">)</span>
+        <span class="n">cxa</span> <span class="o">=</span> <span class="n">cxa</span><span class="p">[:,</span><span class="n">mask</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+        <span class="n">cxb</span> <span class="o">=</span> <span class="n">cxb</span><span class="p">[:,</span><span class="n">mask</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="n">nmoa</span><span class="p">,</span> <span class="n">nmob</span> <span class="o">=</span> <span class="n">agf2</span><span class="o">.</span><span class="n">nmo</span>
+    <span class="n">npaira</span><span class="p">,</span> <span class="n">npairb</span> <span class="o">=</span> <span class="n">nmoa</span><span class="o">*</span><span class="p">(</span><span class="n">nmoa</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="n">nmob</span><span class="o">*</span><span class="p">(</span><span class="n">nmob</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+    <span class="n">with_df</span> <span class="o">=</span> <span class="n">agf2</span><span class="o">.</span><span class="n">with_df</span>
+    <span class="n">naux</span> <span class="o">=</span> <span class="n">with_df</span><span class="o">.</span><span class="n">get_naoaux</span><span class="p">()</span>
+    <span class="n">cia</span><span class="p">,</span> <span class="n">cja</span><span class="p">,</span> <span class="n">caa</span> <span class="o">=</span> <span class="n">coeffs_a</span>
+    <span class="n">cib</span><span class="p">,</span> <span class="n">cjb</span><span class="p">,</span> <span class="n">cab</span> <span class="o">=</span> <span class="n">coeffs_b</span>
+
+    <span class="n">xisym_a</span><span class="p">,</span> <span class="n">nxi_a</span><span class="p">,</span> <span class="n">cxi_a</span><span class="p">,</span> <span class="n">sxi_a</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">incore</span><span class="o">.</span><span class="n">_conc_mos</span><span class="p">(</span><span class="n">cxa</span><span class="p">,</span> <span class="n">cia</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">jasym_a</span><span class="p">,</span> <span class="n">nja_a</span><span class="p">,</span> <span class="n">cja_a</span><span class="p">,</span> <span class="n">sja_a</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">incore</span><span class="o">.</span><span class="n">_conc_mos</span><span class="p">(</span><span class="n">cja</span><span class="p">,</span> <span class="n">caa</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">xisym_b</span><span class="p">,</span> <span class="n">nxi_b</span><span class="p">,</span> <span class="n">cxi_b</span><span class="p">,</span> <span class="n">sxi_b</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">incore</span><span class="o">.</span><span class="n">_conc_mos</span><span class="p">(</span><span class="n">cxb</span><span class="p">,</span> <span class="n">cib</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">jasym_b</span><span class="p">,</span> <span class="n">nja_b</span><span class="p">,</span> <span class="n">cja_b</span><span class="p">,</span> <span class="n">sja_b</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">incore</span><span class="o">.</span><span class="n">_conc_mos</span><span class="p">(</span><span class="n">cjb</span><span class="p">,</span> <span class="n">cab</span><span class="p">,</span> <span class="n">compact</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">sym</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;aosym&#39;</span><span class="p">:</span> <span class="s1">&#39;s2&#39;</span><span class="p">,</span> <span class="s1">&#39;mosym&#39;</span><span class="p">:</span> <span class="s1">&#39;s1&#39;</span><span class="p">}</span>
+
+    <span class="n">qxi_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">nxi_a</span><span class="p">))</span>
+    <span class="n">qxi_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">nxi_b</span><span class="p">))</span>
+    <span class="n">qja_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">nja_a</span><span class="p">))</span>
+    <span class="n">qja_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">naux</span><span class="p">,</span> <span class="n">nja_b</span><span class="p">))</span>
+    <span class="n">buf</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">with_df</span><span class="o">.</span><span class="n">blockdim</span><span class="p">,</span> <span class="n">npaira</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">with_df</span><span class="o">.</span><span class="n">blockdim</span><span class="p">,</span> <span class="n">npairb</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">p0</span><span class="p">,</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">mpi_helper</span><span class="o">.</span><span class="n">prange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">naux</span><span class="p">,</span> <span class="n">with_df</span><span class="o">.</span><span class="n">blockdim</span><span class="p">):</span>
+        <span class="n">naux0</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">-</span> <span class="n">p0</span>
+        <span class="n">bufa0</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="n">naux0</span><span class="p">]</span>
+        <span class="n">bufb0</span> <span class="o">=</span> <span class="n">buf</span><span class="p">[</span><span class="mi">1</span><span class="p">][:</span><span class="n">naux0</span><span class="p">]</span>
+        <span class="n">bufa0</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">eri</span><span class="o">.</span><span class="n">eri</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span>
+        <span class="n">bufb0</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">eri</span><span class="o">.</span><span class="n">eri</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span>
+
+        <span class="n">qxi_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">bufa0</span><span class="p">,</span> <span class="n">cxi_a</span><span class="p">,</span> <span class="n">sxi_a</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qxi_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+        <span class="n">qxi_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">bufb0</span><span class="p">,</span> <span class="n">cxi_b</span><span class="p">,</span> <span class="n">sxi_b</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qxi_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+        <span class="n">qja_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">bufa0</span><span class="p">,</span> <span class="n">cja_a</span><span class="p">,</span> <span class="n">sja_a</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qja_a</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+        <span class="n">qja_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ao2mo</span><span class="o">.</span><span class="n">_ao2mo</span><span class="o">.</span><span class="n">nr_e2</span><span class="p">(</span><span class="n">bufb0</span><span class="p">,</span> <span class="n">cja_b</span><span class="p">,</span> <span class="n">sja_b</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">qja_b</span><span class="p">[</span><span class="n">p0</span><span class="p">:</span><span class="n">p1</span><span class="p">],</span> <span class="o">**</span><span class="n">sym</span><span class="p">)</span>
+
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">barrier</span><span class="p">()</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qxi_a</span><span class="p">)</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qxi_b</span><span class="p">)</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qja_a</span><span class="p">)</span>
+    <span class="n">mpi_helper</span><span class="o">.</span><span class="n">allreduce_safe_inplace</span><span class="p">(</span><span class="n">qja_b</span><span class="p">)</span>
+
+    <span class="n">qxi_a</span> <span class="o">=</span> <span class="n">qxi_a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">naux</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qxi_b</span> <span class="o">=</span> <span class="n">qxi_b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">naux</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qja_a</span> <span class="o">=</span> <span class="n">qja_a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">naux</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">qja_b</span> <span class="o">=</span> <span class="n">qja_b</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">naux</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">log</span><span class="o">.</span><span class="n">timer</span><span class="p">(</span><span class="s1">&#39;QMO integral transformation&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">cput0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">((</span><span class="n">qxi_a</span><span class="p">,</span> <span class="n">qja_a</span><span class="p">),</span> <span class="p">(</span><span class="n">qxi_b</span><span class="p">,</span> <span class="n">qja_b</span><span class="p">))</span>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">gto</span><span class="p">,</span> <span class="n">scf</span><span class="p">,</span> <span class="n">mp</span>
+    <span class="kn">import</span> <span class="nn">pyscf.scf.stability</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">M</span><span class="p">(</span><span class="n">atom</span><span class="o">=</span><span class="s1">&#39;O 0 0 0; H 0 0 1; H 0 1 0&#39;</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;cc-pvdz&#39;</span><span class="p">,</span> <span class="n">charge</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">uhf</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">UHF</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="o">.</span><span class="n">density_fit</span><span class="p">()</span>
+    <span class="n">uhf</span><span class="o">.</span><span class="n">conv_tol</span> <span class="o">=</span> <span class="mf">1e-11</span>
+    <span class="n">uhf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">niter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+        <span class="n">stability</span> <span class="o">=</span> <span class="n">scf</span><span class="o">.</span><span class="n">stability</span><span class="o">.</span><span class="n">uhf_stability</span><span class="p">(</span><span class="n">uhf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stability</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">sint</span><span class="p">,</span> <span class="n">sext</span> <span class="o">=</span> <span class="n">stability</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sint</span> <span class="o">=</span> <span class="n">stability</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">sint</span><span class="p">,</span> <span class="n">uhf</span><span class="o">.</span><span class="n">mo_coeff</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rdm1</span> <span class="o">=</span> <span class="n">uhf</span><span class="o">.</span><span class="n">make_rdm1</span><span class="p">(</span><span class="n">sint</span><span class="p">,</span> <span class="n">uhf</span><span class="o">.</span><span class="n">mo_occ</span><span class="p">)</span>
+        <span class="n">uhf</span><span class="o">.</span><span class="n">scf</span><span class="p">(</span><span class="n">dm0</span><span class="o">=</span><span class="n">rdm1</span><span class="p">)</span>
+
+    <span class="n">uagf2</span> <span class="o">=</span> <span class="n">DFUAGF2</span><span class="p">(</span><span class="n">uhf</span><span class="p">)</span>
+
+    <span class="n">uagf2</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="n">uagf2</span><span class="o">.</span><span class="n">ipagf2</span><span class="p">(</span><span class="n">nroots</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">uagf2</span><span class="o">.</span><span class="n">eaagf2</span><span class="p">(</span><span class="n">nroots</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

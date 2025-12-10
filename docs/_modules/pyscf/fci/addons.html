@@ -1,0 +1,1358 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyscf.fci.addons &#8212; PySCF</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/pyscf-pst.css?v=ed6b5f64" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=1647406f"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyscf/fci/addons';</script>
+    <link rel="icon" href="../../../_static/favicon-32x32.png"/>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="2.11" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-light" alt=""/>
+    <img src="../../../_static/logo-64x64.png" class="logo__image only-dark pst-js-only" alt=""/>
+  
+  
+    <p class="title logo__title">PySCF</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quickstart.html">
+    Quickstart
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../contributor/index.html">
+    Contributor Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../about.html">
+    About
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/pyscf/pyscf" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../../pyscf.html" class="nav-link">pyscf</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="../fci.html" class="nav-link">pyscf.fci</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyscf.fci.addons</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyscf.fci.addons</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># Copyright 2014-2021 The PySCF Developers. All Rights Reserved.</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">lib</span>
+<span class="kn">from</span> <span class="nn">pyscf.fci</span> <span class="kn">import</span> <span class="n">cistring</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">symm</span>
+<span class="kn">from</span> <span class="nn">pyscf</span> <span class="kn">import</span> <span class="n">__config__</span>
+
+<span class="n">LARGE_CI_TOL</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;fci_addons_large_ci_tol&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">RETURN_STRS</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;fci_addons_large_ci_return_strs&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">PENALTY</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">__config__</span><span class="p">,</span> <span class="s1">&#39;fci_addons_fix_spin_shift&#39;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="large_ci">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.large_ci">[docs]</a>
+<span class="k">def</span> <span class="nf">large_ci</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">LARGE_CI_TOL</span><span class="p">,</span> <span class="n">return_strs</span><span class="o">=</span><span class="n">RETURN_STRS</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Search for the largest CI coefficients</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="n">na</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">ci</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">na</span> <span class="o">*</span> <span class="n">nb</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">na</span><span class="p">,</span> <span class="n">nb</span><span class="p">)</span>
+    <span class="n">addra</span><span class="p">,</span> <span class="n">addrb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">addra</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># No large CI coefficient &gt; tol, search for the largest coefficient</span>
+        <span class="n">addra</span><span class="p">,</span> <span class="n">addrb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">unravel_index</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ci</span><span class="p">)),</span> <span class="n">ci</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">addra</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">addra</span><span class="p">])</span>
+        <span class="n">addrb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">addrb</span><span class="p">])</span>
+    <span class="n">strsa</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">addrs2str</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">,</span> <span class="n">addra</span><span class="p">)</span>
+    <span class="n">strsb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">addrs2str</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">,</span> <span class="n">addrb</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">return_strs</span><span class="p">:</span>
+        <span class="n">strsa</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">strsa</span><span class="p">]</span>
+        <span class="n">strsb</span> <span class="o">=</span> <span class="p">[</span><span class="nb">bin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">strsb</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ci</span><span class="p">[</span><span class="n">addra</span><span class="p">,</span><span class="n">addrb</span><span class="p">],</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">occslsta</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">_strs2occslst</span><span class="p">(</span><span class="n">strsa</span><span class="p">,</span> <span class="n">norb</span><span class="p">)</span>
+        <span class="n">occslstb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">_strs2occslst</span><span class="p">(</span><span class="n">strsb</span><span class="p">,</span> <span class="n">norb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ci</span><span class="p">[</span><span class="n">addra</span><span class="p">,</span><span class="n">addrb</span><span class="p">],</span> <span class="n">occslsta</span><span class="p">,</span> <span class="n">occslstb</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="initguess_triplet">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.initguess_triplet">[docs]</a>
+<span class="k">def</span> <span class="nf">initguess_triplet</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">binstring</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Generate a triplet initial guess for FCI solver</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="n">na</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">addr</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">str2addr</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">binstring</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+    <span class="n">ci0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">na</span><span class="p">,</span><span class="n">nb</span><span class="p">))</span>
+    <span class="n">ci0</span><span class="p">[</span><span class="n">addr</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">ci0</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">addr</span><span class="p">]</span> <span class="o">=-</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ci0</span></div>
+
+
+<div class="viewcode-block" id="symm_initguess">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.symm_initguess">[docs]</a>
+<span class="k">def</span> <span class="nf">symm_initguess</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">,</span> <span class="n">wfnsym</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">irrep_nelec</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Generate CI wavefunction initial guess which has the given symmetry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        nelec : int or 2-item list</span>
+<span class="sd">            Number of electrons, or 2-item list for (alpha, beta) electrons</span>
+<span class="sd">        orbsym : list of int</span>
+<span class="sd">            The irrep ID for each orbital.</span>
+
+<span class="sd">    Kwags:</span>
+<span class="sd">        wfnsym : int</span>
+<span class="sd">            The irrep ID of target symmetry</span>
+<span class="sd">        irrep_nelec : dict</span>
+<span class="sd">            Freeze occupancy for certain irreps</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        CI coefficients 2D array which has the target symmetry.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">raise</span> <span class="ne">DeprecationWarning</span></div>
+
+
+
+<div class="viewcode-block" id="cylindrical_init_guess">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.cylindrical_init_guess">[docs]</a>
+<span class="k">def</span> <span class="nf">cylindrical_init_guess</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">,</span> <span class="n">wfnsym</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">singlet</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                           <span class="n">nroots</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    FCI initial guess for system of cylindrical symmetry.</span>
+<span class="sd">    (In testing)</span>
+
+<span class="sd">    Examples:</span>
+
+<span class="sd">    &gt;&gt;&gt; mol = gto.M(atom=&#39;O; O 1 1.2&#39;, spin=2, symmetry=True)</span>
+<span class="sd">    &gt;&gt;&gt; orbsym = [6,7,2,3]</span>
+<span class="sd">    &gt;&gt;&gt; ci0 = fci.addons.cylindrical_init_guess(mol, 4, (3,3), orbsym, wfnsym=10)[0]</span>
+<span class="sd">    &gt;&gt;&gt; print(ci0.reshape(4,4))</span>
+<span class="sd">    &gt;&gt;&gt; ci0 = fci.addons.cylindrical_init_guess(mol, 4, (3,3), orbsym, wfnsym=10, singlet=False)[0]</span>
+<span class="sd">    &gt;&gt;&gt; print(ci0.reshape(4,4))</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Initial guess for cylindrical symmetry is under testing&#39;</span><span class="p">)</span>
+
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orbsym</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">orbsym</span> <span class="o">=</span> <span class="p">[</span><span class="n">symm</span><span class="o">.</span><span class="n">irrep_name2id</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">groupname</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">orbsym</span><span class="p">]</span>
+    <span class="n">orbsym</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">orbsym</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">wfnsym</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">wfnsym</span> <span class="o">=</span> <span class="n">symm</span><span class="o">.</span><span class="n">irrep_name2id</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">groupname</span><span class="p">,</span> <span class="n">wfnsym</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">groupname</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;SO3&#39;</span><span class="p">,</span> <span class="s1">&#39;Dooh&#39;</span><span class="p">,</span> <span class="s1">&#39;Coov&#39;</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">irrep_id2lz</span><span class="p">(</span><span class="n">irrep_id</span><span class="p">):</span>
+            <span class="c1"># See also symm.basis.DOOH_IRREP_ID_TABLE</span>
+            <span class="n">level</span> <span class="o">=</span> <span class="n">irrep_id</span> <span class="o">//</span> <span class="mi">10</span>
+            <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">groupname</span> <span class="o">==</span> <span class="s1">&#39;SO3&#39;</span><span class="p">:</span>
+                <span class="n">level</span> <span class="o">=</span> <span class="n">level</span> <span class="o">%</span> <span class="mi">10</span>  <span class="c1"># See SO3 irreps in pyscf.symm.basis</span>
+            <span class="n">d2h_id</span> <span class="o">=</span> <span class="n">irrep_id</span> <span class="o">%</span> <span class="mi">10</span>
+            <span class="c1"># irrep_id 0,1,4,5 corresponds to lz = 0,2,4,...</span>
+            <span class="c1"># irrep_id 2,3,6,7 corresponds to lz = 1,3,5,...</span>
+            <span class="n">lz</span> <span class="o">=</span> <span class="n">level</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">((</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">6</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">7</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">irrep_id</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">number</span><span class="p">)):</span>
+                <span class="c1"># irrep_id 1,3,4,6 corresponds to E_y (E_{(-)})</span>
+                <span class="c1"># irrep_id 0,2,5,7 corresponds to E_x (E_{(+)})</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">6</span><span class="p">):</span>
+                    <span class="n">lz</span> <span class="o">=</span> <span class="o">-</span><span class="n">lz</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">lz</span><span class="p">[(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">d2h_id</span><span class="o">==</span><span class="mi">6</span><span class="p">)]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">return</span> <span class="n">lz</span>
+
+        <span class="n">orb_lz</span> <span class="o">=</span> <span class="n">irrep_id2lz</span><span class="p">(</span><span class="n">orbsym</span><span class="p">)</span>
+        <span class="n">wfn_lz</span> <span class="o">=</span> <span class="n">irrep_id2lz</span><span class="p">(</span><span class="n">wfnsym</span><span class="p">)</span>
+        <span class="n">d2h_wfnsym_id</span> <span class="o">=</span> <span class="n">wfnsym</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+        <span class="n">orb_lz</span> <span class="o">=</span> <span class="n">wfn_lz</span> <span class="o">=</span> <span class="n">d2h_wfnsym_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="n">occslsta</span> <span class="o">=</span> <span class="n">occslstb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_occslst</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">!=</span> <span class="n">nelecb</span><span class="p">:</span>
+        <span class="n">occslstb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_occslst</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">occslsta</span><span class="p">)</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">occslsta</span><span class="p">)</span>
+
+    <span class="n">gx_mask</span> <span class="o">=</span> <span class="n">orbsym</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="n">gy_mask</span> <span class="o">=</span> <span class="n">orbsym</span> <span class="o">==</span> <span class="mi">3</span>
+    <span class="n">ux_mask</span> <span class="o">=</span> <span class="n">orbsym</span> <span class="o">==</span> <span class="mi">7</span>
+    <span class="n">uy_mask</span> <span class="o">=</span> <span class="n">orbsym</span> <span class="o">==</span> <span class="mi">6</span>
+    <span class="n">all_lz</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">orb_lz</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">search_open_shell_det</span><span class="p">(</span><span class="n">occ_lst</span><span class="p">):</span>
+        <span class="n">occ_mask</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">occ_mask</span><span class="p">[</span><span class="n">occ_lst</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># First search Lz of the open-shell orbital</span>
+        <span class="k">for</span> <span class="n">lz_open</span> <span class="ow">in</span> <span class="n">all_lz</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="n">n_gx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">gx_mask</span> <span class="o">&amp;</span> <span class="n">occ_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">))</span>
+        <span class="n">n_gy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">gy_mask</span> <span class="o">&amp;</span> <span class="n">occ_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">))</span>
+        <span class="n">n_ux</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">ux_mask</span> <span class="o">&amp;</span> <span class="n">occ_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">))</span>
+        <span class="n">n_uy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">uy_mask</span> <span class="o">&amp;</span> <span class="n">occ_mask</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">n_gx</span> <span class="o">&gt;</span> <span class="n">n_gy</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_mask</span>    <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gx_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="o">~</span><span class="n">occ_mask</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gy_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">n_gx</span> <span class="o">&lt;</span> <span class="n">n_gy</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="o">~</span><span class="n">occ_mask</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gx_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_mask</span>    <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">gy_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">n_ux</span> <span class="o">&gt;</span> <span class="n">n_uy</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_mask</span>    <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">ux_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="o">~</span><span class="n">occ_mask</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">uy_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">n_ux</span> <span class="o">&lt;</span> <span class="n">n_uy</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="o">~</span><span class="n">occ_mask</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==</span> <span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">ux_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">idy</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_mask</span>    <span class="o">&amp;</span> <span class="p">(</span><span class="n">orb_lz</span> <span class="o">==-</span><span class="n">lz_open</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">uy_mask</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span>
+
+        <span class="n">nelec</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">occ_lst</span><span class="p">)</span>
+        <span class="n">det_x</span> <span class="o">=</span> <span class="n">occ_mask</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">det_x</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">det_x</span><span class="p">[</span><span class="n">idy</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">str_x</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">det_x</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">addr_x</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">str2addr</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">str_x</span><span class="p">)</span>
+        <span class="n">det_y</span> <span class="o">=</span> <span class="n">occ_mask</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">det_y</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">det_y</span><span class="p">[</span><span class="n">idy</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">str_y</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;1&#39;</span> <span class="k">if</span> <span class="n">i</span> <span class="k">else</span> <span class="s1">&#39;0&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">det_y</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+        <span class="n">addr_y</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">str2addr</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">str_y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">addr_x</span><span class="p">,</span> <span class="n">addr_y</span>
+
+    <span class="n">ci0</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">iroot</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="o">*</span><span class="n">nb</span><span class="p">):</span>
+        <span class="n">ci_1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">na</span><span class="p">,</span><span class="n">nb</span><span class="p">))</span>
+        <span class="n">addra</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">//</span> <span class="n">nb</span>
+        <span class="n">addrb</span> <span class="o">=</span> <span class="n">addr</span> <span class="o">%</span> <span class="n">nb</span>
+        <span class="n">occa</span> <span class="o">=</span> <span class="n">occslsta</span><span class="p">[</span><span class="n">addra</span><span class="p">]</span>
+        <span class="n">occb</span> <span class="o">=</span> <span class="n">occslstb</span><span class="p">[</span><span class="n">addrb</span><span class="p">]</span>
+        <span class="n">tot_sym</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">occa</span><span class="p">:</span>
+            <span class="n">tot_sym</span> <span class="o">^=</span> <span class="n">orbsym</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">occb</span><span class="p">:</span>
+            <span class="n">tot_sym</span> <span class="o">^=</span> <span class="n">orbsym</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">tot_sym</span> <span class="o">==</span> <span class="n">d2h_wfnsym_id</span><span class="p">:</span>
+            <span class="n">n_Ex_a</span> <span class="o">=</span> <span class="p">(</span><span class="n">gx_mask</span><span class="p">[</span><span class="n">occa</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">ux_mask</span><span class="p">[</span><span class="n">occa</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">n_Ey_a</span> <span class="o">=</span> <span class="p">(</span><span class="n">gy_mask</span><span class="p">[</span><span class="n">occa</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">uy_mask</span><span class="p">[</span><span class="n">occa</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">n_Ex_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">gx_mask</span><span class="p">[</span><span class="n">occb</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">ux_mask</span><span class="p">[</span><span class="n">occb</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="n">n_Ey_b</span> <span class="o">=</span> <span class="p">(</span><span class="n">gy_mask</span><span class="p">[</span><span class="n">occb</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">uy_mask</span><span class="p">[</span><span class="n">occb</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n_Ex_a</span> <span class="o">-</span> <span class="n">n_Ey_a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="nb">abs</span><span class="p">(</span><span class="n">n_Ex_b</span> <span class="o">-</span> <span class="n">n_Ey_b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="c1"># open-shell for both alpha det and beta det e.g. the</span>
+                <span class="c1"># valence part of O2 molecule</span>
+
+                <span class="n">addr_x_a</span><span class="p">,</span> <span class="n">addr_y_a</span> <span class="o">=</span> <span class="n">search_open_shell_det</span><span class="p">(</span><span class="n">occa</span><span class="p">)</span>
+                <span class="n">addr_x_b</span><span class="p">,</span> <span class="n">addr_y_b</span> <span class="o">=</span> <span class="n">search_open_shell_det</span><span class="p">(</span><span class="n">occb</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">singlet</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">wfn_lz</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_x_a</span><span class="p">,</span><span class="n">addr_x_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+                        <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_y_a</span><span class="p">,</span><span class="n">addr_y_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_x_a</span><span class="p">,</span><span class="n">addr_x_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+                        <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_y_a</span><span class="p">,</span><span class="n">addr_y_b</span><span class="p">]</span> <span class="o">=-</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_x_a</span><span class="p">,</span><span class="n">addr_y_b</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+                    <span class="n">ci_1</span><span class="p">[</span><span class="n">addr_y_a</span><span class="p">,</span><span class="n">addr_x_b</span><span class="p">]</span> <span class="o">=-</span><span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># TODO: Other direct-product to direct-sum transformation</span>
+                <span class="c1"># which involves CG coefficients.</span>
+                <span class="n">ci_1</span><span class="p">[</span><span class="n">addra</span><span class="p">,</span><span class="n">addrb</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">ci0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ci_1</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+            <span class="n">iroot</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">iroot</span> <span class="o">&gt;=</span> <span class="n">nroots</span><span class="p">:</span>
+                <span class="k">break</span>
+
+    <span class="k">return</span> <span class="n">ci0</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_symmetrize_wfn</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">,</span> <span class="n">wfnsym</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">strsa</span><span class="o">.</span><span class="n">size</span><span class="p">,</span><span class="n">strsb</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+    <span class="n">airreps</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">strsa</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">birreps</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">strsb</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">)</span>
+    <span class="n">orbsym_in_d2h</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">orbsym</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="n">wfnsym_in_d2h</span> <span class="o">=</span> <span class="n">wfnsym</span> <span class="o">%</span> <span class="mi">10</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbsym_in_d2h</span><span class="p">):</span>
+        <span class="n">airreps</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">strsa</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^=</span> <span class="n">ir</span>
+        <span class="n">birreps</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">bitwise_and</span><span class="p">(</span><span class="n">strsb</span><span class="p">,</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">^=</span> <span class="n">ir</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">airreps</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">^</span> <span class="n">birreps</span><span class="p">)</span> <span class="o">==</span> <span class="n">wfnsym_in_d2h</span>
+    <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span>
+    <span class="n">ci1</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">ci</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+    <span class="n">ci1</span> <span class="o">*=</span> <span class="mi">1</span><span class="o">/</span><span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">ci1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ci1</span>
+<div class="viewcode-block" id="symmetrize_wfn">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.symmetrize_wfn">[docs]</a>
+<span class="k">def</span> <span class="nf">symmetrize_wfn</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">,</span> <span class="n">wfnsym</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Symmetrize the CI wavefunction by zeroing out the determinants which</span>
+<span class="sd">    do not have the right symmetry.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        nelec : int or 2-item list</span>
+<span class="sd">            Number of electrons, or 2-item list for (alpha, beta) electrons</span>
+<span class="sd">        orbsym : list of int</span>
+<span class="sd">            The irrep ID for each orbital.</span>
+
+<span class="sd">    Kwags:</span>
+<span class="sd">        wfnsym : int</span>
+<span class="sd">            The irrep ID of target symmetry</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2D array which is the symmetrized CI coefficients</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="n">strsa</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">neleca</span><span class="p">))</span>
+    <span class="n">strsb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">_symmetrize_wfn</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">,</span> <span class="n">wfnsym</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_guess_wfnsym</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">):</span>
+    <span class="n">nb</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">strsb</span><span class="p">)</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ci</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+    <span class="n">stra</span> <span class="o">=</span> <span class="n">strsa</span><span class="p">[</span><span class="n">idx</span> <span class="o">//</span> <span class="n">nb</span><span class="p">]</span>
+    <span class="n">strb</span> <span class="o">=</span> <span class="n">strsb</span><span class="p">[</span><span class="n">idx</span> <span class="o">%</span> <span class="n">nb</span> <span class="p">]</span>
+
+    <span class="n">orbsym_in_d2h</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">orbsym</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span>  <span class="c1"># convert to D2h irreps</span>
+    <span class="n">airrep</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">birrep</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ir</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">orbsym_in_d2h</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">stra</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)):</span>
+            <span class="n">airrep</span> <span class="o">^=</span> <span class="n">ir</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">strb</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)):</span>
+            <span class="n">birrep</span> <span class="o">^=</span> <span class="n">ir</span>
+    <span class="k">return</span> <span class="n">airrep</span> <span class="o">^</span> <span class="n">birrep</span>
+<div class="viewcode-block" id="guess_wfnsym">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.guess_wfnsym">[docs]</a>
+<span class="k">def</span> <span class="nf">guess_wfnsym</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Guess the wavefunction symmetry based on the non-zero elements in the</span>
+<span class="sd">    given CI coefficients.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        nelec : int or 2-item list</span>
+<span class="sd">            Number of electrons, or 2-item list for (alpha, beta) electrons</span>
+<span class="sd">        orbsym : list of int</span>
+<span class="sd">            The irrep ID for each orbital.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Irrep ID</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="n">strsa</span> <span class="o">=</span> <span class="n">strsb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">neleca</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">!=</span> <span class="n">nelecb</span><span class="p">:</span>
+        <span class="n">strsb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ci</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">wfnsym</span> <span class="o">=</span> <span class="n">_guess_wfnsym</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wfnsym</span> <span class="o">=</span> <span class="p">[</span><span class="n">_guess_wfnsym</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">strsa</span><span class="p">,</span> <span class="n">strsb</span><span class="p">,</span> <span class="n">orbsym</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ci</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">wfnsym</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">wfnsym</span><span class="p">):</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Different wfnsym </span><span class="si">%s</span><span class="s1"> found in different CI vectors&#39;</span> <span class="o">%</span> <span class="n">wfnsym</span><span class="p">)</span>
+        <span class="n">wfnsym</span> <span class="o">=</span> <span class="n">wfnsym</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">wfnsym</span></div>
+
+
+
+<div class="viewcode-block" id="des_a">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.des_a">[docs]</a>
+<span class="k">def</span> <span class="nf">des_a</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">neleca_nelecb</span><span class="p">,</span> <span class="n">ap_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Construct (N-1)-electron wavefunction by removing an alpha electron from</span>
+<span class="sd">    the N-electron wavefunction.</span>
+
+<span class="sd">    ... math::</span>
+
+<span class="sd">        |N-1\rangle = \hat{a}_p |N\rangle</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0 : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        (neleca,nelecb) : (int,int)</span>
+<span class="sd">            Number of (alpha, beta) electrons of the input CI function</span>
+<span class="sd">        ap_id : int</span>
+<span class="sd">            Orbital index (0-based), for the annihilation operator</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2D array, row for alpha strings and column for beta strings.  Note it</span>
+<span class="sd">        has different number of rows to the input CI coefficients</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">neleca_nelecb</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ci0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ci0</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ci0</span> <span class="o">=</span> <span class="n">ci0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">),</span>
+                          <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="n">des_index</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_des_str_index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">na_ci1</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">na_ci1</span><span class="p">,</span> <span class="n">ci0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">entry_has_ap</span> <span class="o">=</span> <span class="p">(</span><span class="n">des_index</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ap_id</span><span class="p">)</span>
+    <span class="n">addr_ci0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">entry_has_ap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">addr_ci1</span> <span class="o">=</span> <span class="n">des_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">des_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="c1">#print(addr_ci0)</span>
+    <span class="c1">#print(addr_ci1)</span>
+    <span class="n">ci1</span><span class="p">[</span><span class="n">addr_ci1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ci0</span><span class="p">[</span><span class="n">addr_ci0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ci1</span></div>
+
+
+<div class="viewcode-block" id="des_b">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.des_b">[docs]</a>
+<span class="k">def</span> <span class="nf">des_b</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">neleca_nelecb</span><span class="p">,</span> <span class="n">ap_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Construct (N-1)-electron wavefunction by removing a beta electron from</span>
+<span class="sd">    N-electron wavefunction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0 : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        (neleca,nelecb) : (int,int)</span>
+<span class="sd">            Number of (alpha, beta) electrons of the input CI function</span>
+<span class="sd">        ap_id : int</span>
+<span class="sd">            Orbital index (0-based), for the annihilation operator</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2D array, row for alpha strings and column for beta strings. Note it</span>
+<span class="sd">        has different number of columns to the input CI coefficients.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">neleca_nelecb</span>
+    <span class="k">if</span> <span class="n">nelecb</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ci0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ci0</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ci0</span> <span class="o">=</span> <span class="n">ci0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">),</span>
+                          <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="n">des_index</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_des_str_index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">nb_ci1</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ci0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nb_ci1</span><span class="p">))</span>
+
+    <span class="n">entry_has_ap</span> <span class="o">=</span> <span class="p">(</span><span class="n">des_index</span><span class="p">[:,:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">ap_id</span><span class="p">)</span>
+    <span class="n">addr_ci0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">entry_has_ap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">addr_ci1</span> <span class="o">=</span> <span class="n">des_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">des_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="c1"># This sign prefactor accounts for interchange of operators with alpha and beta spins</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">sign</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">ci1</span><span class="p">[:,</span><span class="n">addr_ci1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ci0</span><span class="p">[:,</span><span class="n">addr_ci0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign</span>
+    <span class="k">return</span> <span class="n">ci1</span></div>
+
+
+<div class="viewcode-block" id="cre_a">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.cre_a">[docs]</a>
+<span class="k">def</span> <span class="nf">cre_a</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">neleca_nelecb</span><span class="p">,</span> <span class="n">ap_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Construct (N+1)-electron wavefunction by adding an alpha electron in</span>
+<span class="sd">    the N-electron wavefunction.</span>
+
+<span class="sd">    ... math::</span>
+
+<span class="sd">        |N+1\rangle = \hat{a}^+_p |N\rangle</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0 : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        (neleca,nelecb) : (int,int)</span>
+<span class="sd">            Number of (alpha, beta) electrons of the input CI function</span>
+<span class="sd">        ap_id : int</span>
+<span class="sd">            Orbital index (0-based), for the creation operator</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2D array, row for alpha strings and column for beta strings. Note it</span>
+<span class="sd">        has different number of rows to the input CI coefficients.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">neleca_nelecb</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">&gt;=</span> <span class="n">norb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ci0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ci0</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ci0</span> <span class="o">=</span> <span class="n">ci0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">),</span>
+                          <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="n">cre_index</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_cre_str_index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">na_ci1</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">na_ci1</span><span class="p">,</span> <span class="n">ci0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="n">entry_has_ap</span> <span class="o">=</span> <span class="p">(</span><span class="n">cre_index</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ap_id</span><span class="p">)</span>
+    <span class="n">addr_ci0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">entry_has_ap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">addr_ci1</span> <span class="o">=</span> <span class="n">cre_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">cre_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">ci1</span><span class="p">[</span><span class="n">addr_ci1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sign</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">ci0</span><span class="p">[</span><span class="n">addr_ci0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ci1</span></div>
+
+
+<span class="c1"># construct (N+1)-electron wavefunction by adding a beta electron to</span>
+<span class="c1"># N-electron wavefunction:</span>
+<div class="viewcode-block" id="cre_b">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.cre_b">[docs]</a>
+<span class="k">def</span> <span class="nf">cre_b</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">neleca_nelecb</span><span class="p">,</span> <span class="n">ap_id</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;Construct (N+1)-electron wavefunction by adding a beta electron in</span>
+<span class="sd">    the N-electron wavefunction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0 : 2D array</span>
+<span class="sd">            CI coefficients, row for alpha strings and column for beta strings.</span>
+<span class="sd">        norb : int</span>
+<span class="sd">            Number of orbitals.</span>
+<span class="sd">        (neleca,nelecb) : (int,int)</span>
+<span class="sd">            Number of (alpha, beta) electrons of the input CI function</span>
+<span class="sd">        ap_id : int</span>
+<span class="sd">            Orbital index (0-based), for the creation operator</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        2D array, row for alpha strings and column for beta strings. Note it</span>
+<span class="sd">        has different number of columns to the input CI coefficients.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">neleca_nelecb</span>
+    <span class="k">if</span> <span class="n">nelecb</span> <span class="o">&gt;=</span> <span class="n">norb</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">ci0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ci0</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">ci0</span> <span class="o">=</span> <span class="n">ci0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">),</span>
+                          <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">))</span>
+    <span class="n">cre_index</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">gen_cre_str_index</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">nb_ci1</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ci0</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">nb_ci1</span><span class="p">))</span>
+
+    <span class="n">entry_has_ap</span> <span class="o">=</span> <span class="p">(</span><span class="n">cre_index</span><span class="p">[:,:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">ap_id</span><span class="p">)</span>
+    <span class="n">addr_ci0</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">entry_has_ap</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">addr_ci1</span> <span class="o">=</span> <span class="n">cre_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">sign</span> <span class="o">=</span> <span class="n">cre_index</span><span class="p">[</span><span class="n">entry_has_ap</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+    <span class="c1"># This sign prefactor accounts for interchange of operators with alpha and beta spins</span>
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">sign</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">ci1</span><span class="p">[:,</span><span class="n">addr_ci1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ci0</span><span class="p">[:,</span><span class="n">addr_ci0</span><span class="p">]</span> <span class="o">*</span> <span class="n">sign</span>
+    <span class="k">return</span> <span class="n">ci1</span></div>
+
+
+<div class="viewcode-block" id="det_overlap">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.det_overlap">[docs]</a>
+<span class="k">def</span> <span class="nf">det_overlap</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="n">string2</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Determinants overlap on non-orthogonal one-particle basis&#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># orthogonal basis with s_ij = delta_ij</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string1</span> <span class="o">==</span> <span class="n">string2</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">nelec</span> <span class="o">=</span> <span class="n">string1</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+            <span class="n">string1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nelec</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">string1</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">string2</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="p">(</span><span class="n">string2</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">nelec</span><span class="p">)</span>
+            <span class="n">string2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">nelec</span><span class="p">)</span>
+        <span class="n">idx1</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">string1</span><span class="p">)]</span>
+        <span class="n">idx2</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&amp;</span> <span class="n">string2</span><span class="p">)]</span>
+        <span class="n">s1</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">take_2d</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">s1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="overlap">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.overlap">[docs]</a>
+<span class="k">def</span> <span class="nf">overlap</span><span class="p">(</span><span class="n">bra</span><span class="p">,</span> <span class="n">ket</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Overlap between two CI wavefunctions</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        s : 2D array or a list of 2D array</span>
+<span class="sd">            The overlap matrix of non-orthogonal one-particle basis</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">bra</span> <span class="o">=</span> <span class="n">transform_ci_for_orbital_rotation</span><span class="p">(</span><span class="n">bra</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">bra</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">conj</span><span class="p">(),</span> <span class="n">ket</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="SpinPenaltyFCISolver">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.SpinPenaltyFCISolver">[docs]</a>
+<span class="k">class</span> <span class="nc">SpinPenaltyFCISolver</span><span class="p">:</span>
+    <span class="n">__name_mixin__</span> <span class="o">=</span> <span class="s1">&#39;SpinPenalty&#39;</span>
+    <span class="n">_keys</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ss_value&#39;</span><span class="p">,</span> <span class="s1">&#39;ss_penalty&#39;</span><span class="p">,</span> <span class="s1">&#39;base&#39;</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fcibase</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">ss_value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">fcibase</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span> <span class="p">(</span><span class="n">fcibase</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss_value</span> <span class="o">=</span> <span class="n">ss_value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ss_penalty</span> <span class="o">=</span> <span class="n">shift</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">davidson_only</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span><span class="o">.</span><span class="n">davidson_only</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="SpinPenaltyFCISolver.undo_fix_spin">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.SpinPenaltyFCISolver.undo_fix_spin">[docs]</a>
+    <span class="k">def</span> <span class="nf">undo_fix_spin</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lib</span><span class="o">.</span><span class="n">drop_class</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">SpinPenaltyFCISolver</span><span class="p">))</span>
+        <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">base</span>
+        <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">ss_value</span>
+        <span class="k">del</span> <span class="n">obj</span><span class="o">.</span><span class="n">ss_penalty</span>
+        <span class="k">return</span> <span class="n">obj</span></div>
+
+
+<div class="viewcode-block" id="SpinPenaltyFCISolver.base_contract_2e">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.SpinPenaltyFCISolver.base_contract_2e">[docs]</a>
+    <span class="k">def</span> <span class="nf">base_contract_2e</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">contract_2e</span> <span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SpinPenaltyFCISolver.contract_2e">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.SpinPenaltyFCISolver.contract_2e">[docs]</a>
+    <span class="k">def</span> <span class="nf">contract_2e</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eri</span><span class="p">,</span> <span class="n">fcivec</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">link_index</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nelec</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">number</span><span class="p">)):</span>
+            <span class="n">sz</span> <span class="o">=</span> <span class="p">(</span><span class="n">nelec</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.5</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sz</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">nelec</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">nelec</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mf">.5</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ss</span> <span class="o">=</span> <span class="n">sz</span><span class="o">*</span><span class="p">(</span><span class="n">sz</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_value</span>
+
+        <span class="k">if</span> <span class="n">ss</span> <span class="o">&lt;</span> <span class="n">sz</span><span class="o">*</span><span class="p">(</span><span class="n">sz</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mf">.1</span><span class="p">:</span>
+            <span class="c1"># (S^2-ss)|Psi&gt; to shift state other than the lowest state</span>
+            <span class="n">ci1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contract_ss</span><span class="p">(</span><span class="n">fcivec</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">fcivec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">ci1</span> <span class="o">-=</span> <span class="n">ss</span> <span class="o">*</span> <span class="n">fcivec</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># (S^2-ss)^2|Psi&gt; to shift states except the given spin.</span>
+            <span class="c1"># It still relies on the quality of initial guess</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contract_ss</span><span class="p">(</span><span class="n">fcivec</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">fcivec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">-=</span> <span class="n">ss</span> <span class="o">*</span> <span class="n">fcivec</span>
+            <span class="n">ci1</span> <span class="o">=</span> <span class="o">-</span><span class="n">ss</span> <span class="o">*</span> <span class="n">tmp</span>
+            <span class="n">ci1</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contract_ss</span><span class="p">(</span><span class="n">tmp</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">fcivec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ci1</span> <span class="o">*=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ss_penalty</span>
+
+        <span class="n">ci0</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">contract_2e</span> <span class="p">(</span><span class="n">eri</span><span class="p">,</span> <span class="n">fcivec</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">link_index</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">ci1</span> <span class="o">+=</span> <span class="n">ci0</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">fcivec</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ci1</span></div>
+</div>
+
+
+<div class="viewcode-block" id="fix_spin">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.fix_spin">[docs]</a>
+<span class="k">def</span> <span class="nf">fix_spin</span><span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">PENALTY</span><span class="p">,</span> <span class="n">ss</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&#39;&#39;&#39;If FCI solver cannot stay on spin eigenfunction, this function can</span>
+<span class="sd">    add a shift to the states which have wrong spin.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        (H + shift*S^2) |\Psi\rangle = E |\Psi\rangle</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fciobj : An instance of :class:`FCISolver`</span>
+
+<span class="sd">    Kwargs:</span>
+<span class="sd">        shift : float</span>
+<span class="sd">            Level shift for states which have different spin</span>
+<span class="sd">        ss : number</span>
+<span class="sd">            S^2 expection value == s*(s+1)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">            A modified FCI object based on fciobj.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="kn">import</span> <span class="nn">types</span>
+    <span class="kn">from</span> <span class="nn">pyscf.fci</span> <span class="kn">import</span> <span class="n">direct_uhf</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">direct_uhf</span><span class="o">.</span><span class="n">FCISolver</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">types</span><span class="o">.</span><span class="n">ModuleType</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">DeprecationWarning</span><span class="p">(</span><span class="s1">&#39;fix_spin should be applied on FCI object only&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s1">&#39;ss_value&#39;</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;fix_spin_: kwarg &quot;ss_value&quot; will be removed in future release. &#39;</span>
+                         <span class="s1">&#39;It was replaced by &quot;ss&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">ss_value</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;ss_value&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ss_value</span> <span class="o">=</span> <span class="n">ss</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">SpinPenaltyFCISolver</span><span class="p">):</span>
+        <span class="c1"># recursion avoidance</span>
+        <span class="n">fciobj</span><span class="o">.</span><span class="n">ss_penalty</span> <span class="o">=</span> <span class="n">shift</span>
+        <span class="n">fciobj</span><span class="o">.</span><span class="n">ss_value</span> <span class="o">=</span> <span class="n">ss_value</span>
+        <span class="k">return</span> <span class="n">fciobj</span>
+
+    <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span><span class="n">SpinPenaltyFCISolver</span><span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">ss_value</span><span class="p">),</span>
+                         <span class="p">(</span><span class="n">SpinPenaltyFCISolver</span><span class="p">,</span> <span class="n">fciobj</span><span class="o">.</span><span class="vm">__class__</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="fix_spin_">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.fix_spin_">[docs]</a>
+<span class="k">def</span> <span class="nf">fix_spin_</span><span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">ss</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">sp_fci</span> <span class="o">=</span> <span class="n">fix_spin</span><span class="p">(</span><span class="n">fciobj</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">ss</span><span class="p">)</span>
+    <span class="n">fciobj</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">sp_fci</span><span class="o">.</span><span class="vm">__class__</span>
+    <span class="n">fciobj</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">sp_fci</span><span class="o">.</span><span class="vm">__dict__</span>
+    <span class="k">return</span> <span class="n">fciobj</span></div>
+
+
+<div class="viewcode-block" id="transform_ci_for_orbital_rotation">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.transform_ci_for_orbital_rotation">[docs]</a>
+<span class="k">def</span> <span class="nf">transform_ci_for_orbital_rotation</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Transform CI coefficients (dimension conserved) to the representation in</span>
+<span class="sd">    new one-particle basis.  Solving CI problem for Hamiltonian h1, h2 defined</span>
+<span class="sd">    in old basis,</span>
+<span class="sd">    CI_old = fci.kernel(h1, h2, ...)</span>
+<span class="sd">    Given orbital rotation u, the CI problem can be either solved by</span>
+<span class="sd">    transforming the Hamiltonian, or transforming the coefficients.</span>
+<span class="sd">    CI_new = fci.kernel(u^T*h1*u, ...) = transform_ci_for_orbital_rotation(CI_old, u)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        u : a squared 2D array or a list of 2D array</span>
+<span class="sd">            the orbital rotation to transform the old one-particle basis to new</span>
+<span class="sd">            one-particle basis</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">u</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">u</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">norb</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">norb</span><span class="p">)</span> <span class="ow">and</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">norb</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">transform_ci</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="transform_ci">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.transform_ci">[docs]</a>
+<span class="k">def</span> <span class="nf">transform_ci</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Transform CI coefficients to the representation in new one-particle basis.</span>
+<span class="sd">    Solving CI problem for Hamiltonian h1, h2 defined in old basis,</span>
+<span class="sd">    CI_old = fci.kernel(h1, h2, ...)</span>
+<span class="sd">    Given orbital rotation u, the CI problem can be either solved by</span>
+<span class="sd">    transforming the Hamiltonian, or transforming the coefficients.</span>
+<span class="sd">    CI_new = fci.kernel(u^T*h1*u, ...) = transform_ci_for_orbital_rotation(CI_old, u)</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        u : 2D array or a list of 2D array</span>
+<span class="sd">            the orbital rotation to transform the old one-particle basis to new</span>
+<span class="sd">            one-particle basis. If u is not a squared matrix, the resultant CI</span>
+<span class="sd">            coefficients array may have different shape to the input CI</span>
+<span class="sd">            coefficients.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="n">u</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">ua</span> <span class="o">=</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">u</span>
+        <span class="k">assert</span> <span class="n">ua</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="n">ub</span><span class="o">.</span><span class="n">shape</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ua</span><span class="p">,</span> <span class="n">ub</span> <span class="o">=</span> <span class="n">u</span>
+    <span class="n">norb_old</span><span class="p">,</span> <span class="n">norb_new</span> <span class="o">=</span> <span class="n">ua</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">na_old</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb_old</span><span class="p">,</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">nb_old</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb_old</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">na_new</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb_new</span><span class="p">,</span> <span class="n">neleca</span><span class="p">)</span>
+    <span class="n">nb_new</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb_new</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">)</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">ci</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">na_old</span><span class="p">,</span> <span class="n">nb_old</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">trans_ci_a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">trans_ci_a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">na_old</span><span class="p">,</span> <span class="n">na_new</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">ua</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">occ_masks_old</span> <span class="o">=</span> <span class="n">_init_occ_masks</span><span class="p">(</span><span class="n">norb_old</span><span class="p">,</span> <span class="n">neleca</span><span class="p">,</span> <span class="n">na_old</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norb_old</span> <span class="o">==</span> <span class="n">norb_new</span><span class="p">:</span>
+            <span class="n">occ_masks_new</span> <span class="o">=</span> <span class="n">occ_masks_old</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">occ_masks_new</span> <span class="o">=</span> <span class="n">_init_occ_masks</span><span class="p">(</span><span class="n">norb_new</span><span class="p">,</span> <span class="n">neleca</span><span class="p">,</span> <span class="n">na_new</span><span class="p">)</span>
+
+        <span class="c1"># Perform</span>
+        <span class="c1">#for i in range(na_old): # old basis</span>
+        <span class="c1">#    for j in range(na_new): # new basis</span>
+        <span class="c1">#        uij = u[occ_masks_old[i]][:,occ_masks_new[j]]</span>
+        <span class="c1">#        trans_ci_a[i,j] = numpy.linalg.det(uij)</span>
+        <span class="n">occ_idx_all_strs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_masks_new</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">na_new</span><span class="p">,</span><span class="n">neleca</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na_old</span><span class="p">):</span>
+            <span class="n">ui</span> <span class="o">=</span> <span class="n">ua</span><span class="p">[</span><span class="n">occ_masks_old</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">minors</span> <span class="o">=</span> <span class="n">ui</span><span class="p">[</span><span class="n">occ_idx_all_strs</span><span class="p">]</span>
+            <span class="n">trans_ci_a</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">minors</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">neleca</span> <span class="o">==</span> <span class="n">nelecb</span> <span class="ow">and</span> <span class="n">numpy</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">ua</span><span class="p">,</span> <span class="n">ub</span><span class="p">):</span>
+        <span class="n">trans_ci_b</span> <span class="o">=</span> <span class="n">trans_ci_a</span>
+    <span class="k">elif</span> <span class="n">nelecb</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">trans_ci_b</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">trans_ci_b</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nb_old</span><span class="p">,</span> <span class="n">nb_new</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">ub</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">occ_masks_old</span> <span class="o">=</span> <span class="n">_init_occ_masks</span><span class="p">(</span><span class="n">norb_old</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">,</span> <span class="n">nb_old</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">norb_old</span> <span class="o">==</span> <span class="n">norb_new</span><span class="p">:</span>
+            <span class="n">occ_masks_new</span> <span class="o">=</span> <span class="n">occ_masks_old</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">occ_masks_new</span> <span class="o">=</span> <span class="n">_init_occ_masks</span><span class="p">(</span><span class="n">norb_new</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">,</span> <span class="n">nb_new</span><span class="p">)</span>
+
+        <span class="n">occ_idx_all_strs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">occ_masks_new</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nb_new</span><span class="p">,</span><span class="n">nelecb</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nb_old</span><span class="p">):</span>
+            <span class="n">ui</span> <span class="o">=</span> <span class="n">ub</span><span class="p">[</span><span class="n">occ_masks_old</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">minors</span> <span class="o">=</span> <span class="n">ui</span><span class="p">[</span><span class="n">occ_idx_all_strs</span><span class="p">]</span>
+            <span class="n">trans_ci_b</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="n">minors</span><span class="p">)</span>
+
+    <span class="c1"># Transform old basis to new basis for all alpha-electron excitations</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">trans_ci_a</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">ci</span><span class="p">)</span>
+    <span class="c1"># Transform old basis to new basis for all beta-electron excitations</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">ci</span><span class="p">,</span> <span class="n">trans_ci_b</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ci</span></div>
+
+
+<div class="viewcode-block" id="civec_spinless_repr_generator">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.civec_spinless_repr_generator">[docs]</a>
+<span class="k">def</span> <span class="nf">civec_spinless_repr_generator</span><span class="p">(</span><span class="n">ci0_r</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Put CI vectors in the spinless representation; i.e., map</span>
+<span class="sd">        norb -&gt; 2 * norb</span>
+<span class="sd">        (neleca, nelecb) -&gt; (neleca+nelecb, 0)</span>
+<span class="sd">    This permits linear combinations of CI vectors with different</span>
+<span class="sd">    M == neleca-nelecb at the price of higher memory cost. This function</span>
+<span class="sd">    does NOT change the datatype.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0_r: sequence or generator of ndarray of length nprods</span>
+<span class="sd">            CAS-CI vectors in the spin-pure representation</span>
+<span class="sd">        norb: integer</span>
+<span class="sd">            Number of orbitals</span>
+<span class="sd">        nelec_r: sequence of tuple of length (2)</span>
+<span class="sd">            (neleca, nelecb) for each element of ci0_r</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ci1_r_gen: callable that returns a generator of length nprods</span>
+<span class="sd">            generates spinless CAS-CI vectors</span>
+<span class="sd">        ss2spinless: callable</span>
+<span class="sd">            Put a CAS-CI vector in the spinless representation</span>
+<span class="sd">            Args:</span>
+<span class="sd">                ci0: ndarray</span>
+<span class="sd">                    CAS-CI vector</span>
+<span class="sd">                ne: tuple of length 2</span>
+<span class="sd">                    neleca, nelecb of target Hilbert space</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                ci1: ndarray</span>
+<span class="sd">                    spinless CAS-CI vector</span>
+<span class="sd">        spinless2ss: callable</span>
+<span class="sd">            Perform the reverse operation on a spinless CAS-CI vector</span>
+<span class="sd">            Args:</span>
+<span class="sd">                ci2: ndarray</span>
+<span class="sd">                    spinless CAS-CI vector</span>
+<span class="sd">                ne: tuple of length 2</span>
+<span class="sd">                    neleca, nelecb target Hilbert space</span>
+<span class="sd">            Returns:</span>
+<span class="sd">                ci3: ndarray</span>
+<span class="sd">                    CAS-CI vector of ci2 in the (neleca, nelecb) Hilbert space</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">nelec_r_tot</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span> <span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">nelec_r</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">nelec_r_tot</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;Different particle-number subspaces&quot;</span><span class="p">)</span>
+    <span class="n">nelec</span> <span class="o">=</span> <span class="n">nelec_r_tot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">addrs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">ndet_sp</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">ne</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">nelec_r</span><span class="p">):</span>
+        <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span><span class="p">(</span><span class="n">ne</span><span class="p">)</span>
+        <span class="n">ndeta</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">)</span>
+        <span class="n">ndetb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">)</span>
+        <span class="n">strsa</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">addrs2str</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">neleca</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ndeta</span><span class="p">)))</span>
+        <span class="n">strsb</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">addrs2str</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelecb</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ndetb</span><span class="p">)))</span>
+        <span class="n">strs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">strsa</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">left_shift</span><span class="p">(</span><span class="n">strsb</span><span class="p">,</span> <span class="n">norb</span><span class="p">))</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+        <span class="n">addrs</span><span class="p">[</span><span class="n">ne</span><span class="p">]</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">strs2addr</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">strs</span><span class="p">)</span>
+        <span class="n">ndet_sp</span><span class="p">[</span><span class="n">ne</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ndeta</span><span class="p">,</span><span class="n">ndetb</span><span class="p">)</span>
+    <span class="n">strs</span> <span class="o">=</span> <span class="n">strsa</span> <span class="o">=</span> <span class="n">strsb</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">ndet</span> <span class="o">=</span> <span class="n">cistring</span><span class="o">.</span><span class="n">num_strings</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">ss2spinless</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">ne</span><span class="p">,</span> <span class="n">buf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">buf</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">ndet</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">ci0</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ci1</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">buf</span><span class="p">)</span><span class="o">.</span><span class="n">flat</span><span class="p">[:</span><span class="n">ndet</span><span class="p">]</span>
+        <span class="n">ci1</span><span class="p">[:]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">ci1</span><span class="p">[</span><span class="n">addrs</span><span class="p">[</span><span class="n">ne</span><span class="p">]]</span> <span class="o">=</span> <span class="n">ci0</span><span class="p">[:,:]</span><span class="o">.</span><span class="n">ravel</span> <span class="p">()</span>
+        <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span> <span class="p">(</span><span class="n">ne</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">neleca</span><span class="o">*</span><span class="n">nelecb</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">:</span> <span class="n">ci1</span><span class="p">[:]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="c1"># Sign comes from changing representation:</span>
+        <span class="c1"># ... a2&#39; a1&#39; a0&#39; ... b2&#39; b1&#39; b0&#39; |vac&gt;</span>
+        <span class="c1"># -&gt;</span>
+        <span class="c1"># ... b2&#39; b1&#39; b0&#39; .. a2&#39; a1&#39; a0&#39; |vac&gt;</span>
+        <span class="c1"># i.e., strictly decreasing from left to right</span>
+        <span class="c1"># (the ordinality of spin-down is conventionally greater than spin-up)</span>
+        <span class="k">return</span> <span class="n">ci1</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">spinless2ss</span><span class="p">(</span><span class="n">ci2</span><span class="p">,</span> <span class="n">ne</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39; Generate the spin-separated CI vector in a particular M</span>
+<span class="sd">        Hilbert space from a spinless CI vector &#39;&#39;&#39;</span>
+        <span class="n">ci3</span> <span class="o">=</span> <span class="n">ci2</span><span class="p">[</span><span class="n">addrs</span><span class="p">[</span><span class="n">ne</span><span class="p">]]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">ndet_sp</span><span class="p">[</span><span class="n">ne</span><span class="p">])</span>
+        <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span> <span class="o">=</span> <span class="n">_unpack_nelec</span> <span class="p">(</span><span class="n">ne</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">neleca</span><span class="o">*</span><span class="n">nelecb</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span><span class="p">:</span> <span class="n">ci3</span><span class="p">[:]</span> <span class="o">*=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">ci3</span>
+    <span class="k">def</span> <span class="nf">ci1_r_gen</span><span class="p">(</span><span class="n">buf</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">ci0_r</span><span class="p">):</span>
+            <span class="n">ci0_r_gen</span> <span class="o">=</span> <span class="n">ci0_r</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ci0_r_gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ci0_r</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ci0</span><span class="p">,</span> <span class="n">ne</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">ci0_r_gen</span><span class="p">,</span> <span class="n">nelec_r</span><span class="p">):</span>
+            <span class="c1"># Doing this in two lines saves memory: ci0 is overwritten</span>
+            <span class="n">ci0</span> <span class="o">=</span> <span class="n">ss2spinless</span><span class="p">(</span><span class="n">ci0</span><span class="p">,</span> <span class="n">ne</span><span class="p">)</span>
+            <span class="k">yield</span> <span class="n">ci0</span>
+    <span class="k">return</span> <span class="n">ci1_r_gen</span><span class="p">,</span> <span class="n">ss2spinless</span><span class="p">,</span> <span class="n">spinless2ss</span></div>
+
+
+<div class="viewcode-block" id="civec_spinless_repr">
+<a class="viewcode-back" href="../../../pyscf_api_docs/pyscf.fci.html#pyscf.fci.addons.civec_spinless_repr">[docs]</a>
+<span class="k">def</span> <span class="nf">civec_spinless_repr</span><span class="p">(</span><span class="n">ci0_r</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec_r</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Put CI vectors in the spinless representation; i.e., map</span>
+<span class="sd">        norb -&gt; 2 * norb</span>
+<span class="sd">        (neleca, nelecb) -&gt; (neleca+nelecb, 0)</span>
+<span class="sd">    This permits linear combinations of CI vectors with different</span>
+<span class="sd">    M == neleca-nelecb at the price of higher memory cost. This function</span>
+<span class="sd">    does NOT change the datatype.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        ci0_r: sequence or generator of ndarray of length nprods</span>
+<span class="sd">            CAS-CI vectors in the spin-pure representation</span>
+<span class="sd">        norb: integer</span>
+<span class="sd">            Number of orbitals</span>
+<span class="sd">        nelec_r: sequence of tuple of length (2)</span>
+<span class="sd">            (neleca, nelecb) for each element of ci0_r</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ci1_r: ndarray of shape (nprods, ndet_spinless)</span>
+<span class="sd">            spinless CAS-CI vectors</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">ci1_r_gen</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">civec_spinless_repr_generator</span><span class="p">(</span><span class="n">ci0_r</span><span class="p">,</span> <span class="n">norb</span><span class="p">,</span> <span class="n">nelec_r</span><span class="p">)</span>
+    <span class="n">ci1_r</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ci1_r_gen</span><span class="p">()],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ci1_r</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_unpack_nelec</span><span class="p">(</span><span class="n">nelec</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">spin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">spin</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">nelec</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">nelec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">nelec</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">number</span><span class="p">)):</span>
+        <span class="n">nelecb</span> <span class="o">=</span> <span class="p">(</span><span class="n">nelec</span><span class="o">-</span><span class="n">spin</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+        <span class="n">neleca</span> <span class="o">=</span> <span class="n">nelec</span> <span class="o">-</span> <span class="n">nelecb</span>
+        <span class="n">nelec</span> <span class="o">=</span> <span class="n">neleca</span><span class="p">,</span> <span class="n">nelecb</span>
+    <span class="k">return</span> <span class="n">nelec</span>
+
+<span class="k">def</span> <span class="nf">_init_occ_masks</span><span class="p">(</span><span class="n">norb</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">nci</span><span class="p">):</span>
+    <span class="n">one_particle_strs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">strs</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">cistring</span><span class="o">.</span><span class="n">make_strings</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">),</span> <span class="n">nelec</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">norb</span> <span class="o">&lt;</span> <span class="mi">64</span><span class="p">:</span>
+        <span class="n">occ_masks</span> <span class="o">=</span> <span class="p">(</span><span class="n">strs</span><span class="p">[:,</span><span class="kc">None</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">one_particle_strs</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">occ_masks</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nci</span><span class="p">,</span> <span class="n">norb</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nci</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">norb</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">one_particle_strs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">strs</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                    <span class="n">occ_masks</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="n">occ_masks</span>
+
+<span class="k">del</span> <span class="p">(</span><span class="n">LARGE_CI_TOL</span><span class="p">,</span> <span class="n">RETURN_STRS</span><span class="p">,</span> <span class="n">PENALTY</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, The PySCF Developers.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

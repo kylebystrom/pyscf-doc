@@ -12,7 +12,11 @@ Introduction
 
 Direct computation of the Hartree-Fock exchange matrix in the atomic orbital basis scales poorly with system size.
 To achieve better scaling, one three-dimensional integral in the 6-dimensional two-electron integrals can be computed analytically, while the other can be evaluated on a real-space grid, as proposed by Friesner :cite:`Friesner1985`.
+<<<<<<< HEAD
 The PySCF implementation resembles the chain-of-spheres (COSX) algorithm of Neese et al. :cite:`Neese2009`, but uses slightly different default grids and a modified P-junction screening algorithm.
+=======
+The PySCF implementation resembles the chain-of-spheres (COSX) algorithm of Neese et al. :cite:`Neese2009`, but uses more conservative grids and a slightly different P-junction screening function.
+>>>>>>> d7b2fc03652fe737e66d8698cc9b514bd6c9d3cc
 Overlap fitting is used to reduce aliasing errors :cite:`Izsak2011`.
 Before screening of negligible integrals, SGX scales as :math:`O(N^3)` with system size, as opposed to the :math:`O(N^4)` scaling of analytical exchange :cite:`Neese2009`. This makes its performance favorable for large basis sets and large systems.
 In principle, both SGX and analytical exchange scale asymptotically as :math:`O(N^2)` if negligible integrals are screened out, and as :math:`O(N)` if the system has a gap and negligible density matrix components are screened.
